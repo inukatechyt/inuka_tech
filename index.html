@@ -121,10 +121,19 @@
         <div class="max-width">
             <h2 class="title" data-aos="zoom-out">About me</h2>
             <div class="about-content">
-                <div class="column left" data-aos="fade-down">
-                    <img src="Inuka.jpg" alt="">
-                    <!-- https://deelay.me/500/ -->
-                </div>
+         <div class="column left" data-aos="fade-down">
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="Inuka1.jpg" alt=""></div>
+            <div class="swiper-slide"><img src="Inuka2.jpg" alt=""></div>
+            <div class="swiper-slide"><img src="Inuka3.jpg" alt=""></div>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+</div>
+
                 <div class="column right" data-aos="fade-up">
                     <div class="text">I'm Inuka and I'm a <span class="typing-2"></span></div>
                     <p>Surrounded by innovation, yet embracing the timeless essence of creativity. Ideas flow like ink on pages, forming designs, code, 
@@ -387,6 +396,18 @@ Get the right tech solutions for your business success! 🚀 <br><br>
             duration: 1500
         });
     </script>
+<!-- Swiper.js CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+    var swiper = new Swiper('.swiper', {
+        loop: true,
+        pagination: { el: '.swiper-pagination', clickable: true },
+        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+        autoplay: { delay: 3000 },
+    });
+</script>
 
 </body>
 
