@@ -33,7 +33,8 @@
 </head>
 
 <body>
-<div id="particles-js"></div>
+<div id="particles-js" style="position: fixed; width: 100%; height: 100%; z-index: -1;"></div>
+
 
 
     <div class="preloader">
@@ -444,14 +445,12 @@ Get the right tech solutions for your business success! 🚀 <br><br>
 particlesJS("particles-js", {
   particles: {
     number: { value: 100 },
-    color: { value: ["#ff0000", "#ffffff"] }, // Red & White particles
-    shape: { type: "circle" },
-    opacity: { value: 0.8 },
     size: { value: 3 },
     move: { speed: 2 }
   }
 });
 </script>
+
 
 </body>
 
