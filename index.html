@@ -294,7 +294,7 @@ Get the right tech solutions for your business success! 🚀 <br><br>
 <!-- Swiper CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 
-<section class="testimonial-section" data-aos="fade-up" style="text-align: center; padding: 50px 20px; background: linear-gradient(135deg, #0f172a, #1e293b); color: #fff;">
+<section class="testimonial-section" data-aos="fade-up" style="text-align: center; padding: 50px 20px; background: #192335; color: #fff;">
     <h2 style="font-size: 2rem; margin-bottom: 20px; font-weight: bold;">What Our Clients Say</h2>
     <div class="swiper testimonial-slider" style="max-width: 600px; margin: auto; overflow: hidden;">
         <div class="swiper-wrapper">
@@ -316,10 +316,49 @@ Get the right tech solutions for your business success! 🚀 <br><br>
                     <h4 style="font-size: 1rem; font-weight: bold; opacity: 0.8;">- Michael Smith</h4>
                 </div>
             </div>
+            <div class="swiper-slide">
+                <div class="testimonial-card" style="background: rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 10px; box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3); transition: transform 0.4s ease-in-out;">
+                    <p style="font-size: 1.2rem; font-style: italic; margin-bottom: 10px;">"Super fast, high-quality work. Inuka Tech is my go-to for all web and design needs!"</p>
+                    <h4 style="font-size: 1rem; font-weight: bold; opacity: 0.8;">- Emily Johnson</h4>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="testimonial-card" style="background: rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 10px; box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3); transition: transform 0.4s ease-in-out;">
+                    <p style="font-size: 1.2rem; font-style: italic; margin-bottom: 10px;">"Great communication and amazing results! My website looks stunning!"</p>
+                    <h4 style="font-size: 1rem; font-weight: bold; opacity: 0.8;">- David Brown</h4>
+                </div>
+            </div>
         </div>
         <div class="swiper-pagination"></div>
     </div>
 </section>
+
+<!-- Swiper.js & Fixes -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<script>
+    var swiper = new Swiper('.testimonial-slider', {
+        loop: true,
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+    });
+</script>
+
+<style>
+    .swiper-wrapper {
+        display: flex;
+        overflow: visible !important;
+    }
+    .swiper-slide {
+        opacity: 1 !important;
+        display: block !important;
+    }
+</style>
 
 
     <!-- contact section start -->
