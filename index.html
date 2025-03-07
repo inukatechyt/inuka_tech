@@ -291,6 +291,9 @@ Get the right tech solutions for your business success! 🚀 <br><br>
         </div>
     </section>
 <!-- testimonial section start -->
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+
 <section class="testimonial-section" data-aos="fade-up" style="text-align: center; padding: 50px 20px; background: linear-gradient(135deg, #0f172a, #1e293b); color: #fff;">
     <h2 style="font-size: 2rem; margin-bottom: 20px; font-weight: bold;">What Our Clients Say</h2>
     <div class="swiper testimonial-slider" style="max-width: 600px; margin: auto; overflow: hidden;">
@@ -428,28 +431,31 @@ Get the right tech solutions for your business success! 🚀 <br><br>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-<script>
-    var swiper = new Swiper('.swiper', {
-        loop: true,
-        pagination: { el: '.swiper-pagination', clickable: true },
-        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-        autoplay: { delay: 3000 },
-    });
-</script>
-<!-- Swiper.js CDN -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 <script>
     var swiper = new Swiper('.testimonial-slider', {
         loop: true,
-        autoplay: { delay: 4000, disableOnInteraction: false },
-        pagination: { el: '.swiper-pagination', clickable: true },
-        effect: 'fade',
-        speed: 800,
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
     });
 </script>
 
+<style>
+    .swiper-wrapper {
+        display: flex;
+        overflow: visible !important;
+    }
+    .swiper-slide {
+        opacity: 1 !important;
+        display: block !important;
+    }
+</style>
 </body>
 
 </html>
