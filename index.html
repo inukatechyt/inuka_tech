@@ -290,6 +290,59 @@ Get the right tech solutions for your business success! 🚀 <br><br>
             </div>
         </div>
     </section>
+<!-- testimonial section start -->
+<div class="testimonial-section" data-aos="fade-up">
+    <h2>What Our Clients Say</h2>
+    <div class="swiper testimonial-slider">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <div class="testimonial-card">
+                    <p>"Inuka Tech transformed my business with a stunning website and top-tier graphic design!"</p>
+                    <h4>- John Doe</h4>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="testimonial-card">
+                    <p>"Professional, creative, and highly skilled! Highly recommend for web & branding."</p>
+                    <h4>- Sarah Lee</h4>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="testimonial-card">
+                    <p>"Amazing work! From UI/UX to development, every detail was perfect!"</p>
+                    <h4>- Michael Smith</h4>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+</div>
+<div class="testimonial-section" data-aos="fade-up">
+    <h2>What Our Clients Say</h2>
+    <div class="swiper testimonial-slider">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <div class="testimonial-card">
+                    <p>"Inuka Tech transformed my business with a stunning website and top-tier graphic design!"</p>
+                    <h4>- John Doe</h4>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="testimonial-card">
+                    <p>"Professional, creative, and highly skilled! Highly recommend for web & branding."</p>
+                    <h4>- Sarah Lee</h4>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="testimonial-card">
+                    <p>"Amazing work! From UI/UX to development, every detail was perfect!"</p>
+                    <h4>- Michael Smith</h4>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+</div>
 
     <!-- contact section start -->
     <section class="contact" id="contact">
@@ -406,6 +459,19 @@ Get the right tech solutions for your business success! 🚀 <br><br>
         pagination: { el: '.swiper-pagination', clickable: true },
         navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
         autoplay: { delay: 3000 },
+    });
+</script>
+<!-- Swiper.js CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+    var swiper = new Swiper('.testimonial-slider', {
+        loop: true,
+        autoplay: { delay: 4000, disableOnInteraction: false },
+        pagination: { el: '.swiper-pagination', clickable: true },
+        effect: 'fade',
+        speed: 800,
     });
 </script>
 
