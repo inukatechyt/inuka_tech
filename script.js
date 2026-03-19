@@ -4,6 +4,13 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     
+    /* --- 0. PRELOADER LOGIC --- */
+    setTimeout(() => {
+        const preloader = document.getElementById('preloader');
+        preloader.style.opacity = '0';
+        setTimeout(() => { preloader.style.display = 'none'; }, 500);
+    }, 1500); // 1.5 second loading screen
+
     /* --- 1. DYNAMIC CANVAS BACKGROUND --- */
     const canvas = document.getElementById("bg-canvas");
     const ctx = canvas.getContext("2d");
@@ -91,15 +98,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
     initCanvas(); animateCanvas();
 
-    /* --- 2. TYPED.JS --- */
+    /* --- 2. TYPED.JS (Updated Texts) --- */
     if (document.querySelector(".typing")) {
         new Typed(".typing", {
-            strings: ["Web Experiences.", "Digital Identities.", "Software Solutions.", "The Future."],
+            strings: ["Graphic Designer.", "Software Developer.", "Web Developer.", "IT Consultant.", "Freelancer."],
             typeSpeed: 60, backSpeed: 40, backDelay: 1500, loop: true, cursorChar: '|'
         });
     }
 
-    /* --- 3. MOBILE MENU LOGIC --- */
+    /* --- 3. SWIPER CAROUSEL (About Me) --- */
+    var swiper = new Swiper(".mySwiper", {
+        loop: true,
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        effect: "fade", // Gives a nice premium fade effect between photos
+    });
+
+    /* --- 4. MOBILE MENU LOGIC --- */
     const mobileToggle = document.querySelector('.mobile-toggle');
     const navLinks = document.querySelector('.nav-links');
     const navItems = document.querySelectorAll('.nav-item');
@@ -114,20 +135,49 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    /* --- 4. GSAP ANIMATIONS --- */
-    gsap.registerPlugin(ScrollTrigger);
+    /* --- 5. GSAP ANIMATIONS & SCROLL BEHAVIOR --- */
+    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-    gsap.from(".reveal-text", { y: 80, opacity: 0, duration: 1.2, stagger: 0.2, ease: "power4.out", delay: 0.2 });
+    // Smooth Scroll Down Button Action with 'Push' effect
+    const scrollBtn = document.getElementById("scroll-down-btn");
+    scrollBtn.addEventListener("click", () => {
+        // Animate the button click
+        gsap.to(scrollBtn, {scale: 0.8, duration: 0.2, yoyo: true, repeat: 1});
+        
+        // Push the about section slightly before scrolling to it
+        gsap.fromTo("#about", 
+            { y: 50, scale: 0.98 }, 
+            { y: 0, scale: 1, duration: 1, ease: "power3.out" }
+        );
+        
+        gsap.to(window, {duration: 1, scrollTo: "#about", ease: "power2.inOut"});
+    });
+
+    // Make the scroll button bounce continuously
+    gsap.to(".scroll-down-btn", {
+        y: 15,
+        repeat: -1,
+        yoyo: true,
+        duration: 1.5,
+        ease: "sine.inOut"
+    });
+
+    // Reveal Texts
+    gsap.from(".reveal-text", { y: 60, opacity: 0, duration: 1.2, stagger: 0.2, ease: "power4.out", delay: 1.5 /* delayed for preloader */ });
+    
+    // Bento Grid Reveal
     gsap.from(".bento-grid .glass-card", {
         scrollTrigger: { trigger: ".expertise-section", start: "top 75%" },
         y: 60, opacity: 0, duration: 1, stagger: 0.15, ease: "back.out(1.2)"
     });
+    
+    // Contact Form Reveal
     gsap.from(".contact-info, .input-group, .outline-btn", {
         scrollTrigger: { trigger: ".contact-section", start: "top 80%" },
         y: 30, opacity: 0, duration: 0.8, stagger: 0.1, ease: "power3.out"
     });
 
-    /* --- 5. NAVBAR SCROLL EFFECT --- */
+    /* --- 6. NAVBAR SCROLL EFFECT --- */
     const navbar = document.querySelector(".glass-nav");
     window.addEventListener("scroll", () => {
         if (window.scrollY > 50) {
