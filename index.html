@@ -20,10 +20,10 @@
         <div class="terminal-window">
             <div class="terminal-header">
                 <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-                <span class="terminal-title">boot_sequence.sh</span>
+                <span class="terminal-title">boot.sh</span>
             </div>
             <div class="terminal-body">
-                <p><span class="prompt">root@inuka-tech:~#</span> ./initialize_beast.sh</p>
+                <p><span class="prompt">root@inuka-tech:~#</span> ./start</p>
                 <p><span class="boot-text"></span></p>
             </div>
         </div>
@@ -88,26 +88,30 @@
 
     <section id="about" class="about-section">
         <div class="max-width">
-            <h2 class="section-title reveal-text">About Me</h2>
             <div class="about-content glass-card reveal-text">
                 <div class="about-images">
                     <div class="swiper mySwiper">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide"><img src="Inuka1.jpeg" alt="Inuka Sanjula 1" onerror="this.src='https://via.placeholder.com/350x400?text=Photo+1'"></div>
-                            <div class="swiper-slide"><img src="Inuka2.jpeg" alt="Inuka Sanjula 2" onerror="this.src='https://via.placeholder.com/350x400?text=Photo+2'"></div>
-                            <div class="swiper-slide"><img src="Inuka3.jpeg" alt="Inuka Sanjula 3" onerror="this.src='https://via.placeholder.com/350x400?text=Photo+3'"></div>
+                            <div class="swiper-slide"><img src="Inuka1.jpeg" alt="Inuka Sanjula 1" onerror="this.src='https://via.placeholder.com/400x400?text=Photo+1'"></div>
+                            <div class="swiper-slide"><img src="Inuka2.jpeg" alt="Inuka Sanjula 2" onerror="this.src='https://via.placeholder.com/400x400?text=Photo+2'"></div>
+                            <div class="swiper-slide"><img src="Inuka3.jpeg" alt="Inuka Sanjula 3" onerror="this.src='https://via.placeholder.com/400x400?text=Photo+3'"></div>
                         </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
                         <div class="swiper-pagination"></div>
                     </div>
                 </div>
                 <div class="about-text">
-                    <h3>Hello! I'm Inuka, a digital creator based in Sri Lanka.</h3>
-                    <p>I am a 2026 Technology stream student focusing on Science for Technology, Engineering, and ICT. Beyond my studies, I am the founder of Inuka Tech, turning creative ideas into real-world digital solutions.</p>
-                    <p>Whether designing a brand's visual identity, developing custom software, or managing social media growth for businesses, I combine cutting-edge technology with high-end creativity.</p>
-                    <div class="about-highlights">
-                        <span><i class="fas fa-check-circle"></i> Founder, Inuka Tech</span>
-                        <span><i class="fas fa-check-circle"></i> Multiple Agency Roles</span>
-                        <span><i class="fas fa-check-circle"></i> Kurunegala, LK</span>
+                    <h3>I'M INUKA AND I'M A <span class="typing-about"></span></h3>
+                    <p>SURROUNDED BY INNOVATION, YET EMBRACING THE TIMELESS ESSENCE OF CREATIVITY. IDEAS FLOW LIKE INK ON PAGES, FORMING DESIGNS, CODE, AND VISIONS THAT SHAPE THE DIGITAL WORLD. EVERY PROJECT IS A STEP TOWARD MASTERY, EVERY CHALLENGE A LESSON IN RESILIENCE. OPEN TO CHANGE, DRIVEN BY PASSION—THIS IS THE JOURNEY I WALK, CRAFTING EXPERIENCES THAT LEAVE A LASTING IMPRESSION.</p>
+                    
+                    <div class="about-actions">
+                        <a href="https://www.youtube.com/@InukaTech" target="_blank" class="primary-btn subscribe-btn">SUBSCRIBE</a>
+                        <div class="about-socials">
+                            <a href="https://wa.me/94717954374" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+                            <a href="https://www.facebook.com/share/14udQvUyhk/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                            <a href="https://www.instagram.com/inukasanjula10" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -174,28 +178,24 @@
                 <p class="role-badge">Graphic Designer & Software Developer</p>
                 <p>Engineering robust software solutions and crafting premium graphic assets for a Japan-based international tech firm.</p>
             </div>
-            
             <div class="glass-card bento-medium group">
                 <i class="fas fa-chalkboard-teacher card-icon"></i>
                 <h3>Iresh Dasanayaka (ICT)</h3>
                 <p class="role-badge">Instructor & Coordinator</p>
                 <p>Serving as an instructor, coordinator, and lead graphic designer for elite ICT educational programs.</p>
             </div>
-
             <div class="glass-card bento-medium group">
                 <i class="fas fa-car card-icon"></i>
                 <h3>Yunikon International INC</h3>
                 <p class="role-badge">Social Media Manager</p>
                 <p>Driving digital growth and brand presence for a premier vehicle dealership.</p>
             </div>
-
             <div class="glass-card bento-medium group">
                 <i class="fas fa-tshirt card-icon"></i>
                 <h3>Velexlk</h3>
                 <p class="role-badge">Social Media Director</p>
                 <p>Directing visual marketing campaigns and overarching social media strategy.</p>
             </div>
-
             <div class="glass-card bento-medium group">
                 <i class="fas fa-chart-line card-icon"></i>
                 <h3>Cantab</h3>
@@ -259,12 +259,6 @@
 
     <footer class="glass-footer">
         <div class="footer-content">
-            <div class="social-links">
-                <a href="https://wa.me/94717954374" target="_blank" class="social-btn"><i class="fa-brands fa-whatsapp"></i></a>
-                <a href="https://www.facebook.com/share/14udQvUyhk/" target="_blank" class="social-btn"><i class="fa-brands fa-facebook"></i></a>
-                <a href="https://www.instagram.com/inukasanjula10" target="_blank" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
-                <a href="https://www.youtube.com/@InukaTech" target="_blank" class="social-btn"><i class="fa-brands fa-youtube"></i></a>
-            </div>
             <p>&copy; 2026 Inuka Tech. Created by Inuka Sanjula.</p>
         </div>
     </footer>
