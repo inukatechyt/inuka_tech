@@ -4,12 +4,22 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     
-    /* --- 0. PRELOADER --- */
-    setTimeout(() => {
-        const preloader = document.getElementById('preloader');
-        preloader.style.opacity = '0';
-        setTimeout(() => { preloader.style.display = 'none'; }, 500);
-    }, 1200);
+    /* --- 0. TERMINAL PRELOADER LOGIC --- */
+    new Typed(".boot-text", {
+        strings: [
+            "[SYSTEM] Initializing Inuka_OS kernel...<br>[MODULES] Mounting Spatial UI rendering engine...<br>[MODULES] Loading Neural Network Canvas...<br>[ARCHITECT] AI Systems Online.<br>Welcome back, Inuka."
+        ],
+        typeSpeed: 30,
+        showCursor: true,
+        cursorChar: '█',
+        onComplete: function() {
+            setTimeout(() => {
+                const preloader = document.getElementById('preloader');
+                preloader.style.opacity = '0';
+                setTimeout(() => { preloader.style.display = 'none'; }, 500);
+            }, 800);
+        }
+    });
 
     /* --- 1. DYNAMIC CANVAS BACKGROUND --- */
     const canvas = document.getElementById("bg-canvas");
@@ -88,11 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    window.addEventListener('resize', () => {
-        canvas.width = innerWidth; canvas.height = innerHeight;
-        initCanvas();
-    });
-
+    window.addEventListener('resize', () => { canvas.width = innerWidth; canvas.height = innerHeight; initCanvas(); });
     initCanvas(); animateCanvas();
 
     /* --- 2. TYPED.JS --- */
@@ -103,23 +109,23 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Terminal Typing for "Architect"
+    // Realistic Terminal Typing for "Architect"
     if (document.querySelector(".architect-typing")) {
         new Typed(".architect-typing", {
-            strings: ["Awaiting command...", "System diagnostics running...", "Environment optimized."],
-            typeSpeed: 40, backSpeed: 20, backDelay: 3000, loop: true, cursorChar: '█'
+            strings: [
+                "import tensorflow as tf\nimport neural_core", 
+                "Loading deep_learning_models/weights.h5...", 
+                "Optimizing system memory...\n> RAM usage dropped by 40%.",
+                "Bypassing standard protocols...\n> Executing override.py"
+            ],
+            typeSpeed: 35, backSpeed: 15, backDelay: 4000, loop: true, cursorChar: '█'
         });
     }
 
-    /* --- 3. SWIPER CAROUSELS --- */
+    /* --- 3. SWIPER CAROUSEL --- */
     var swiper1 = new Swiper(".mySwiper", {
         loop: true, autoplay: { delay: 3000, disableOnInteraction: false },
         pagination: { el: ".swiper-pagination", clickable: true }, effect: "fade"
-    });
-
-    var swiper2 = new Swiper(".testimonialSwiper", {
-        loop: true, autoplay: { delay: 5000, disableOnInteraction: false },
-        pagination: { el: ".swiper-pagination", clickable: true },
     });
 
     /* --- 4. MOBILE MENU --- */
@@ -130,19 +136,30 @@ document.addEventListener("DOMContentLoaded", () => {
     mobileToggle.addEventListener('click', () => { navLinks.classList.toggle('active'); });
     navItems.forEach(item => { item.addEventListener('click', () => { navLinks.classList.remove('active'); }); });
 
-    /* --- 5. GSAP ANIMATIONS --- */
+    /* --- 5. GSAP ANIMATIONS & SCROLLING --- */
     gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-    // Scroll Down Button
+    // Smooth Scroll Down Button
     const scrollBtn = document.getElementById("scroll-down-btn");
     scrollBtn.addEventListener("click", () => {
         gsap.to(scrollBtn, {scale: 0.8, duration: 0.2, yoyo: true, repeat: 1});
+        gsap.fromTo("#about", { y: 50, scale: 0.98 }, { y: 0, scale: 1, duration: 1, ease: "power3.out" });
         gsap.to(window, {duration: 1, scrollTo: "#about", ease: "power2.inOut"});
     });
     gsap.to(".scroll-down-btn", { y: 15, repeat: -1, yoyo: true, duration: 1.5, ease: "sine.inOut" });
 
-    // General Reveals
-    gsap.from(".reveal-text", { y: 60, opacity: 0, duration: 1.2, stagger: 0.2, ease: "power4.out", delay: 1 });
+    // Smooth Scroll Up Button
+    const scrollUpBtn = document.getElementById("scroll-up-btn");
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 800) { scrollUpBtn.classList.add("visible"); } 
+        else { scrollUpBtn.classList.remove("visible"); }
+    });
+    scrollUpBtn.addEventListener("click", () => {
+        gsap.to(window, {duration: 1.5, scrollTo: 0, ease: "power3.inOut"});
+    });
+
+    // General Reveals (Delayed to wait for the boot sequence)
+    gsap.from(".reveal-text", { y: 60, opacity: 0, duration: 1.2, stagger: 0.2, ease: "power4.out", delay: 2.5 });
     
     gsap.utils.toArray('.bento-grid').forEach(grid => {
         gsap.from(grid.children, {
@@ -151,7 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    /* --- 6. NAVBAR SCROLL --- */
+    /* --- 6. NAVBAR SCROLL EFFECT --- */
     const navbar = document.querySelector(".glass-nav");
     window.addEventListener("scroll", () => {
         if (window.scrollY > 50) {
