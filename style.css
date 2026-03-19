@@ -1,277 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="Inuka Tech, Software Developer, Graphic Designer, IT Consulting, Sri Lanka">
-    <meta name="description" content="Inuka Tech - Premium Digital Solutions & Engineering.">
-    <title>Inuka Tech | Premium Digital Solutions</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&family=Space+Grotesk:wght@400;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="style.css">
-</head>
+:root {
+    --bg: #0a0a0c; --accent: #ff1e1e; --glass: rgba(255, 255, 255, 0.03); --border: rgba(255, 255, 255, 0.1);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--bg); color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
-<body class="loading-state">
-    <div id="preloader" class="terminal-preloader">
-        <div class="terminal-window">
-            <div class="terminal-header">
-                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-                <span class="terminal-title">boot.sh</span>
-            </div>
-            <div class="terminal-body">
-                <p><span class="prompt">root@inuka-tech:~#</span> ./start</p>
-                <p><span class="boot-text"></span></p>
-            </div>
-        </div>
-    </div>
+/* Background Canvas */
+#bg-canvas { position: fixed; top: 0; left: 0; z-index: -1; }
 
-    <canvas id="bg-canvas"></canvas>
+/* Custom Cursor */
+#cursor {
+    width: 20px; height: 20px; border: 2px solid var(--accent); border-radius: 50%;
+    position: fixed; pointer-events: none; z-index: 99999; transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s, background 0.3s;
+}
 
-    <nav class="glass-nav">
-        <div class="nav-container">
-            <div class="brand">Inuka<span>.</span>Tech</div>
-            <ul class="nav-links">
-                <li><a href="#home" class="nav-item">Home</a></li>
-                <li><a href="#about" class="nav-item">About</a></li>
-                <li><a href="#services" class="nav-item">Services</a></li>
-                <li><a href="#projects" class="nav-item">Work</a></li>
-                <li><a href="#contact" class="nav-item">Contact</a></li>
-            </ul>
-            <div class="mobile-toggle"><i class="fas fa-bars"></i></div>
-        </div>
-    </nav>
+/* Preloader */
+.terminal-preloader { position: fixed; inset: 0; background: #000; z-index: 1000000; display: flex; align-items: center; justify-content: center; }
+.terminal-window { width: 90%; max-width: 500px; border: 1px solid #333; border-radius: 8px; background: #000; }
+.terminal-header { padding: 10px; background: #1a1a1a; display: flex; align-items: center; }
+.dot { width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; }
+.red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
+.terminal-body { padding: 20px; font-family: 'Fira Code', monospace; color: #0f0; }
 
-    <section id="home" class="hero-section">
-        <div class="hero-content">
-            <h2 class="pre-headline reveal-text">Welcome to my portfolio</h2>
-            <h1 class="main-headline reveal-text">INUKA SANJULA</h1>
-            <div class="dynamic-role reveal-text">
-                <span class="static-text">I am a</span>
-                <span class="typing"></span>
-            </div>
-            <div class="reveal-text">
-                <button id="scroll-down-btn" class="scroll-down-btn">
-                    <i class="fas fa-chevron-down"></i>
-                </button>
-            </div>
-        </div>
-    </section>
+/* Navbar */
+.glass-nav { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 1200px; background: rgba(10,10,15,0.7); backdrop-filter: blur(20px); border-radius: 15px; border: 1px solid var(--border); z-index: 1000; padding: 15px 30px; }
+.nav-container { display: flex; justify-content: space-between; align-items: center; }
+.brand { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.4rem; }
+.brand span { color: var(--accent); }
+.nav-links { display: flex; gap: 20px; list-style: none; }
+.nav-links a { color: #aaa; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: 0.3s; }
+.nav-links a:hover { color: #fff; }
 
-    <div class="marquee-container">
-        <div class="marquee-content">
-            <span><i class="fab fa-python"></i> Python</span>
-            <span><i class="fab fa-react"></i> React</span>
-            <span><i class="fas fa-database"></i> SQL</span>
-            <span><i class="fab fa-linux"></i> Kali Linux</span>
-            <span><i class="fas fa-code"></i> IntelliJ IDEA</span>
-            <span><img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg" style="width: 20px;"> Photoshop</span>
-            <span><img src="https://upload.wikimedia.org/wikipedia/commons/4/40/Adobe_Premiere_Pro_CC_icon.svg" style="width: 20px;"> Premiere Pro</span>
-            <span><img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Adobe_After_Effects_CC_icon.svg" style="width: 20px;"> After Effects</span>
-            <span><i class="fas fa-bezier-curve"></i> CorelDRAW</span>
-            <span><i class="fas fa-pen-nib"></i> Affinity</span>
-            <span><i class="fab fa-python"></i> Python</span>
-            <span><i class="fab fa-react"></i> React</span>
-            <span><i class="fas fa-database"></i> SQL</span>
-            <span><i class="fab fa-linux"></i> Kali Linux</span>
-            <span><i class="fas fa-code"></i> IntelliJ IDEA</span>
-            <span><img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg" style="width: 20px;"> Photoshop</span>
-            <span><img src="https://upload.wikimedia.org/wikipedia/commons/4/40/Adobe_Premiere_Pro_CC_icon.svg" style="width: 20px;"> Premiere Pro</span>
-            <span><img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Adobe_After_Effects_CC_icon.svg" style="width: 20px;"> After Effects</span>
-            <span><i class="fas fa-bezier-curve"></i> CorelDRAW</span>
-            <span><i class="fas fa-pen-nib"></i> Affinity</span>
-        </div>
-    </div>
+/* Hero */
+.hero-section { height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; }
+.main-headline { font-size: 5.5rem; font-family: 'Space Grotesk', sans-serif; background: linear-gradient(#fff, #555); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.dynamic-role { font-size: 1.8rem; color: #aaa; margin: 20px 0; }
+.scroll-down-btn { background: none; border: 1px solid var(--border); color: #fff; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; margin-top: 40px; transition: 0.3s; }
 
-    <section id="about" class="about-section">
-        <div class="max-width">
-            <div class="about-content glass-card reveal-text">
-                <div class="about-images">
-                    <div class="swiper mySwiper">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide"><img src="Inuka1.jpeg" alt="Inuka Sanjula 1" onerror="this.src='https://via.placeholder.com/400x400?text=Photo+1'"></div>
-                            <div class="swiper-slide"><img src="Inuka2.jpeg" alt="Inuka Sanjula 2" onerror="this.src='https://via.placeholder.com/400x400?text=Photo+2'"></div>
-                            <div class="swiper-slide"><img src="Inuka3.jpeg" alt="Inuka Sanjula 3" onerror="this.src='https://via.placeholder.com/400x400?text=Photo+3'"></div>
-                        </div>
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
-                        <div class="swiper-pagination"></div>
-                    </div>
-                </div>
-                <div class="about-text">
-                    <h3>I'M INUKA AND I'M A <span class="typing-about"></span></h3>
-                    <p>SURROUNDED BY INNOVATION, YET EMBRACING THE TIMELESS ESSENCE OF CREATIVITY. IDEAS FLOW LIKE INK ON PAGES, FORMING DESIGNS, CODE, AND VISIONS THAT SHAPE THE DIGITAL WORLD. EVERY PROJECT IS A STEP TOWARD MASTERY, EVERY CHALLENGE A LESSON IN RESILIENCE. OPEN TO CHANGE, DRIVEN BY PASSION—THIS IS THE JOURNEY I WALK, CRAFTING EXPERIENCES THAT LEAVE A LASTING IMPRESSION.</p>
-                    
-                    <div class="about-actions">
-                        <a href="https://www.youtube.com/@InukaTech" target="_blank" class="primary-btn subscribe-btn">SUBSCRIBE</a>
-                        <div class="about-socials">
-                            <a href="https://wa.me/94717954374" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
-                            <a href="https://www.facebook.com/share/14udQvUyhk/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
-                            <a href="https://www.instagram.com/inukasanjula10" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+/* About Section (Fixed Size) */
+.about-section { padding: 80px 20px; }
+.about-content { display: grid; grid-template-columns: 350px 1fr; gap: 40px; padding: 40px; max-width: 1100px; margin: 0 auto; align-items: center; }
+.about-images { width: 350px; height: 400px; border-radius: 10px; overflow: hidden; }
+.about-images img { width: 100%; height: 100%; object-fit: cover; }
+.about-text h3 { font-size: 1.5rem; margin-bottom: 20px; font-family: 'Space Grotesk'; }
+.about-text p { font-size: 0.9rem; line-height: 1.6; color: #ccc; text-transform: uppercase; margin-bottom: 20px; }
+.subscribe-btn { background: var(--accent); padding: 10px 25px; color: #fff; text-decoration: none; border-radius: 5px; font-weight: 700; display: inline-block; }
+.about-socials { display: flex; gap: 10px; margin-top: 20px; }
+.about-socials a { color: #fff; width: 40px; height: 40px; border: 1px solid var(--accent); display: flex; align-items: center; justify-content: center; border-radius: 5px; }
 
-    <section id="services" class="expertise-section" style="padding-top: 20px;">
-        <h2 class="section-title reveal-text">What I Do</h2>
-        <div class="bento-grid nine-grid">
-            <div class="glass-card bento-small group">
-                <i class="fas fa-laptop-code card-icon"></i>
-                <h3>Web Development</h3>
-                <p>Building fast, beautiful, and highly responsive websites tailored for business and e-commerce.</p>
-            </div>
-            <div class="glass-card bento-small group">
-                <i class="fa-solid fa-pen-nib card-icon"></i>
-                <h3>Graphic Design</h3>
-                <p>Logos, flyers, and premium brand visual identities that command attention.</p>
-            </div>
-            <div class="glass-card bento-small group">
-                <i class="fa-solid fa-hashtag card-icon"></i>
-                <h3>Social Media</h3>
-                <p>Strategic content creation and account management to drive engagement and sales.</p>
-            </div>
-            <div class="glass-card bento-small group">
-                <i class="fa-solid fa-robot card-icon"></i>
-                <h3>AI & Automation</h3>
-                <p>Developing smart Python scripts and AI tools to streamline advanced workflows.</p>
-            </div>
-            <div class="glass-card bento-small group">
-                <i class="fa-solid fa-desktop card-icon"></i>
-                <h3>IT Consulting</h3>
-                <p>Expert advice on system architecture, network setup, and technical troubleshooting.</p>
-            </div>
-            <div class="glass-card bento-small group">
-                <i class="fas fa-camera card-icon"></i>
-                <h3>Photography</h3>
-                <p>Commercial shoots and high-quality photography to elevate your digital and print marketing.</p>
-            </div>
-            <div class="glass-card bento-small group">
-                <i class="fas fa-pen-fancy card-icon"></i>
-                <h3>Content Writing</h3>
-                <p>Crafting compelling, SEO-friendly copy for websites, blogs, and social campaigns.</p>
-            </div>
-            <div class="glass-card bento-small group">
-                <i class="fas fa-object-group card-icon"></i>
-                <h3>UI/UX Architecture</h3>
-                <p>Designing intuitive and beautiful user interfaces that maximize customer conversion.</p>
-            </div>
-            <div class="glass-card bento-small group">
-                <i class="fas fa-shield-alt card-icon"></i>
-                <h3>Cybersecurity</h3>
-                <p>System penetration testing and ethical hacking to secure digital environments.</p>
-            </div>
-        </div>
-    </section>
+/* Bento Grid */
+.expertise-section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
+.bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.bento-large { grid-column: span 2; }
+.glass-card { background: var(--glass); backdrop-filter: blur(15px); border: 1px solid var(--border); padding: 30px; border-radius: 20px; box-shadow: inset 0 -4px 15px rgba(255,30,30,0.05); }
 
-    <section id="projects" class="expertise-section">
-        <h2 class="section-title reveal-text">Selected Roles</h2>
-        <div class="bento-grid">
-            <div class="glass-card bento-large group">
-                <i class="fas fa-code-branch card-icon"></i>
-                <h3>iCODE Software Solutions</h3>
-                <p class="role-badge">Graphic Designer & Software Developer</p>
-                <p>Engineering robust software solutions and crafting premium graphic assets for a Japan-based international tech firm.</p>
-            </div>
-            <div class="glass-card bento-medium group">
-                <i class="fas fa-chalkboard-teacher card-icon"></i>
-                <h3>Iresh Dasanayaka (ICT)</h3>
-                <p class="role-badge">Instructor & Coordinator</p>
-                <p>Serving as an instructor, coordinator, and lead graphic designer for elite ICT educational programs.</p>
-            </div>
-            <div class="glass-card bento-medium group">
-                <i class="fas fa-car card-icon"></i>
-                <h3>Yunikon International INC</h3>
-                <p class="role-badge">Social Media Manager</p>
-                <p>Driving digital growth and brand presence for a premier vehicle dealership.</p>
-            </div>
-            <div class="glass-card bento-medium group">
-                <i class="fas fa-tshirt card-icon"></i>
-                <h3>Velexlk</h3>
-                <p class="role-badge">Social Media Director</p>
-                <p>Directing visual marketing campaigns and overarching social media strategy.</p>
-            </div>
-            <div class="glass-card bento-medium group">
-                <i class="fas fa-chart-line card-icon"></i>
-                <h3>Cantab</h3>
-                <p class="role-badge">Social Media Director</p>
-                <p>Leading social media initiatives, optimizing outreach, and managing brand communications.</p>
-            </div>
-        </div>
-    </section>
+/* Terminal */
+.terminal-container { padding: 0 !important; max-width: 800px; margin: 0 auto; }
+.terminal-body { min-height: 200px; font-size: 0.9rem; line-height: 1.5; }
 
-    <section class="expertise-section" style="padding-top: 20px;">
-        <h2 class="section-title reveal-text" style="font-size: 2.5rem;">AI Engineering</h2>
-        <div class="glass-card terminal-container reveal-text">
-            <div class="terminal-header">
-                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-                <span class="terminal-title">bash - Architect.py</span>
-            </div>
-            <div class="terminal-body" style="min-height: 200px;">
-                <p><span class="prompt">inuka@dev-machine:~$</span> python3 Architect.py</p>
-                <p><span class="sys-msg">[SYSTEM]</span> Importing Neural Core... Done.</p>
-                <p><span class="sys-msg">[ARCHITECT]</span> <span class="architect-typing"></span></p>
-            </div>
-            <div class="terminal-info">
-                <h3>Project: Architect</h3>
-                <p>A custom, personalized AI automation assistant programmed in Python, designed to seamlessly control laptop environments and streamline advanced daily workflows.</p>
-            </div>
-        </div>
-    </section>
+/* Marquee */
+.marquee-container { border-block: 1px solid var(--border); padding: 15px 0; overflow: hidden; display: flex; }
+.marquee-content { display: flex; animation: scroll 20s linear infinite; gap: 50px; white-space: nowrap; }
+@keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-    <section id="contact" class="contact-section">
-        <div class="contact-container glass-card">
-            <div class="contact-info">
-                <h2 class="section-title" style="text-align: left;">Get In Touch</h2>
-                <p class="contact-subtitle">Have a project in mind or need some help? Send me a message below.</p>
-                <div class="info-items">
-                    <div class="info-item"><i class="fas fa-envelope"></i> inukatech10@gmail.com</div>
-                    <div class="info-item"><i class="fas fa-phone"></i> +94 71 795 4374</div>
-                    <div class="info-item"><i class="fas fa-map-marker-alt"></i> Kurunegala, Sri Lanka</div>
-                </div>
-            </div>
-            <form action="https://formsubmit.co/inukatech10@gmail.com" method="post" class="contact-form">
-                <div class="input-group">
-                    <input type="text" name="Name" required placeholder=" ">
-                    <label>Your Name</label>
-                </div>
-                <div class="input-group">
-                    <input type="email" name="Email" required placeholder=" ">
-                    <label>Email Address</label>
-                </div>
-                <div class="input-group">
-                    <input type="text" name="Subject" required placeholder=" ">
-                    <label>Subject</label>
-                </div>
-                <div class="input-group">
-                    <textarea name="Message" rows="4" required placeholder=" "></textarea>
-                    <label>Your Message</label>
-                </div>
-                <button type="submit" class="primary-btn outline-btn">Send Message</button>
-            </form>
-        </div>
-    </section>
+/* Scroll Up */
+.scroll-up-btn { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: var(--accent); border: none; color: #fff; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 1000; cursor: pointer; }
+.scroll-up-btn.visible { opacity: 1; pointer-events: auto; }
 
-    <footer class="glass-footer">
-        <div class="footer-content">
-            <p>&copy; 2026 Inuka Tech. Created by Inuka Sanjula.</p>
-        </div>
-    </footer>
-
-    <button id="scroll-up-btn" class="scroll-up-btn">
-        <i class="fas fa-chevron-up"></i>
-    </button>
-
-    <script src="typed.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="script.js"></script>
-</body>
-</html>
+/* Mobile */
+@media (max-width: 900px) {
+    .about-content { grid-template-columns: 1fr; }
+    .about-images { width: 100%; }
+    .bento-grid { grid-template-columns: 1fr; }
+    .bento-large { grid-column: span 1; }
+    .main-headline { font-size: 3rem; }
+}
