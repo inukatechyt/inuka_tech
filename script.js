@@ -4,20 +4,17 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     
-    /* --- 0. TERMINAL PRELOADER LOGIC --- */
+    /* --- 0. ULTRA-FAST TERMINAL PRELOADER --- */
     new Typed(".boot-text", {
-        strings: [
-            "[SYSTEM] Initializing Inuka_OS kernel...<br>[MODULES] Mounting Spatial UI rendering engine...<br>[MODULES] Loading Neural Network Canvas...<br>[ARCHITECT] AI Systems Online.<br>Welcome back, Inuka."
-        ],
-        typeSpeed: 30,
-        showCursor: true,
-        cursorChar: '█',
+        strings: ["[SYSTEM] Booting...^100<br>[ARCHITECT] Ready."],
+        typeSpeed: 10,
+        showCursor: false,
         onComplete: function() {
             setTimeout(() => {
                 const preloader = document.getElementById('preloader');
                 preloader.style.opacity = '0';
-                setTimeout(() => { preloader.style.display = 'none'; }, 500);
-            }, 800);
+                setTimeout(() => { preloader.style.display = 'none'; }, 300);
+            }, 200); // Exits immediately after typing
         }
     });
 
@@ -41,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
         draw() {
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-            ctx.fillStyle = '#ff1e1e'; 
+            ctx.fillStyle = '#c91010'; 
             ctx.fill();
         }
         update() {
@@ -109,6 +106,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // About Section Typing
+    if (document.querySelector(".typing-about")) {
+        new Typed(".typing-about", {
+            strings: ["SOFTWARE DEVELOPER", "GRAPHIC DESIGNER", "WEB DEVELOPER"],
+            typeSpeed: 60, backSpeed: 40, backDelay: 1500, loop: true, cursorChar: '|'
+        });
+    }
+
     // Realistic Terminal Typing for "Architect"
     if (document.querySelector(".architect-typing")) {
         new Typed(".architect-typing", {
@@ -125,7 +130,9 @@ document.addEventListener("DOMContentLoaded", () => {
     /* --- 3. SWIPER CAROUSEL --- */
     var swiper1 = new Swiper(".mySwiper", {
         loop: true, autoplay: { delay: 3000, disableOnInteraction: false },
-        pagination: { el: ".swiper-pagination", clickable: true }, effect: "fade"
+        pagination: { el: ".swiper-pagination", clickable: true },
+        navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+        effect: "fade"
     });
 
     /* --- 4. MOBILE MENU --- */
@@ -158,8 +165,8 @@ document.addEventListener("DOMContentLoaded", () => {
         gsap.to(window, {duration: 1.5, scrollTo: 0, ease: "power3.inOut"});
     });
 
-    // General Reveals (Delayed to wait for the boot sequence)
-    gsap.from(".reveal-text", { y: 60, opacity: 0, duration: 1.2, stagger: 0.2, ease: "power4.out", delay: 2.5 });
+    // General Reveals (Delayed for fast preloader)
+    gsap.from(".reveal-text", { y: 60, opacity: 0, duration: 1.2, stagger: 0.2, ease: "power4.out", delay: 0.5 });
     
     gsap.utils.toArray('.bento-grid').forEach(grid => {
         gsap.from(grid.children, {
