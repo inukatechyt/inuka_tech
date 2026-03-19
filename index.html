@@ -1,32 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T7EG241V9G"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-T7EG241V9G');
-    </script>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="Inuka Tech, Software Developer, Graphic Designer, IT Consulting, Sri Lanka">
-    <meta name="description" content="Inuka Tech - Engineering high-performance software and premium digital identities.">
-    <meta name="author" content="Inuka Sanjula">
-    
-    <title>Inuka Tech | Premium Digital Solutions</title>
-    <link rel="icon" type="image/x-icon" href="logo (2).jpg">
+    <meta name="description" content="Inuka Tech - Creating amazing websites and designs for your business.">
+    <title>Inuka Tech | My Portfolio</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="loading-state">
+    <div id="preloader" class="preloader">
+        <div class="loader-content">
+            <div class="spinner"></div>
+            <h3>Loading Inuka Tech...</h3>
+        </div>
+    </div>
+
     <canvas id="bg-canvas"></canvas>
 
     <nav class="glass-nav">
@@ -34,8 +33,9 @@
             <div class="brand">Inuka<span>.</span>Tech</div>
             <ul class="nav-links">
                 <li><a href="#home" class="nav-item">Home</a></li>
-                <li><a href="#expertise" class="nav-item">Expertise</a></li>
-                <li><a href="#contact" class="nav-item">Initiate</a></li>
+                <li><a href="#about" class="nav-item">About Me</a></li>
+                <li><a href="#services" class="nav-item">Services</a></li>
+                <li><a href="#contact" class="nav-item">Contact</a></li>
             </ul>
             <div class="mobile-toggle"><i class="fas fa-bars"></i></div>
         </div>
@@ -43,44 +43,80 @@
 
     <section id="home" class="hero-section">
         <div class="hero-content">
-            <h2 class="pre-headline reveal-text">Architecting The Future</h2>
+            <h2 class="pre-headline reveal-text">Welcome to my portfolio</h2>
             <h1 class="main-headline reveal-text">INUKA SANJULA</h1>
             <div class="dynamic-role reveal-text">
-                <span class="static-text">I engineer</span>
+                <span class="static-text">I am a</span>
                 <span class="typing"></span>
             </div>
             <div class="reveal-text">
-                <a href="#contact" class="primary-btn glass-btn mt-8">Start a Project <i class="fas fa-arrow-right"></i></a>
+                <button id="scroll-down-btn" class="scroll-down-btn">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
             </div>
         </div>
     </section>
 
-    <section id="expertise" class="expertise-section">
-        <h2 class="section-title reveal-text">Core Arsenal</h2>
+    <section id="about" class="about-section">
+        <div class="max-width">
+            <h2 class="section-title reveal-text">About Me</h2>
+            <div class="about-content glass-card reveal-text">
+                <div class="about-images">
+                    <div class="swiper mySwiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="Inuka1.jpeg" alt="Inuka Sanjula 1" onerror="this.src='https://via.placeholder.com/400x400?text=Photo+1'"></div>
+                            <div class="swiper-slide"><img src="Inuka2.jpeg" alt="Inuka Sanjula 2" onerror="this.src='https://via.placeholder.com/400x400?text=Photo+2'"></div>
+                            <div class="swiper-slide"><img src="Inuka3.jpeg" alt="Inuka Sanjula 3" onerror="this.src='https://via.placeholder.com/400x400?text=Photo+3'"></div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <h3>Hello! I'm Inuka, a digital creator based in Sri Lanka.</h3>
+                    <p>I am currently a Technology stream student focusing on Science, Engineering, and ICT. Beyond my studies, I am the founder of Inuka Tech, where I turn creative ideas into real-world digital solutions.</p>
+                    <p>Whether it's designing a brand's visual identity, building a modern website, or managing social media growth for businesses, I love combining technology with creativity. When I'm not coding or designing, you can find me behind my Canon camera or following my passion for high-performance vehicles.</p>
+                    <div class="about-highlights">
+                        <span><i class="fas fa-check-circle"></i> 5+ Years Experience</span>
+                        <span><i class="fas fa-check-circle"></i> Freelancer & Founder</span>
+                        <span><i class="fas fa-check-circle"></i> Kurunegala, LK</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="expertise-section">
+        <h2 class="section-title reveal-text">What I Do</h2>
         
         <div class="bento-grid">
             <div class="glass-card bento-large group">
-                <i class="fas fa-code card-icon"></i>
-                <h3>Software & Web Solutions</h3>
-                <p>High-performance, responsive, and secure digital platforms engineered for scale. From custom architectures to seamless deployments.</p>
-                <div class="tech-stack-tags">
-                    <span>React</span><span>Python</span><span>Databases</span><span>Cybersecurity</span>
-                </div>
+                <i class="fas fa-laptop-code card-icon"></i>
+                <h3>Web Development</h3>
+                <p>I build fast, beautiful, and easy-to-use websites for businesses, portfolios, and online stores. I ensure they work perfectly on both phones and computers.</p>
             </div>
 
             <div class="glass-card bento-medium group">
-                <i class="fa-solid fa-marker card-icon"></i>
-                <h3>Premium Graphic Design</h3>
-                <p>Commercial-grade visual identities. UI/UX design, brand elevation, and high-impact marketing materials that command attention.</p>
-                <div class="tech-stack-tags">
-                    <span>Adobe CC</span><span>UI/UX</span><span>Branding</span>
-                </div>
+                <i class="fa-solid fa-pen-nib card-icon"></i>
+                <h3>Graphic Design</h3>
+                <p>Logos, flyers, social media posts, and brand designs that make your business stand out.</p>
             </div>
 
             <div class="glass-card bento-small group">
-                <i class="fa-solid fa-network-wired card-icon"></i>
-                <h3>IT Consultancy</h3>
-                <p>Strategic technology guidance to optimize, secure, and scale your digital operations globally.</p>
+                <i class="fa-solid fa-hashtag card-icon"></i>
+                <h3>Social Media Management</h3>
+                <p>I help brands grow online by creating content and managing their pages to attract more customers.</p>
+            </div>
+
+            <div class="glass-card bento-small group">
+                <i class="fa-solid fa-robot card-icon"></i>
+                <h3>AI & Automation</h3>
+                <p>Using the latest AI tools to speed up tasks, create stunning images, and build smart software solutions.</p>
+            </div>
+
+            <div class="glass-card bento-small group">
+                <i class="fa-solid fa-desktop card-icon"></i>
+                <h3>IT Consulting</h3>
+                <p>Expert advice on computer networking, software setup, and fixing technical problems.</p>
             </div>
         </div>
     </section>
@@ -88,8 +124,8 @@
     <section id="contact" class="contact-section">
         <div class="contact-container glass-card">
             <div class="contact-info">
-                <h2 class="section-title" style="text-align: left;">Initiate Protocol</h2>
-                <p class="contact-subtitle">Ready to build something extraordinary? Drop the brief.</p>
+                <h2 class="section-title" style="text-align: left;">Get In Touch</h2>
+                <p class="contact-subtitle">Have a project in mind or need some help? Send me a message below.</p>
                 
                 <div class="info-items">
                     <div class="info-item"><i class="fas fa-envelope"></i> inukatech10@gmail.com</div>
@@ -113,9 +149,9 @@
                 </div>
                 <div class="input-group">
                     <textarea name="Message" rows="4" required placeholder=" "></textarea>
-                    <label>Project Details</label>
+                    <label>Your Message</label>
                 </div>
-                <button type="submit" class="primary-btn outline-btn">Deploy Message</button>
+                <button type="submit" class="primary-btn outline-btn">Send Message</button>
             </form>
         </div>
     </section>
@@ -128,12 +164,14 @@
                 <a href="https://www.instagram.com/inukasanjula10" target="_blank" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
                 <a href="https://www.youtube.com/@InukaTech" target="_blank" class="social-btn"><i class="fa-brands fa-youtube"></i></a>
             </div>
-            <p>&copy; 2026 Inuka Tech. Engineered in Sri Lanka.</p>
+            <p>&copy; 2026 Inuka Tech. Created by Inuka Sanjula.</p>
         </div>
     </footer>
 
     <script src="typed.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="script.js"></script>
 </body>
