@@ -4,12 +4,12 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     
-    /* --- 0. PRELOADER LOGIC --- */
+    /* --- 0. PRELOADER --- */
     setTimeout(() => {
         const preloader = document.getElementById('preloader');
         preloader.style.opacity = '0';
         setTimeout(() => { preloader.style.display = 'none'; }, 500);
-    }, 1500); // 1.5 second loading screen
+    }, 1200);
 
     /* --- 1. DYNAMIC CANVAS BACKGROUND --- */
     const canvas = document.getElementById("bg-canvas");
@@ -21,10 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let mouse = { x: null, y: null, radius: 150 };
 
-    window.addEventListener("mousemove", (event) => {
-        mouse.x = event.x;
-        mouse.y = event.y;
-    });
+    window.addEventListener("mousemove", (event) => { mouse.x = event.x; mouse.y = event.y; });
 
     class Particle {
         constructor(x, y, directionX, directionY, size, color) {
@@ -98,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     initCanvas(); animateCanvas();
 
-    /* --- 2. TYPED.JS (Updated Texts) --- */
+    /* --- 2. TYPED.JS --- */
     if (document.querySelector(".typing")) {
         new Typed(".typing", {
             strings: ["Graphic Designer.", "Software Developer.", "Web Developer.", "IT Consultant.", "Freelancer."],
@@ -106,88 +103,61 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    /* --- 3. SWIPER CAROUSEL (About Me) --- */
-    var swiper = new Swiper(".mySwiper", {
-        loop: true,
-        autoplay: {
-            delay: 3000,
-            disableOnInteraction: false,
-        },
-        pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
-        },
-        effect: "fade", // Gives a nice premium fade effect between photos
+    // Terminal Typing for "Architect"
+    if (document.querySelector(".architect-typing")) {
+        new Typed(".architect-typing", {
+            strings: ["Awaiting command...", "System diagnostics running...", "Environment optimized."],
+            typeSpeed: 40, backSpeed: 20, backDelay: 3000, loop: true, cursorChar: '█'
+        });
+    }
+
+    /* --- 3. SWIPER CAROUSELS --- */
+    var swiper1 = new Swiper(".mySwiper", {
+        loop: true, autoplay: { delay: 3000, disableOnInteraction: false },
+        pagination: { el: ".swiper-pagination", clickable: true }, effect: "fade"
     });
 
-    /* --- 4. MOBILE MENU LOGIC --- */
+    var swiper2 = new Swiper(".testimonialSwiper", {
+        loop: true, autoplay: { delay: 5000, disableOnInteraction: false },
+        pagination: { el: ".swiper-pagination", clickable: true },
+    });
+
+    /* --- 4. MOBILE MENU --- */
     const mobileToggle = document.querySelector('.mobile-toggle');
     const navLinks = document.querySelector('.nav-links');
     const navItems = document.querySelectorAll('.nav-item');
 
-    mobileToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-    });
+    mobileToggle.addEventListener('click', () => { navLinks.classList.toggle('active'); });
+    navItems.forEach(item => { item.addEventListener('click', () => { navLinks.classList.remove('active'); }); });
 
-    navItems.forEach(item => {
-        item.addEventListener('click', () => {
-            navLinks.classList.remove('active');
+    /* --- 5. GSAP ANIMATIONS --- */
+    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+    // Scroll Down Button
+    const scrollBtn = document.getElementById("scroll-down-btn");
+    scrollBtn.addEventListener("click", () => {
+        gsap.to(scrollBtn, {scale: 0.8, duration: 0.2, yoyo: true, repeat: 1});
+        gsap.to(window, {duration: 1, scrollTo: "#about", ease: "power2.inOut"});
+    });
+    gsap.to(".scroll-down-btn", { y: 15, repeat: -1, yoyo: true, duration: 1.5, ease: "sine.inOut" });
+
+    // General Reveals
+    gsap.from(".reveal-text", { y: 60, opacity: 0, duration: 1.2, stagger: 0.2, ease: "power4.out", delay: 1 });
+    
+    gsap.utils.toArray('.bento-grid').forEach(grid => {
+        gsap.from(grid.children, {
+            scrollTrigger: { trigger: grid, start: "top 80%" },
+            y: 60, opacity: 0, duration: 1, stagger: 0.15, ease: "back.out(1.2)"
         });
     });
 
-    /* --- 5. GSAP ANIMATIONS & SCROLL BEHAVIOR --- */
-    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
-
-    // Smooth Scroll Down Button Action with 'Push' effect
-    const scrollBtn = document.getElementById("scroll-down-btn");
-    scrollBtn.addEventListener("click", () => {
-        // Animate the button click
-        gsap.to(scrollBtn, {scale: 0.8, duration: 0.2, yoyo: true, repeat: 1});
-        
-        // Push the about section slightly before scrolling to it
-        gsap.fromTo("#about", 
-            { y: 50, scale: 0.98 }, 
-            { y: 0, scale: 1, duration: 1, ease: "power3.out" }
-        );
-        
-        gsap.to(window, {duration: 1, scrollTo: "#about", ease: "power2.inOut"});
-    });
-
-    // Make the scroll button bounce continuously
-    gsap.to(".scroll-down-btn", {
-        y: 15,
-        repeat: -1,
-        yoyo: true,
-        duration: 1.5,
-        ease: "sine.inOut"
-    });
-
-    // Reveal Texts
-    gsap.from(".reveal-text", { y: 60, opacity: 0, duration: 1.2, stagger: 0.2, ease: "power4.out", delay: 1.5 /* delayed for preloader */ });
-    
-    // Bento Grid Reveal
-    gsap.from(".bento-grid .glass-card", {
-        scrollTrigger: { trigger: ".expertise-section", start: "top 75%" },
-        y: 60, opacity: 0, duration: 1, stagger: 0.15, ease: "back.out(1.2)"
-    });
-    
-    // Contact Form Reveal
-    gsap.from(".contact-info, .input-group, .outline-btn", {
-        scrollTrigger: { trigger: ".contact-section", start: "top 80%" },
-        y: 30, opacity: 0, duration: 0.8, stagger: 0.1, ease: "power3.out"
-    });
-
-    /* --- 6. NAVBAR SCROLL EFFECT --- */
+    /* --- 6. NAVBAR SCROLL --- */
     const navbar = document.querySelector(".glass-nav");
     window.addEventListener("scroll", () => {
         if (window.scrollY > 50) {
-            navbar.style.padding = "10px 30px";
-            navbar.style.background = "rgba(5, 5, 7, 0.85)";
-            navbar.style.borderColor = "var(--accent-primary)";
+            navbar.style.padding = "10px 30px"; navbar.style.background = "rgba(5, 5, 7, 0.85)"; navbar.style.borderColor = "var(--accent-primary)";
         } else {
-            navbar.style.padding = "15px 30px";
-            navbar.style.background = "rgba(10, 10, 15, 0.6)";
-            navbar.style.borderColor = "var(--glass-border)";
+            navbar.style.padding = "15px 30px"; navbar.style.background = "rgba(10, 10, 15, 0.6)"; navbar.style.borderColor = "var(--glass-border)";
         }
     });
 });
