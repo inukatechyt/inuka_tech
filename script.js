@@ -1,10 +1,10 @@
 /* ==========================================
-   INUKA TECH - PREMIUM "BEAST" ENGINE (VANILLA JS + GSAP)
+   INUKA TECH - PREMIUM "BEAST" ENGINE 
    ========================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
     
-    /* --- 1. DYNAMIC CANVAS BACKGROUND (Neural Network Effect) --- */
+    /* --- 1. DYNAMIC CANVAS BACKGROUND --- */
     const canvas = document.getElementById("bg-canvas");
     const ctx = canvas.getContext("2d");
     let particlesArray;
@@ -14,33 +14,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let mouse = { x: null, y: null, radius: 150 };
 
-    window.addEventListener("mousemove", function(event) {
+    window.addEventListener("mousemove", (event) => {
         mouse.x = event.x;
         mouse.y = event.y;
     });
 
     class Particle {
         constructor(x, y, directionX, directionY, size, color) {
-            this.x = x;
-            this.y = y;
-            this.directionX = directionX;
-            this.directionY = directionY;
-            this.size = size;
-            this.color = color;
+            this.x = x; this.y = y; this.directionX = directionX; this.directionY = directionY;
+            this.size = size; this.color = color;
         }
         draw() {
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-            ctx.fillStyle = '#ff1e1e'; // Accent color for particles
+            ctx.fillStyle = '#ff1e1e'; 
             ctx.fill();
         }
         update() {
             if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
             if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
-
-            // Mouse interaction
-            let dx = mouse.x - this.x;
-            let dy = mouse.y - this.y;
+            let dx = mouse.x - this.x; let dy = mouse.y - this.y;
             let distance = Math.sqrt(dx * dx + dy * dy);
             if (distance < mouse.radius + this.size) {
                 if (mouse.x < this.x && this.x < canvas.width - this.size * 10) this.x += 2;
@@ -48,8 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (mouse.y < this.y && this.y < canvas.height - this.size * 10) this.y += 2;
                 if (mouse.y > this.y && this.y > this.size * 10) this.y -= 2;
             }
-            this.x += this.directionX;
-            this.y += this.directionY;
+            this.x += this.directionX; this.y += this.directionY;
             this.draw();
         }
     }
@@ -61,19 +53,15 @@ document.addEventListener("DOMContentLoaded", () => {
             let size = (Math.random() * 2) + 1;
             let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
             let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
-            let directionX = (Math.random() * 1) - 0.5;
-            let directionY = (Math.random() * 1) - 0.5;
-            let color = '#ffffff';
-            particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+            let directionX = (Math.random() * 1) - 0.5; let directionY = (Math.random() * 1) - 0.5;
+            particlesArray.push(new Particle(x, y, directionX, directionY, size, '#ffffff'));
         }
     }
 
     function animateCanvas() {
         requestAnimationFrame(animateCanvas);
         ctx.clearRect(0, 0, innerWidth, innerHeight);
-        for (let i = 0; i < particlesArray.length; i++) {
-            particlesArray[i].update();
-        }
+        for (let i = 0; i < particlesArray.length; i++) particlesArray[i].update();
         connectParticles();
     }
 
@@ -96,76 +84,50 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    window.addEventListener('resize', function() {
-        canvas.width = innerWidth;
-        canvas.height = innerHeight;
+    window.addEventListener('resize', () => {
+        canvas.width = innerWidth; canvas.height = innerHeight;
         initCanvas();
     });
 
-    initCanvas();
-    animateCanvas();
+    initCanvas(); animateCanvas();
 
-    /* --- 2. TYPED.JS INTEGRATION --- */
+    /* --- 2. TYPED.JS --- */
     if (document.querySelector(".typing")) {
         new Typed(".typing", {
             strings: ["Web Experiences.", "Digital Identities.", "Software Solutions.", "The Future."],
-            typeSpeed: 60,
-            backSpeed: 40,
-            backDelay: 1500,
-            loop: true,
-            cursorChar: '|',
-            autoInsertCss: true
+            typeSpeed: 60, backSpeed: 40, backDelay: 1500, loop: true, cursorChar: '|'
         });
     }
 
-    /* --- 3. GSAP ANIMATIONS (The Elite Touch) --- */
+    /* --- 3. MOBILE MENU LOGIC --- */
+    const mobileToggle = document.querySelector('.mobile-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    const navItems = document.querySelectorAll('.nav-item');
+
+    mobileToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+
+    navItems.forEach(item => {
+        item.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+        });
+    });
+
+    /* --- 4. GSAP ANIMATIONS --- */
     gsap.registerPlugin(ScrollTrigger);
 
-    // Hero Section Reveal
-    gsap.from(".reveal-text", {
-        y: 80,
-        opacity: 0,
-        duration: 1.2,
-        stagger: 0.2,
-        ease: "power4.out",
-        delay: 0.2
-    });
-
-    gsap.from(".dynamic-role, .primary-btn", {
-        y: 40,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out",
-        delay: 0.8
-    });
-
-    // Bento Grid Reveal on Scroll
+    gsap.from(".reveal-text", { y: 80, opacity: 0, duration: 1.2, stagger: 0.2, ease: "power4.out", delay: 0.2 });
     gsap.from(".bento-grid .glass-card", {
-        scrollTrigger: {
-            trigger: ".expertise-section",
-            start: "top 75%",
-        },
-        y: 60,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.15,
-        ease: "back.out(1.2)"
+        scrollTrigger: { trigger: ".expertise-section", start: "top 75%" },
+        y: 60, opacity: 0, duration: 1, stagger: 0.15, ease: "back.out(1.2)"
     });
-
-    // Contact Form Reveal
     gsap.from(".contact-info, .input-group, .outline-btn", {
-        scrollTrigger: {
-            trigger: ".contact-section",
-            start: "top 80%",
-        },
-        y: 30,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: "power3.out"
+        scrollTrigger: { trigger: ".contact-section", start: "top 80%" },
+        y: 30, opacity: 0, duration: 0.8, stagger: 0.1, ease: "power3.out"
     });
 
-    /* --- 4. NAVBAR SCROLL EFFECT --- */
+    /* --- 5. NAVBAR SCROLL EFFECT --- */
     const navbar = document.querySelector(".glass-nav");
     window.addEventListener("scroll", () => {
         if (window.scrollY > 50) {
@@ -178,16 +140,4 @@ document.addEventListener("DOMContentLoaded", () => {
             navbar.style.borderColor = "var(--glass-border)";
         }
     });
-
-    /* --- 5. SECURITY / ANTI-INSPECT (Optional, kept from your original code) --- */
-    document.addEventListener('contextmenu', function(e) {
-        // e.preventDefault(); // Uncomment this line to actually block right-click
-        // console.log("Right click disabled for security.");
-    });
-
-    document.onkeydown = function(e) {
-        if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'C'.charCodeAt(0) || e.keyCode == 'J'.charCodeAt(0))) || (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0))) {
-            // return false; // Uncomment to block F12 and DevTools shortcuts
-        }
-    }
 });
