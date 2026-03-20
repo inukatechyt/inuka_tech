@@ -16,20 +16,28 @@
             --accent: #c91010; 
             --glass: rgba(255, 255, 255, 0.03);
             --border: rgba(255, 255, 255, 0.08);
+            --glass-highlight: rgba(255, 255, 255, 0.15);
             --text-main: #ffffff;
             --text-muted: #a0a0a5;
+            --font-code: 'Fira Code', monospace;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; background-color: var(--bg); }
         body { font-family: 'Inter', sans-serif; color: var(--text-main); overflow-x: hidden; background: var(--bg); }
 
-        /* Preloader */
-        .terminal-preloader { position: fixed; inset: 0; background: #000; z-index: 999999; display: flex; justify-content: center; align-items: center; }
-        .terminal-window { width: 90%; max-width: 500px; background: #0a0a0c; border: 1px solid #333; border-radius: 10px; padding: 20px; font-family: 'Fira Code', monospace; color: #0f0; box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
-
         /* Canvas Background */
         #bg-canvas { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+
+        /* Preloader */
+        .terminal-preloader { position: fixed; inset: 0; background: #000; z-index: 999999; display: flex; justify-content: center; align-items: center; }
+        .terminal-window { width: 90%; max-width: 600px; background: #0a0a0c; border: 1px solid #333; border-radius: 10px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
+        .terminal-header { background: #111; padding: 10px 20px; display: flex; align-items: center; border-bottom: 1px solid #333; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; }
+        .dot.red { background: #ff5f56; } .dot.yellow { background: #ffbd2e; } .dot.green { background: #27c93f; }
+        .terminal-title { margin-left: auto; margin-right: auto; font-family: 'Inter', sans-serif; font-size: 0.85rem; color: #888; }
+        .terminal-body { padding: 30px; font-family: var(--font-code); color: #00ff00; font-size: 1.1rem; line-height: 1.8; }
+        .prompt { color: #5dade2; }
 
         /* Navbar */
         .glass-nav { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 1200px; background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 20px; z-index: 1000; padding: 15px 30px; }
@@ -42,28 +50,29 @@
 
         /* Hero */
         .hero-section { height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; }
+        .pre-headline { color: var(--accent); letter-spacing: 4px; margin-bottom: 10px; font-size: 1.2rem; text-transform: uppercase; }
         .main-headline { font-family: 'Space Grotesk'; font-size: clamp(3rem, 8vw, 6rem); font-weight: 900; background: linear-gradient(180deg, #fff, #444); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .dynamic-role { font-size: 1.8rem; color: var(--text-muted); margin: 20px 0; }
-        .scroll-down-btn { background: none; border: 1px solid var(--border); color: #fff; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; margin-top: 30px; transition: 0.3s; }
+        .scroll-down-btn { background: none; border: 1px solid var(--border); color: #fff; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; margin-top: 30px; transition: 0.3s; backdrop-filter: blur(5px); display: inline-flex; justify-content: center; align-items: center; font-size: 1.2rem; }
+        .scroll-down-btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(5px); }
 
         /* Infinite Marquee */
         .marquee-container { border-block: 1px solid var(--border); padding: 15px 0; overflow: hidden; display: flex; background: rgba(255,255,255,0.01); }
         .marquee-content { display: flex; animation: scroll-m 20s linear infinite; gap: 60px; white-space: nowrap; font-family: 'Space Grotesk'; font-weight: 700; color: var(--text-muted); }
+        .marquee-content span { display: flex; align-items: center; gap: 10px; }
+        .marquee-content i { color: var(--accent); }
         @keyframes scroll-m { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
+        /* General Sections */
+        .expertise-section, .about-section { padding: 100px 20px; }
+        .max-width { max-width: 1200px; margin: 0 auto; }
+        .section-title { font-family: 'Space Grotesk'; font-size: 3rem; font-weight: 700; margin-bottom: 3rem; text-align: center; letter-spacing: -1px; }
+
         /* About Section (EXACT Side-by-Side Fix) */
-        .about-section { padding: 100px 20px; }
-        .max-width { max-width: 1100px; margin: 0 auto; }
         .about-content { 
-            display: grid; 
-            grid-template-columns: 400px 1fr; 
-            gap: 50px; padding: 40px; 
-            background: var(--glass); 
-            backdrop-filter: blur(15px); 
-            border: 1px solid var(--border); 
-            border-radius: 20px; 
-            align-items: center;
-            box-shadow: inset 0 -4px 15px rgba(201, 16, 16, 0.1);
+            display: grid; grid-template-columns: 400px 1fr; gap: 50px; padding: 40px; 
+            background: var(--glass); backdrop-filter: blur(15px); border: 1px solid var(--border); 
+            border-radius: 20px; align-items: center; box-shadow: inset 0 -4px 15px rgba(201, 16, 16, 0.1);
         }
         .about-images { width: 400px; height: 380px; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
         .about-images img { width: 100%; height: 100%; object-fit: cover; }
@@ -72,36 +81,48 @@
         .about-footer-row { display: flex; align-items: center; gap: 20px; }
         .subscribe-btn { background: var(--accent); color: #fff; padding: 12px 25px; text-decoration: none; border-radius: 4px; font-weight: 700; font-size: 0.9rem; }
         .about-socials { display: flex; gap: 10px; }
-        .about-socials a { color: #fff; width: 40px; height: 40px; border: 1px solid var(--accent); display: flex; align-items: center; justify-content: center; border-radius: 6px; text-decoration: none; transition: 0.3s; }
+        .about-socials a { color: #fff; width: 40px; height: 40px; border: 1px solid var(--accent); display: flex; align-items: center; justify-content: center; border-radius: 6px; text-decoration: none; transition: 0.3s; background: rgba(0,0,0,0.3); }
         .about-socials a:hover { background: var(--accent); }
 
-        /* 9-Tile Services Grid */
-        .expertise-section { padding: 80px 20px; }
+        /* Grid System */
         .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .glass-card { background: var(--glass); backdrop-filter: blur(15px); border: 1px solid var(--border); border-radius: 20px; padding: 30px; transition: 0.4s; }
-        .glass-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.2); }
-        .card-icon { font-size: 2rem; color: var(--accent); margin-bottom: 15px; }
-        .glass-card h3 { font-family: 'Space Grotesk'; font-size: 1.2rem; margin-bottom: 10px; }
-
-        /* Roles */
+        .glass-card { background: var(--glass); backdrop-filter: blur(15px); border: 1px solid var(--border); border-top: 1px solid var(--glass-highlight); border-radius: 20px; padding: 40px; transition: 0.4s; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .glass-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.2); box-shadow: inset 0 -4px 20px rgba(201,16,16,0.2); }
+        .card-icon { font-size: 2.5rem; color: var(--accent); margin-bottom: 20px; }
+        .glass-card h3 { font-family: 'Space Grotesk'; font-size: 1.4rem; margin-bottom: 10px; }
+        .glass-card p { color: var(--text-muted); line-height: 1.6; font-size: 0.95rem; }
+        
+        /* Specific Grid Adjustments */
+        .nine-grid .glass-card { padding: 30px; }
         .bento-large { grid-column: span 2; }
-        .role-badge { display: inline-block; padding: 4px 10px; background: rgba(201,16,16,0.2); color: var(--accent); border-radius: 5px; font-size: 0.75rem; font-weight: 700; margin-bottom: 10px; }
+        .role-badge { display: inline-block; padding: 5px 12px; background: rgba(201,16,16,0.15); color: var(--accent); border-radius: 6px; font-size: 0.85rem; font-weight: 600; margin-bottom: 15px; border: 1px solid rgba(201,16,16,0.3); }
 
-        /* Terminal Window */
-        .terminal-container { padding: 0 !important; overflow: hidden; max-width: 800px; margin: 0 auto; }
-        .terminal-body { background: #000; padding: 25px; min-height: 200px; font-family: 'Fira Code'; font-size: 0.9rem; color: #0f0; }
+        /* Terminal Window container */
+        .terminal-container { padding: 0 !important; max-width: 900px; margin: 0 auto; }
+
+        /* Contact Section */
+        .contact-container { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; padding: 50px; align-items: center; }
+        .info-item { font-size: 1.1rem; margin-bottom: 20px; display: flex; align-items: center; gap: 15px; }
+        .info-item i { color: var(--accent); font-size: 1.3rem; }
+        .contact-form { display: flex; flex-direction: column; gap: 20px; }
+        .contact-form input, .contact-form textarea { width: 100%; padding: 15px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 12px; color: #fff; font-family: 'Inter'; outline: none; transition: 0.3s; }
+        .contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent); }
+        .outline-btn { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 15px 30px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        .outline-btn:hover { background: var(--accent); color: #fff; }
 
         /* Scroll Up Button */
-        .scroll-up-btn { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: var(--accent); color: #fff; border: none; opacity: 0; cursor: pointer; transition: 0.3s; z-index: 1000; }
+        .scroll-up-btn { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: var(--accent); color: #fff; border: none; opacity: 0; cursor: pointer; transition: 0.3s; z-index: 1000; box-shadow: 0 10px 20px rgba(0,0,0,0.5); font-size: 1.2rem;}
         .scroll-up-btn.visible { opacity: 1; }
 
         /* Mobile Adjustments */
         @media (max-width: 900px) {
-            .about-content { grid-template-columns: 1fr; padding: 20px; text-align: center; }
+            .about-content { grid-template-columns: 1fr; padding: 30px; text-align: center; }
             .about-images { width: 100%; height: auto; }
             .about-footer-row { flex-direction: column; }
             .bento-grid { grid-template-columns: 1fr; }
             .bento-large { grid-column: span 1; }
+            .contact-container { grid-template-columns: 1fr; padding: 30px; }
+            .nav-links { display: none; }
         }
     </style>
 </head>
@@ -109,7 +130,14 @@
 <body>
     <div id="preloader" class="terminal-preloader">
         <div class="terminal-window">
-            <div id="boot-text"></div>
+            <div class="terminal-header">
+                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                <span class="terminal-title">boot_sequence.sh</span>
+            </div>
+            <div class="terminal-body">
+                <p><span class="prompt">root@inuka-tech:~#</span> ./start_beast</p>
+                <p><span id="boot-text"></span></p>
+            </div>
         </div>
     </div>
 
@@ -130,7 +158,7 @@
 
     <section id="home" class="hero-section">
         <div class="hero-content">
-            <h2 style="color:var(--accent); letter-spacing:3px; margin-bottom:10px;">WELCOME TO MY PORTFOLIO</h2>
+            <h2 class="pre-headline">WELCOME TO MY PORTFOLIO</h2>
             <h1 class="main-headline">INUKA SANJULA</h1>
             <div class="dynamic-role">I AM A <span id="typing-hero"></span></div>
             <button id="scroll-down-btn" class="scroll-down-btn"><i class="fas fa-chevron-down"></i></button>
@@ -139,8 +167,8 @@
 
     <div class="marquee-container">
         <div class="marquee-content">
-            <span>PYTHON</span><span>REACT</span><span>KALI LINUX</span><span>PHOTOSHOP</span><span>CORELDRAW</span><span>PREMIERE PRO</span><span>AFTER EFFECTS</span><span>INTELLIJ</span><span>AFFINITY</span><span>SQL</span>
-            <span>PYTHON</span><span>REACT</span><span>KALI LINUX</span><span>PHOTOSHOP</span><span>CORELDRAW</span><span>PREMIERE PRO</span><span>AFTER EFFECTS</span><span>INTELLIJ</span><span>AFFINITY</span><span>SQL</span>
+            <span><i class="fab fa-python"></i> PYTHON</span><span><i class="fab fa-react"></i> REACT</span><span><i class="fas fa-database"></i> SQL</span><span><i class="fab fa-linux"></i> KALI LINUX</span><span><i class="fas fa-code"></i> INTELLIJ</span><span><i class="fas fa-image"></i> PHOTOSHOP</span><span><i class="fas fa-video"></i> PREMIERE PRO</span><span><i class="fas fa-magic"></i> AFTER EFFECTS</span><span><i class="fas fa-bezier-curve"></i> CORELDRAW</span><span><i class="fas fa-pen-nib"></i> AFFINITY</span>
+            <span><i class="fab fa-python"></i> PYTHON</span><span><i class="fab fa-react"></i> REACT</span><span><i class="fas fa-database"></i> SQL</span><span><i class="fab fa-linux"></i> KALI LINUX</span><span><i class="fas fa-code"></i> INTELLIJ</span><span><i class="fas fa-image"></i> PHOTOSHOP</span><span><i class="fas fa-video"></i> PREMIERE PRO</span><span><i class="fas fa-magic"></i> AFTER EFFECTS</span><span><i class="fas fa-bezier-curve"></i> CORELDRAW</span><span><i class="fas fa-pen-nib"></i> AFFINITY</span>
         </div>
     </div>
 
@@ -158,7 +186,7 @@
                 </div>
                 <div class="about-text">
                     <h3>I'M INUKA AND I'M A <span id="typing-about" style="color:var(--accent)"></span></h3>
-                    <p>SURROUNDED BY INNOVATION, YET EMBRACING THE TIMELESS ESSENCE OF CREATIVITY. IDEAS FLOW LIKE INK ON PAGES, FORMING DESIGNS, CODE, AND VISIONS THAT SHAPE THE DIGITAL WORLD. EVERY PROJECT IS A STEP TOWARD MASTERY, EVERY CHALLENGE A LESSON IN RESILIENCE.</p>
+                    <p>SURROUNDED BY INNOVATION, YET EMBRACING THE TIMELESS ESSENCE OF CREATIVITY. IDEAS FLOW LIKE INK ON PAGES, FORMING DESIGNS, CODE, AND VISIONS THAT SHAPE THE DIGITAL WORLD. EVERY PROJECT IS A STEP TOWARD MASTERY, EVERY CHALLENGE A LESSON IN RESILIENCE. OPEN TO CHANGE, DRIVEN BY PASSION—THIS IS THE JOURNEY I WALK, CRAFTING EXPERIENCES THAT LEAVE A LASTING IMPRESSION.</p>
                     <div class="about-footer-row">
                         <a href="https://www.youtube.com/@InukaTech" target="_blank" class="subscribe-btn">SUBSCRIBE</a>
                         <div class="about-socials">
@@ -174,39 +202,42 @@
 
     <section id="services" class="expertise-section">
         <div class="max-width">
-            <h2 style="text-align:center; font-family:'Space Grotesk'; font-size:2.5rem; margin-bottom:50px;">WHAT I DO</h2>
-            <div class="bento-grid">
-                <div class="glass-card"><h3>Web Development</h3></div>
-                <div class="glass-card"><h3>Graphic Design</h3></div>
-                <div class="glass-card"><h3>Social Media</h3></div>
-                <div class="glass-card"><h3>AI Automation</h3></div>
-                <div class="glass-card"><h3>IT Consulting</h3></div>
-                <div class="glass-card"><h3>Photography</h3></div>
-                <div class="glass-card"><h3>Content Writing</h3></div>
-                <div class="glass-card"><h3>UI/UX Design</h3></div>
-                <div class="glass-card"><h3>Cybersecurity</h3></div>
+            <h2 class="section-title">WHAT I DO</h2>
+            <div class="bento-grid nine-grid">
+                <div class="glass-card"><i class="fas fa-laptop-code card-icon"></i><h3>Web Development</h3><p>Building fast, beautiful, and highly responsive websites.</p></div>
+                <div class="glass-card"><i class="fas fa-pen-nib card-icon"></i><h3>Graphic Design</h3><p>Logos, flyers, and premium brand visual identities.</p></div>
+                <div class="glass-card"><i class="fas fa-hashtag card-icon"></i><h3>Social Media</h3><p>Strategic content creation and account management.</p></div>
+                <div class="glass-card"><i class="fas fa-robot card-icon"></i><h3>AI Automation</h3><p>Developing smart Python scripts and AI tools.</p></div>
+                <div class="glass-card"><i class="fas fa-desktop card-icon"></i><h3>IT Consulting</h3><p>Expert advice on system architecture and setup.</p></div>
+                <div class="glass-card"><i class="fas fa-camera card-icon"></i><h3>Photography</h3><p>Commercial shoots and high-quality photography.</p></div>
+                <div class="glass-card"><i class="fas fa-pen-fancy card-icon"></i><h3>Content Writing</h3><p>Crafting compelling, SEO-friendly copy for campaigns.</p></div>
+                <div class="glass-card"><i class="fas fa-object-group card-icon"></i><h3>UI/UX Architecture</h3><p>Designing intuitive and beautiful user interfaces.</p></div>
+                <div class="glass-card"><i class="fas fa-shield-alt card-icon"></i><h3>Cybersecurity</h3><p>Ethical hacking concepts to secure digital environments.</p></div>
             </div>
         </div>
     </section>
 
     <section id="projects" class="expertise-section">
         <div class="max-width">
-            <h2 style="text-align:center; font-family:'Space Grotesk'; font-size:2.5rem; margin-bottom:50px;">SELECTED ROLES</h2>
+            <h2 class="section-title">SELECTED ROLES</h2>
             <div class="bento-grid">
                 <div class="glass-card bento-large">
-                    <span class="role-badge">DEVELOPER & DESIGNER</span>
+                    <i class="fas fa-code-branch card-icon"></i>
                     <h3>iCODE Software Solutions</h3>
-                    <p style="color:var(--text-muted)">Engineering for a Japan-based international firm.</p>
+                    <p class="role-badge">Graphic Designer & Developer</p>
+                    <p>Engineering robust software solutions and crafting premium graphic assets for a Japan-based international tech firm.</p>
                 </div>
                 <div class="glass-card">
-                    <span class="role-badge">DIRECTOR</span>
+                    <i class="fas fa-chart-line card-icon"></i>
                     <h3>Cantab</h3>
-                    <p style="color:var(--text-muted)">Leading digital strategy.</p>
+                    <p class="role-badge">Social Media Director</p>
+                    <p>Leading social media initiatives, optimizing outreach, and managing brand communications.</p>
                 </div>
                 <div class="glass-card">
-                    <span class="role-badge">INSTRUCTOR</span>
+                    <i class="fas fa-chalkboard-teacher card-icon"></i>
                     <h3>Iresh Dasanayaka</h3>
-                    <p style="color:var(--text-muted)">Coordinator & Graphic Designer.</p>
+                    <p class="role-badge">ICT Tutor & Instructor</p>
+                    <p>Serving as an instructor, coordinator, and lead graphic designer for educational programs.</p>
                 </div>
             </div>
         </div>
@@ -214,10 +245,38 @@
 
     <section class="expertise-section">
         <div class="max-width">
+            <h2 class="section-title">AI ENGINEERING</h2>
             <div class="glass-card terminal-container">
-                <div class="terminal-body" id="architect-terminal">
-                    <p><span style="color:#5dade2">inuka@dev:~$</span> python3 Architect.py</p>
+                <div class="terminal-header">
+                    <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                    <span class="terminal-title">bash - Architect.py</span>
                 </div>
+                <div class="terminal-body">
+                    <p><span class="prompt">inuka@dev-machine:~$</span> python3 Architect.py</p>
+                    <p style="color: #f5b041;">[SYSTEM] Importing Neural Core... Done.</p>
+                    <p>[ARCHITECT] <span id="architect-typing"></span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="expertise-section">
+        <div class="max-width">
+            <div class="contact-container glass-card">
+                <div class="contact-info">
+                    <h2 class="section-title" style="text-align: left; margin-bottom:20px;">Get In Touch</h2>
+                    <p style="color:var(--text-muted); margin-bottom:30px;">Have a project in mind or need some help? Send me a message below.</p>
+                    <div class="info-item"><i class="fas fa-envelope"></i> inukatech10@gmail.com</div>
+                    <div class="info-item"><i class="fas fa-phone"></i> +94 71 795 4374</div>
+                    <div class="info-item"><i class="fas fa-map-marker-alt"></i> Kurunegala, Sri Lanka</div>
+                </div>
+                <form action="https://formsubmit.co/inukatech10@gmail.com" method="post" class="contact-form">
+                    <input type="text" name="Name" required placeholder="Your Name">
+                    <input type="email" name="Email" required placeholder="Email Address">
+                    <input type="text" name="Subject" required placeholder="Subject">
+                    <textarea name="Message" rows="4" required placeholder="Project Details"></textarea>
+                    <button type="submit" class="outline-btn">Deploy Message</button>
+                </form>
             </div>
         </div>
     </section>
@@ -230,19 +289,18 @@
 
     <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             // 1. Terminal Preloader
             new Typed("#boot-text", {
-                strings: ["> INITIALIZING BEAST_MODE...<br>> ARCHITECT AI: ONLINE."],
-                typeSpeed: 30, showCursor: false,
+                strings: ["[SYSTEM] Booting Inuka_OS...^200<br>[ARCHITECT] AI Systems Online.^200"],
+                typeSpeed: 20, showCursor: false,
                 onComplete: () => {
                     setTimeout(() => {
-                        gsap.to("#preloader", { opacity: 0, duration: 0.5, onComplete: () => document.getElementById("preloader").style.display="none" });
-                    }, 500);
+                        document.getElementById("preloader").style.opacity = "0";
+                        setTimeout(() => document.getElementById("preloader").style.display="none", 500);
+                    }, 200);
                 }
             });
 
@@ -255,6 +313,10 @@
                 strings: ["DEVELOPER", "DESIGNER", "FREELANCER"],
                 typeSpeed: 60, backSpeed: 40, loop: true
             });
+            new Typed("#architect-typing", {
+                strings: ["Awaiting command...", "Optimizing system memory...", "Bypassing standard protocols...", "System fully optimized for Inuka."],
+                typeSpeed: 40, backSpeed: 20, loop: true, cursorChar: '█'
+            });
 
             // 3. Scroll Buttons
             const upBtn = document.getElementById("scroll-up-btn");
@@ -264,51 +326,72 @@
             });
             upBtn.addEventListener("click", () => window.scrollTo({top: 0, behavior: 'smooth'}));
             document.getElementById("scroll-down-btn").addEventListener("click", () => {
-                window.scrollTo({top: document.getElementById('about').offsetTop - 100, behavior: 'smooth'});
+                window.scrollTo({top: document.getElementById('about').offsetTop - 80, behavior: 'smooth'});
             });
 
             // 4. Swiper
             new Swiper(".mySwiper", { loop: true, autoplay: { delay: 3000 } });
 
-            // 5. Background Canvas
+            // 5. Molecular Canvas Background
             const canvas = document.getElementById("bg-canvas");
             const ctx = canvas.getContext("2d");
             canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-            let particles = [];
+            let particlesArray = [];
+            
             class Particle {
-                constructor() {
-                    this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height;
-                    this.vx = Math.random() * 0.6 - 0.3; this.vy = Math.random() * 0.6 - 0.3;
-                }
-                update() {
-                    this.x += this.vx; this.y += this.vy;
-                    if(this.x < 0 || this.x > canvas.width) this.vx *= -1;
-                    if(this.y < 0 || this.y > canvas.height) this.vy *= -1;
+                constructor(x, y, directionX, directionY, size) {
+                    this.x = x; this.y = y; this.directionX = directionX; this.directionY = directionY; this.size = size;
                 }
                 draw() {
-                    ctx.fillStyle = "rgba(201, 16, 16, 0.4)";
-                    ctx.beginPath(); ctx.arc(this.x, this.y, 1.2, 0, Math.PI*2); ctx.fill();
+                    ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                    ctx.fillStyle = '#c91010'; ctx.fill();
+                }
+                update() {
+                    if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
+                    if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
+                    this.x += this.directionX; this.y += this.directionY;
+                    this.draw();
                 }
             }
-            for(let i=0; i<100; i++) particles.push(new Particle());
-            function loop() {
-                ctx.clearRect(0,0,canvas.width, canvas.height);
-                particles.forEach(p => { p.update(); p.draw(); });
-                requestAnimationFrame(loop);
-            }
-            loop();
 
-            // 6. Architect Terminal Content
-            const terminal = document.getElementById("architect-terminal");
-            const lines = ["> loading modules...", "> system optimized.", "> firewall active.", "> welcome back, inuka."];
-            let lineIdx = 0;
-            setInterval(() => {
-                const p = document.createElement("p");
-                p.innerHTML = lines[lineIdx % lines.length];
-                terminal.appendChild(p);
-                if(terminal.children.length > 7) terminal.removeChild(terminal.children[1]);
-                lineIdx++;
-            }, 3000);
+            function initCanvas() {
+                particlesArray = [];
+                let numberOfParticles = (canvas.height * canvas.width) / 12000;
+                for (let i = 0; i < numberOfParticles; i++) {
+                    let size = (Math.random() * 2) + 1;
+                    let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                    let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                    let directionX = (Math.random() * 0.8) - 0.4; 
+                    let directionY = (Math.random() * 0.8) - 0.4;
+                    particlesArray.push(new Particle(x, y, directionX, directionY, size));
+                }
+            }
+
+            function animateCanvas() {
+                requestAnimationFrame(animateCanvas);
+                ctx.clearRect(0, 0, innerWidth, innerHeight);
+                for (let i = 0; i < particlesArray.length; i++) particlesArray[i].update();
+                
+                // Connect Particles (The Molecular Style)
+                for (let a = 0; a < particlesArray.length; a++) {
+                    for (let b = a; b < particlesArray.length; b++) {
+                        let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + 
+                                       ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                        if (distance < (canvas.width / 7) * (canvas.height / 7)) {
+                            let opacityValue = 1 - (distance / 20000);
+                            ctx.strokeStyle = `rgba(255, 255, 255, ${opacityValue * 0.15})`;
+                            ctx.lineWidth = 1;
+                            ctx.beginPath();
+                            ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                            ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            window.addEventListener('resize', () => { canvas.width = innerWidth; canvas.height = innerHeight; initCanvas(); });
+            initCanvas(); animateCanvas();
         });
     </script>
 </body>
