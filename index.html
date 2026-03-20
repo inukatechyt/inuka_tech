@@ -47,7 +47,6 @@
 
         /* Navbar */
         .glass-nav { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 1200px; background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 20px; z-index: 1000; padding: 15px 30px; transition: all 0.4s ease; }
-        /* Neon Nav Scroll Effect */
         .glass-nav.scrolled { box-shadow: 0 0 20px rgba(201, 16, 16, 0.4); border-color: rgba(201, 16, 16, 0.6); background: rgba(5, 5, 7, 0.95); }
         
         .nav-container { display: flex; justify-content: space-between; align-items: center; }
@@ -62,7 +61,7 @@
         .pre-headline { color: var(--accent); letter-spacing: 4px; margin-bottom: 10px; font-size: 1.2rem; text-transform: uppercase; text-shadow: 0 0 10px rgba(201,16,16,0.5); }
         .main-headline { font-family: 'Space Grotesk'; font-size: clamp(3rem, 8vw, 6rem); font-weight: 900; background: linear-gradient(180deg, #fff, #888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0px 10px 20px rgba(201, 16, 16, 0.2)); }
         .dynamic-role { font-size: 1.8rem; color: #fff; margin: 20px 0; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
-        .scroll-down-btn { background: var(--glass); border: 1px solid var(--border); color: #fff; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; margin-top: 30px; transition: 0.3s; backdrop-filter: blur(5px); }
+        .scroll-down-btn { background: var(--glass); border: 1px solid var(--border); color: #fff; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; margin-top: 30px; transition: 0.3s; backdrop-filter: blur(5px); display: inline-flex; justify-content: center; align-items: center; font-size: 1.2rem;}
         .scroll-down-btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(5px); box-shadow: 0 0 15px rgba(201,16,16,0.4); }
 
         /* Marquee */
@@ -103,12 +102,15 @@
         .bento-large { grid-column: span 2; }
         .role-badge { display: inline-block; padding: 5px 12px; background: rgba(201,16,16,0.15); color: var(--accent); border-radius: 6px; font-size: 0.8rem; font-weight: 600; margin-bottom: 15px; border: 1px solid rgba(201,16,16,0.3); }
 
-        /* AI Engineering Layout */
+        /* AI Engineering Layout - MAC WINDOW FIX */
         .ai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center; }
-        .terminal-window { width: 100%; background: #0a0a0c; border: 1px solid #333; border-radius: 10px; overflow: hidden; height: 100%; }
-        .terminal-header { background: #111; padding: 10px 20px; display: flex; align-items: center; border-bottom: 1px solid #333; }
-        .terminal-body { padding: 30px; font-family: var(--font-code); color: #00ff00; font-size: 1.1rem; line-height: 1.8; }
-        .ai-description { padding: 30px; }
+        .mac-window { background: #0a0a0c; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.6); display: flex; flex-direction: column; height: 100%;}
+        .mac-header { background: #1a1a1a; padding: 12px 20px; display: flex; align-items: center; border-bottom: 1px solid #333; }
+        .mac-body { padding: 30px; font-family: var(--font-code); color: #00ff00; font-size: 1.1rem; line-height: 1.8; flex-grow: 1; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; display: inline-block; }
+        .dot.red { background: #ff5f56; } .dot.yellow { background: #ffbd2e; } .dot.green { background: #27c93f; }
+        
+        .ai-description { padding: 30px; height: 100%; display: flex; flex-direction: column; justify-content: center;}
         .ai-description h3 { font-family: 'Space Grotesk'; font-size: 1.8rem; margin-bottom: 15px; color: #fff; }
         .ai-description p { color: #ccc; line-height: 1.7; font-size: 1rem; margin-bottom: 15px;}
         .ai-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;}
@@ -131,7 +133,7 @@
         .footer-socials a:hover { background: var(--accent); border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 5px 15px rgba(201,16,16,0.4); }
 
         /* Scroll Up Button */
-        .scroll-up-btn { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: var(--accent); color: #fff; border: none; opacity: 0; pointer-events: none; cursor: pointer; transition: all 0.4s ease; z-index: 1000; box-shadow: 0 10px 20px rgba(0,0,0,0.5); font-size: 1.2rem;}
+        .scroll-up-btn { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: var(--accent); color: #fff; border: none; opacity: 0; pointer-events: none; cursor: pointer; transition: all 0.4s ease; z-index: 1000; box-shadow: 0 10px 20px rgba(0,0,0,0.5); font-size: 1.2rem; display: flex; justify-content: center; align-items: center;}
         .scroll-up-btn.visible { opacity: 1; pointer-events: auto; }
         .scroll-up-btn:hover { background: #a00b0b; transform: translateY(-5px); }
 
@@ -386,6 +388,13 @@
                     <p>Directing visual marketing campaigns and overarching strategy for the clothing brand.</p>
                 </div>
 
+                <div class="glass-card">
+                    <i class="fas fa-camera-retro card-icon"></i>
+                    <h3>Freelance Photography</h3>
+                    <p class="role-badge">Commercial Photographer</p>
+                    <p>Executing high-quality commercial shoots and event coverage using professional Canon DSLR equipment.</p>
+                </div>
+
             </div>
         </div>
     </section>
@@ -394,12 +403,12 @@
         <div class="max-width">
             <h2 class="section-title">AI ENGINEERING</h2>
             <div class="ai-grid">
-                <div class="glass-card terminal-window">
-                    <div class="terminal-header">
+                <div class="mac-window">
+                    <div class="mac-header">
                         <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-                        <span style="margin:auto; color:#888; font-family:'Inter', sans-serif; font-size: 0.85rem;">Architect.py</span>
+                        <span style="margin-left:auto; margin-right:auto; color:#888; font-family:'Inter', sans-serif; font-size: 0.85rem;">Architect.py</span>
                     </div>
-                    <div class="terminal-body">
+                    <div class="mac-body">
                         <p><span class="prompt">inuka@dev-machine:~$</span> python3 Architect.py</p>
                         <p style="color: #f5b041;">[SYSTEM] Importing Neural Core... Done.</p>
                         <p>[ARCHITECT] <span id="architect-typing"></span></p>
@@ -448,8 +457,6 @@
             <a href="https://www.youtube.com/@InukaTech" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
             <a href="https://www.instagram.com/inukasanjula10" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
             <a href="#" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#" target="_blank" title="Twitter/X"><i class="fab fa-x-twitter"></i></a>
-            <a href="#" target="_blank" title="Threads"><i class="fab fa-threads"></i></a>
         </div>
         <p style="color:var(--text-muted); font-family: 'Space Grotesk';">&copy; 2026 INUKA TECH. WHERE TECHNOLOGY POWERS CREATIVITY.</p>
     </footer>
@@ -525,14 +532,13 @@
             // 4. Swiper
             new Swiper(".mySwiper", { loop: true, autoplay: { delay: 3000 } });
 
-            // 5. Molecular Canvas Background (With Mouse Dodge and Connecting Lines)
+            // 5. Molecular Canvas Background
             const canvas = document.getElementById("bg-canvas");
             const ctx = canvas.getContext("2d");
             canvas.width = window.innerWidth; 
             canvas.height = window.innerHeight;
             let particlesArray = [];
             
-            // Mouse Tracker for dodge animation
             let mouse = { x: null, y: null, radius: 120 };
             window.addEventListener("mousemove", (event) => { 
                 mouse.x = event.x; 
@@ -555,7 +561,6 @@
                     if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
                     if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
                     
-                    // Dodge Animation Logic
                     let dx = mouse.x - this.x; 
                     let dy = mouse.y - this.y;
                     let distance = Math.sqrt(dx * dx + dy * dy);
@@ -591,7 +596,6 @@
                 ctx.clearRect(0, 0, innerWidth, innerHeight);
                 for (let i = 0; i < particlesArray.length; i++) particlesArray[i].update();
                 
-                // Connect Particles (The molecular lines)
                 for (let a = 0; a < particlesArray.length; a++) {
                     for (let b = a; b < particlesArray.length; b++) {
                         let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + 
