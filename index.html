@@ -30,7 +30,7 @@
         html { scroll-behavior: smooth; }
         body { font-family: 'Inter', sans-serif; color: var(--text-main); overflow-x: hidden; background-color: var(--bg); transition: filter 0.2s ease; width: 100%; }
         
-        /* GADGET 1: Custom Cursor (Hidden on touch devices) */
+        /* GADGET 1: Custom Cursor */
         @media (pointer: fine) {
             body, a, button, input, textarea { cursor: none !important; }
             .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999999; pointer-events: none; }
@@ -50,7 +50,7 @@
 
         /* Canvas Layering */
         #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: 0; pointer-events: none; }
-        nav, section, footer, .marquee-container, .scroll-up-btn { position: relative; z-index: 10; }
+        nav, section, footer, .marquee-container, .scroll-up-btn, .chat-toggle-btn, .chat-window { position: relative; z-index: 10; }
 
         /* SYSTEM OVERRIDE EASTER EGG */
         body.override-active { filter: hue-rotate(90deg) invert(10%) saturate(200%); }
@@ -63,17 +63,13 @@
         .raw-preloader-text { font-family: var(--font-code); color: #00ff00; font-size: clamp(1rem, 3vw, 1.2rem); line-height: 1.8; text-shadow: 0 0 5px rgba(0,255,0,0.5); }
         .prompt { color: #5dade2; }
 
-        /* Navbar & GADGET 3: Live Clock */
+        /* Navbar */
         .glass-nav { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 1200px; background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 20px; z-index: 1000; padding: 15px 30px; transition: all 0.4s ease; display: flex; flex-direction: column; gap: 10px;}
         .glass-nav.scrolled { box-shadow: 0 0 20px rgba(201, 16, 16, 0.4); border-color: rgba(201, 16, 16, 0.6); background: rgba(5, 5, 7, 0.95); }
         .nav-container { display: flex; justify-content: space-between; align-items: center; width: 100%;}
         
         .brand { font-family: 'Space Grotesk'; font-size: 1.5rem; font-weight: 700; }
         .brand span { color: var(--accent); transition: 0.3s; }
-        
-        .live-clock { display: flex; align-items: center; gap: 8px; font-family: var(--font-code); font-size: 0.75rem; color: #0f0; background: rgba(0,255,0,0.05); padding: 5px 12px; border-radius: 20px; border: 1px solid rgba(0,255,0,0.2); text-shadow: 0 0 5px rgba(0,255,0,0.5); letter-spacing: 0.5px;}
-        .pulse-dot { width: 6px; height: 6px; background: #0f0; border-radius: 50%; animation: pulse-green 1.5s infinite; }
-        @keyframes pulse-green { 0% { box-shadow: 0 0 0 0 rgba(0,255,0,0.7); } 70% { box-shadow: 0 0 0 6px rgba(0,255,0,0); } 100% { box-shadow: 0 0 0 0 rgba(0,255,0,0); } }
 
         .nav-links { display: flex; list-style: none; gap: 25px; align-items: center; margin: 0; padding: 0; }
         .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: 0.3s; }
@@ -111,17 +107,10 @@
         .glass-badge { background: rgba(201, 16, 16, 0.1); border: 1px solid rgba(201, 16, 16, 0.3); color: #fff; padding: 8px 14px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; display: flex; align-items: center; gap: 8px; backdrop-filter: blur(5px); box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: 0.3s; }
         .glass-badge i { color: var(--accent); }
         
-        /* APPLE-STYLE PROXIMITY GLOW SYSTEM */
+        /* Proximity Glow Grid */
         .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-        .glass-card { 
-            position: relative; overflow: hidden;
-            background: var(--glass); backdrop-filter: blur(15px); border: 1px solid var(--border); border-top: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 35px; transition: border-color 0.4s, transform 0.4s, box-shadow 0.4s; box-shadow: 0 10px 30px rgba(0,0,0,0.3); display: flex; flex-direction: column;
-        }
-        .glass-card::before {
-            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(201, 16, 16, 0.12), transparent 40%);
-            opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 0;
-        }
+        .glass-card { position: relative; overflow: hidden; background: var(--glass); backdrop-filter: blur(15px); border: 1px solid var(--border); border-top: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 35px; transition: border-color 0.4s, transform 0.4s, box-shadow 0.4s; box-shadow: 0 10px 30px rgba(0,0,0,0.3); display: flex; flex-direction: column; }
+        .glass-card::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(201, 16, 16, 0.12), transparent 40%); opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 0; }
         .glass-card:hover::before { opacity: 1; }
         .glass-card > * { position: relative; z-index: 1; }
         .glass-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.2); box-shadow: inset 0 -4px 20px rgba(201, 16, 16, 0.15), 0 15px 30px rgba(0,0,0,0.5); }
@@ -140,7 +129,7 @@
         .mac-window { position: relative; background: #0a0a0c; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.6); display: flex; flex-direction: column; height: 100%; min-height: 380px;}
         .mac-header { background: #1e1e1e; padding: 12px 20px; display: flex; align-items: center; border-bottom: 1px solid #000; position: relative; z-index: 1;}
         .mac-dots { display: flex; gap: 8px; }
-        .mac-dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+        .mac-dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; cursor: pointer; }
         .mac-dot.red { background: #ff5f56; } .mac-dot.yellow { background: #ffbd2e; } .mac-dot.green { background: #27c93f; }
         .mac-title { position: absolute; left: 50%; transform: translateX(-50%); color: #888; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.5px;}
         
@@ -157,29 +146,53 @@
         .ai-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-top: auto;}
         .ai-tags span { background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 5px 12px; border-radius: 5px; font-size: 0.8rem; font-family: var(--font-code); color: var(--accent); transition: 0.3s; }
 
-        /* Contact & Footer */
+        /* Contact Section */
         .contact-container { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; padding: 50px; align-items: center; }
         .info-item { font-size: 1.1rem; margin-bottom: 20px; display: flex; align-items: center; gap: 15px; word-break: break-all; }
         .info-item i { color: var(--accent); font-size: 1.3rem; min-width: 25px; text-align: center; transition: 0.3s; }
         .contact-form { display: flex; flex-direction: column; gap: 20px; position: relative; z-index: 1;}
         .contact-form input, .contact-form textarea { width: 100%; padding: 15px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 12px; color: #fff; font-family: 'Inter'; outline: none; transition: 0.3s; }
         .contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent); box-shadow: 0 0 10px rgba(201, 16, 16, 0.2); }
-        .outline-btn { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 15px 30px; border-radius: 8px; font-weight: 600; transition: border-color 0.3s, color 0.3s, box-shadow 0.3s; font-family: 'Inter'; font-size: 1rem; display: inline-block; text-align: center;}
+        .outline-btn { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 15px 30px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: border-color 0.3s, color 0.3s, box-shadow 0.3s; font-family: 'Inter'; font-size: 1rem; display: inline-block; text-align: center;}
         .outline-btn:hover { background: var(--accent); color: #fff; box-shadow: 0 0 20px rgba(201, 16, 16, 0.4); filter: brightness(1.2); }
 
+        /* Footer */
         footer { text-align: center; padding: 50px 20px; border-top: 1px solid var(--border); background: rgba(0,0,0,0.5); backdrop-filter: blur(10px); }
         .footer-socials { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;}
         .footer-socials a { width: 45px; height: 45px; border-radius: 50%; background: var(--glass); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.2rem; transition: 0.3s; text-decoration: none;}
         .footer-socials a:hover { background: var(--accent); border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 5px 15px rgba(201, 16, 16, 0.4); }
 
+        /* FLOATING UI BUTTONS (Scroll + Chat) */
         .scroll-up-btn { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: var(--accent); color: #fff; border: none; opacity: 0; pointer-events: none; cursor: pointer; transition: opacity 0.4s, transform 0.4s; z-index: 1000; box-shadow: 0 10px 20px rgba(0,0,0,0.5); font-size: 1.2rem; display: flex; justify-content: center; align-items: center;}
         .scroll-up-btn.visible { opacity: 1; pointer-events: auto; }
         .scroll-up-btn:hover { filter: brightness(0.8); transform: translateY(-5px); }
+        
+        .chat-toggle-btn { position: fixed; bottom: 95px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: var(--glass); border: 1px solid var(--accent); color: var(--accent); cursor: pointer; transition: 0.3s; z-index: 1000; box-shadow: 0 0 15px rgba(201, 16, 16, 0.2); font-size: 1.3rem; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(5px);}
+        .chat-toggle-btn:hover { background: var(--accent); color: #fff; box-shadow: 0 0 20px rgba(201, 16, 16, 0.5); }
+
+        /* THE AI CHAT WINDOW */
+        .chat-window { position: fixed; bottom: 160px; right: 30px; width: 320px; height: 400px; background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 15px 40px rgba(0,0,0,0.8); z-index: 1001; display: flex; flex-direction: column; transform: scale(0); opacity: 0; transform-origin: bottom right; transition: transform 0.3s ease, opacity 0.3s ease; pointer-events: none; }
+        .chat-window.active { transform: scale(1); opacity: 1; pointer-events: auto; }
+        
+        .chat-header { background: #1e1e1e; padding: 12px 15px; display: flex; align-items: center; border-bottom: 1px solid #000; border-radius: 12px 12px 0 0;}
+        .chat-title { margin-left: 15px; color: #fff; font-family: 'Space Grotesk'; font-size: 0.9rem; font-weight: 600;}
+        
+        .chat-body { flex-grow: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+        .chat-body::-webkit-scrollbar { width: 4px; }
+        .chat-body::-webkit-scrollbar-thumb { background: #333; }
+        
+        .chat-msg { padding: 10px 14px; border-radius: 10px; font-size: 0.85rem; line-height: 1.5; max-width: 85%; font-family: 'Inter'; }
+        .bot-msg { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: #ccc; align-self: flex-start; border-bottom-left-radius: 2px;}
+        .user-msg { background: rgba(201, 16, 16, 0.2); border: 1px solid var(--accent); color: #fff; align-self: flex-end; border-bottom-right-radius: 2px;}
+        
+        .chat-input-area { display: flex; border-top: 1px solid var(--border); padding: 10px; background: rgba(0,0,0,0.3); border-radius: 0 0 12px 12px;}
+        .chat-input-area input { flex-grow: 1; background: transparent; border: none; color: #fff; font-family: 'Inter'; font-size: 0.9rem; outline: none; padding: 5px 10px; }
+        .chat-input-area button { background: transparent; border: none; color: var(--accent); font-size: 1.2rem; cursor: pointer; padding: 5px; transition: 0.3s; }
+        .chat-input-area button:hover { color: #fff; }
 
         /* --- MOBILE RESPONSIVE FIXES --- */
         @media (max-width: 900px) {
             .mobile-toggle { display: block; }
-            .live-clock { display: none; } /* Hide clock on mobile to save nav space */
             .nav-links {
                 position: absolute; top: 100%; left: 0; width: 100%;
                 background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(20px);
@@ -189,7 +202,7 @@
                 transition: clip-path 0.4s ease;
             }
             .nav-links.active { clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); }
-            
+
             .expertise-section, .about-section { padding: 60px 15px; }
             .about-content { grid-template-columns: 1fr; padding: 25px; text-align: center; gap: 30px; }
             .about-images { width: 100%; max-width: 320px; }
@@ -203,7 +216,11 @@
             .mac-window { min-height: 320px; }
             
             .contact-container { grid-template-columns: 1fr; padding: 25px; gap: 30px;}
-            .info-item { font-size: 1rem; }
+            
+            /* Mobile Floating Buttons */
+            .scroll-up-btn { bottom: 20px; right: 20px; width: 45px; height: 45px;}
+            .chat-toggle-btn { bottom: 75px; right: 20px; width: 45px; height: 45px;}
+            .chat-window { bottom: 130px; right: 20px; width: calc(100% - 40px); max-width: 350px;}
         }
     </style>
 </head>
@@ -231,11 +248,6 @@
         <div class="nav-container">
             <div class="brand">Inuka<span>.</span>Tech</div>
             
-            <div class="live-clock">
-                <span class="pulse-dot"></span> 
-                LK: <span id="lk-time">00:00</span> | ACTIVE
-            </div>
-
             <div class="mobile-toggle"><i class="fas fa-bars"></i></div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
@@ -252,7 +264,7 @@
             <h2 class="pre-headline">WELCOME TO MY PORTFOLIO</h2>
             <h1 class="main-headline">INUKA SANJULA</h1>
             <div class="dynamic-role">I AM A <span id="typing-hero"></span></div>
-            <button id="scroll-down-btn" class="scroll-down-btn magnetic"><i class="fas fa-chevron-down"></i></button>
+            <button id="scroll-down-btn" class="scroll-down-btn"><i class="fas fa-chevron-down"></i></button>
         </div>
     </section>
 
@@ -524,7 +536,7 @@
                     <input type="email" name="Email" required placeholder="Email Address">
                     <input type="text" name="Subject" required placeholder="Subject">
                     <textarea name="Message" rows="4" required placeholder="Project Details"></textarea>
-                    <button type="submit" class="outline-btn magnetic">Deploy Message</button>
+                    <button type="submit" class="outline-btn">Deploy Message</button>
                 </form>
             </div>
         </div>
@@ -540,7 +552,26 @@
         <p style="color:var(--text-muted); font-family: 'Space Grotesk';">&copy; 2026 INUKA TECH. WHERE TECHNOLOGY POWERS CREATIVITY.</p>
     </footer>
 
-    <button id="scroll-up-btn" class="scroll-up-btn magnetic"><i class="fas fa-chevron-up"></i></button>
+    <div class="chat-window" id="chat-window">
+        <div class="chat-header">
+            <div class="mac-dots">
+                <span class="mac-dot red" id="close-chat" style="cursor: pointer;" title="Close"></span>
+                <span class="mac-dot yellow"></span>
+                <span class="mac-dot green"></span>
+            </div>
+            <span class="chat-title">Architect_Support</span>
+        </div>
+        <div class="chat-body" id="chat-body">
+            <div class="chat-msg bot-msg">Hello. I am Architect, the AI assistant for Inuka Tech. How can I help you today?</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chat-msg-input" placeholder="Message Architect..." autocomplete="off">
+            <button id="chat-send-btn"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <button id="chat-toggle-btn" class="chat-toggle-btn"><i class="fas fa-comment-dots"></i></button>
+    <button id="scroll-up-btn" class="scroll-up-btn"><i class="fas fa-chevron-up"></i></button>
 
     <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
@@ -550,6 +581,51 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
 
+            // NEW GADGET: Custom Architect Chatbot Logic
+            const chatToggleBtn = document.getElementById("chat-toggle-btn");
+            const chatWindow = document.getElementById("chat-window");
+            const closeChatBtn = document.getElementById("close-chat");
+            const chatInput = document.getElementById("chat-msg-input");
+            const chatSendBtn = document.getElementById("chat-send-btn");
+            const chatBody = document.getElementById("chat-body");
+
+            chatToggleBtn.addEventListener("click", () => chatWindow.classList.add("active"));
+            closeChatBtn.addEventListener("click", () => chatWindow.classList.remove("active"));
+
+            function addChatMessage(text, isUser) {
+                const msgDiv = document.createElement("div");
+                msgDiv.className = `chat-msg ${isUser ? 'user-msg' : 'bot-msg'}`;
+                msgDiv.textContent = text;
+                chatBody.appendChild(msgDiv);
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }
+
+            function handleChatSend() {
+                const val = chatInput.value.trim();
+                if(!val) return;
+                
+                addChatMessage(val, true);
+                chatInput.value = "";
+
+                // Simulated AI Response Delay
+                setTimeout(() => {
+                    const lowerVal = val.toLowerCase();
+                    if(lowerVal.includes("hello") || lowerVal.includes("hi")) {
+                        addChatMessage("Greetings. Are you looking to start a new project with Inuka?", false);
+                    } else if(lowerVal.includes("price") || lowerVal.includes("cost") || lowerVal.includes("quote")) {
+                        addChatMessage("For pricing and project quotes, please use the Contact form on this site. Inuka reviews all inquiries within 24 hours.", false);
+                    } else if(lowerVal.includes("service") || lowerVal.includes("do")) {
+                        addChatMessage("Inuka specializes in Web Development, Graphic Design, and AI Automation. You can view the full list in the 'Services' section.", false);
+                    } else {
+                        addChatMessage("I have logged your message. If you require a direct response, please deploy a message via the Contact section below.", false);
+                    }
+                }, 800);
+            }
+
+            chatSendBtn.addEventListener("click", handleChatSend);
+            chatInput.addEventListener("keypress", (e) => { if(e.key === "Enter") handleChatSend(); });
+
+
             // GADGET 4: Scroll Progress Laser
             window.addEventListener('scroll', () => {
                 const scrollTop = window.scrollY;
@@ -557,17 +633,6 @@
                 const scrollPercent = (scrollTop / docHeight) * 100;
                 document.getElementById('scroll-progress').style.width = scrollPercent + '%';
             });
-
-            // GADGET 3: Live Clock (Sri Lanka Time)
-            function updateClock() {
-                const now = new Date();
-                const options = { timeZone: 'Asia/Colombo', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
-                const timeString = new Intl.DateTimeFormat('en-GB', options).format(now);
-                const clockElement = document.getElementById('lk-time');
-                if(clockElement) clockElement.textContent = timeString;
-            }
-            setInterval(updateClock, 1000);
-            updateClock();
 
             // GADGET 1: Fluid Glass Custom Cursor (GSAP)
             if (window.matchMedia("(pointer: fine)").matches) {
@@ -592,7 +657,7 @@
                 });
 
                 // Snap to links/buttons
-                document.querySelectorAll('a, button, input, textarea, .magnetic').forEach(el => {
+                document.querySelectorAll('a, button, input, textarea, .mac-dot').forEach(el => {
                     el.addEventListener('mouseenter', () => {
                         gsap.to(cursorOutline, { scale: 1.5, backgroundColor: "rgba(201,16,16,0.1)", borderColor: "rgba(201,16,16,0)", duration: 0.3 });
                         gsap.to(cursorDot, { scale: 0, duration: 0.3 });
@@ -600,21 +665,6 @@
                     el.addEventListener('mouseleave', () => {
                         gsap.to(cursorOutline, { scale: 1, backgroundColor: "transparent", borderColor: "rgba(201,16,16,0.5)", duration: 0.3 });
                         gsap.to(cursorDot, { scale: 1, duration: 0.3 });
-                    });
-                });
-            }
-
-            // GADGET 2: Magnetic UI Buttons
-            if (window.matchMedia("(pointer: fine)").matches) {
-                document.querySelectorAll('.magnetic').forEach(btn => {
-                    btn.addEventListener('mousemove', (e) => {
-                        const rect = btn.getBoundingClientRect();
-                        const x = e.clientX - rect.left - rect.width / 2;
-                        const y = e.clientY - rect.top - rect.height / 2;
-                        gsap.to(btn, {duration: 0.3, x: x * 0.4, y: y * 0.4, ease: "power2.out"});
-                    });
-                    btn.addEventListener('mouseleave', () => {
-                        gsap.to(btn, {duration: 0.7, x: 0, y: 0, ease: "elastic.out(1, 0.3)"});
                     });
                 });
             }
