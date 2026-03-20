@@ -18,9 +18,9 @@
         :root {
             --bg: #050507; 
             --accent: #c91010; 
+            --accent-rgb: 201, 16, 16;
             --glass: rgba(255, 255, 255, 0.03);
             --border: rgba(255, 255, 255, 0.08);
-            --glass-highlight: rgba(255, 255, 255, 0.15);
             --text-main: #ffffff;
             --text-muted: #a0a0a5;
             --font-code: 'Fira Code', monospace;
@@ -30,6 +30,18 @@
         html { scroll-behavior: smooth; }
         body { font-family: 'Inter', sans-serif; color: var(--text-main); overflow-x: hidden; background-color: var(--bg); transition: filter 0.2s ease; width: 100%; }
         
+        /* GADGET 1: Custom Cursor (Hidden on touch devices) */
+        @media (pointer: fine) {
+            body, a, button, input, textarea { cursor: none !important; }
+            .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999999; pointer-events: none; }
+            .cursor-dot { width: 6px; height: 6px; background: var(--accent); box-shadow: 0 0 10px var(--accent); }
+            .cursor-outline { width: 36px; height: 36px; border: 1px solid rgba(var(--accent-rgb), 0.5); }
+        }
+        @media (pointer: coarse) { .cursor-dot, .cursor-outline { display: none; } }
+
+        /* GADGET 4: Scroll Progress Laser */
+        .scroll-progress { position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); width: 0%; z-index: 999999; box-shadow: 0 0 10px var(--accent), 0 0 5px #fff; }
+
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--bg); }
@@ -51,12 +63,18 @@
         .raw-preloader-text { font-family: var(--font-code); color: #00ff00; font-size: clamp(1rem, 3vw, 1.2rem); line-height: 1.8; text-shadow: 0 0 5px rgba(0,255,0,0.5); }
         .prompt { color: #5dade2; }
 
-        /* Navbar */
-        .glass-nav { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 1200px; background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 20px; z-index: 1000; padding: 15px 30px; transition: all 0.4s ease; }
+        /* Navbar & GADGET 3: Live Clock */
+        .glass-nav { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 1200px; background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 20px; z-index: 1000; padding: 15px 30px; transition: all 0.4s ease; display: flex; flex-direction: column; gap: 10px;}
         .glass-nav.scrolled { box-shadow: 0 0 20px rgba(201, 16, 16, 0.4); border-color: rgba(201, 16, 16, 0.6); background: rgba(5, 5, 7, 0.95); }
-        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; width: 100%;}
+        
         .brand { font-family: 'Space Grotesk'; font-size: 1.5rem; font-weight: 700; }
         .brand span { color: var(--accent); transition: 0.3s; }
+        
+        .live-clock { display: flex; align-items: center; gap: 8px; font-family: var(--font-code); font-size: 0.75rem; color: #0f0; background: rgba(0,255,0,0.05); padding: 5px 12px; border-radius: 20px; border: 1px solid rgba(0,255,0,0.2); text-shadow: 0 0 5px rgba(0,255,0,0.5); letter-spacing: 0.5px;}
+        .pulse-dot { width: 6px; height: 6px; background: #0f0; border-radius: 50%; animation: pulse-green 1.5s infinite; }
+        @keyframes pulse-green { 0% { box-shadow: 0 0 0 0 rgba(0,255,0,0.7); } 70% { box-shadow: 0 0 0 6px rgba(0,255,0,0); } 100% { box-shadow: 0 0 0 0 rgba(0,255,0,0); } }
+
         .nav-links { display: flex; list-style: none; gap: 25px; align-items: center; margin: 0; padding: 0; }
         .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: 0.3s; }
         .nav-links a:hover { color: #fff; }
@@ -67,11 +85,11 @@
         .pre-headline { color: var(--accent); letter-spacing: 4px; margin-bottom: 10px; font-size: clamp(0.9rem, 3vw, 1.2rem); text-transform: uppercase; text-shadow: 0 0 10px rgba(201, 16, 16, 0.5); transition: 0.3s; }
         .main-headline { font-family: 'Space Grotesk'; font-size: clamp(3rem, 10vw, 6rem); font-weight: 900; background: linear-gradient(180deg, #fff, #888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0px 10px 20px rgba(201, 16, 16, 0.2)); line-height: 1.1; transition: filter 0.3s; }
         .dynamic-role { font-size: clamp(1.2rem, 4vw, 1.8rem); color: #fff; margin: 20px 0; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
-        .scroll-down-btn { background: var(--glass); border: 1px solid var(--border); color: #fff; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; margin-top: 30px; transition: 0.3s; backdrop-filter: blur(5px); display: inline-flex; justify-content: center; align-items: center; font-size: 1.2rem;}
-        .scroll-down-btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(5px); box-shadow: 0 0 15px rgba(201, 16, 16, 0.4); }
+        .scroll-down-btn { background: var(--glass); border: 1px solid var(--border); color: #fff; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; margin-top: 30px; transition: border-color 0.3s, color 0.3s, box-shadow 0.3s; backdrop-filter: blur(5px); display: inline-flex; justify-content: center; align-items: center; font-size: 1.2rem;}
+        .scroll-down-btn:hover { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 15px rgba(201, 16, 16, 0.4); }
 
         /* Marquee */
-        .marquee-container { border-block: 1px solid var(--border); padding: 15px 0; overflow: hidden; display: flex; background: rgba(255,255,255,0.02); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+        .marquee-container { border-block: 1px solid var(--border); padding: 15px 0; overflow: hidden; display: flex; background: rgba(255,255,255,0.02); backdrop-filter: blur(10px); box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
         .marquee-content { display: flex; animation: scroll-m 25s linear infinite; gap: 40px; white-space: nowrap; font-family: 'Space Grotesk'; font-weight: 700; color: var(--text-muted); }
         .marquee-content span { display: flex; align-items: center; gap: 10px; font-size: 1.1rem;}
         .marquee-content i { color: var(--accent); font-size: 1.3rem; transition: 0.3s; }
@@ -83,7 +101,7 @@
         .max-width { max-width: 1200px; margin: 0 auto; }
         .section-title { font-family: 'Space Grotesk'; font-size: clamp(2rem, 6vw, 3rem); font-weight: 700; margin-bottom: 3rem; text-align: center; letter-spacing: -1px; text-shadow: 0 4px 10px rgba(0,0,0,0.5); }
 
-        /* About Section (Fixed Side-by-Side Layout) */
+        /* About Section */
         .about-content { display: grid; grid-template-columns: 400px 1fr; gap: 50px; padding: 40px; background: var(--glass); backdrop-filter: blur(15px); border: 1px solid var(--border); border-radius: 20px; align-items: center; box-shadow: inset 0 -4px 15px rgba(201, 16, 16, 0.1); transition: 0.3s; }
         .about-images { width: 100%; max-width: 400px; aspect-ratio: 1/1; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin: 0 auto; }
         .about-images img { width: 100%; height: 100%; object-fit: cover; }
@@ -99,14 +117,12 @@
             position: relative; overflow: hidden;
             background: var(--glass); backdrop-filter: blur(15px); border: 1px solid var(--border); border-top: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 35px; transition: border-color 0.4s, transform 0.4s, box-shadow 0.4s; box-shadow: 0 10px 30px rgba(0,0,0,0.3); display: flex; flex-direction: column;
         }
-        /* The Glow Orb */
         .glass-card::before {
             content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(201, 16, 16, 0.12), transparent 40%);
             opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 0;
         }
         .glass-card:hover::before { opacity: 1; }
-        /* Keep text above the glow */
         .glass-card > * { position: relative; z-index: 1; }
         .glass-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.2); box-shadow: inset 0 -4px 20px rgba(201, 16, 16, 0.15), 0 15px 30px rgba(0,0,0,0.5); }
         
@@ -148,7 +164,7 @@
         .contact-form { display: flex; flex-direction: column; gap: 20px; position: relative; z-index: 1;}
         .contact-form input, .contact-form textarea { width: 100%; padding: 15px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 12px; color: #fff; font-family: 'Inter'; outline: none; transition: 0.3s; }
         .contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent); box-shadow: 0 0 10px rgba(201, 16, 16, 0.2); }
-        .outline-btn { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 15px 30px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: 'Inter'; font-size: 1rem;}
+        .outline-btn { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 15px 30px; border-radius: 8px; font-weight: 600; transition: border-color 0.3s, color 0.3s, box-shadow 0.3s; font-family: 'Inter'; font-size: 1rem; display: inline-block; text-align: center;}
         .outline-btn:hover { background: var(--accent); color: #fff; box-shadow: 0 0 20px rgba(201, 16, 16, 0.4); filter: brightness(1.2); }
 
         footer { text-align: center; padding: 50px 20px; border-top: 1px solid var(--border); background: rgba(0,0,0,0.5); backdrop-filter: blur(10px); }
@@ -156,14 +172,14 @@
         .footer-socials a { width: 45px; height: 45px; border-radius: 50%; background: var(--glass); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.2rem; transition: 0.3s; text-decoration: none;}
         .footer-socials a:hover { background: var(--accent); border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 5px 15px rgba(201, 16, 16, 0.4); }
 
-        .scroll-up-btn { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: var(--accent); color: #fff; border: none; opacity: 0; pointer-events: none; cursor: pointer; transition: all 0.4s ease; z-index: 1000; box-shadow: 0 10px 20px rgba(0,0,0,0.5); font-size: 1.2rem; display: flex; justify-content: center; align-items: center;}
+        .scroll-up-btn { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: var(--accent); color: #fff; border: none; opacity: 0; pointer-events: none; cursor: pointer; transition: opacity 0.4s, transform 0.4s; z-index: 1000; box-shadow: 0 10px 20px rgba(0,0,0,0.5); font-size: 1.2rem; display: flex; justify-content: center; align-items: center;}
         .scroll-up-btn.visible { opacity: 1; pointer-events: auto; }
         .scroll-up-btn:hover { filter: brightness(0.8); transform: translateY(-5px); }
 
         /* --- MOBILE RESPONSIVE FIXES --- */
         @media (max-width: 900px) {
-            /* Navbar */
             .mobile-toggle { display: block; }
+            .live-clock { display: none; } /* Hide clock on mobile to save nav space */
             .nav-links {
                 position: absolute; top: 100%; left: 0; width: 100%;
                 background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(20px);
@@ -173,7 +189,7 @@
                 transition: clip-path 0.4s ease;
             }
             .nav-links.active { clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); }
-
+            
             .expertise-section, .about-section { padding: 60px 15px; }
             .about-content { grid-template-columns: 1fr; padding: 25px; text-align: center; gap: 30px; }
             .about-images { width: 100%; max-width: 320px; }
@@ -193,6 +209,11 @@
 </head>
 
 <body>
+    <div class="scroll-progress" id="scroll-progress"></div>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
     <div class="glitch-screen" id="glitch-screen">
         <h1>SYSTEM OVERRIDE</h1>
     </div>
@@ -208,7 +229,13 @@
 
     <nav class="glass-nav" id="main-nav">
         <div class="nav-container">
-            <div class="brand">Inuka<span id="brand-dot">.</span>Tech</div>
+            <div class="brand">Inuka<span>.</span>Tech</div>
+            
+            <div class="live-clock">
+                <span class="pulse-dot"></span> 
+                LK: <span id="lk-time">00:00</span> | ACTIVE
+            </div>
+
             <div class="mobile-toggle"><i class="fas fa-bars"></i></div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
@@ -225,7 +252,7 @@
             <h2 class="pre-headline">WELCOME TO MY PORTFOLIO</h2>
             <h1 class="main-headline">INUKA SANJULA</h1>
             <div class="dynamic-role">I AM A <span id="typing-hero"></span></div>
-            <button id="scroll-down-btn" class="scroll-down-btn"><i class="fas fa-chevron-down"></i></button>
+            <button id="scroll-down-btn" class="scroll-down-btn magnetic"><i class="fas fa-chevron-down"></i></button>
         </div>
     </section>
 
@@ -257,7 +284,7 @@
 
     <section id="about" class="about-section">
         <div class="max-width">
-            <div class="about-content">
+            <div class="about-content glass-card">
                 <div class="about-images">
                     <div class="swiper mySwiper">
                         <div class="swiper-wrapper">
@@ -497,7 +524,7 @@
                     <input type="email" name="Email" required placeholder="Email Address">
                     <input type="text" name="Subject" required placeholder="Subject">
                     <textarea name="Message" rows="4" required placeholder="Project Details"></textarea>
-                    <button type="submit" class="outline-btn">Deploy Message</button>
+                    <button type="submit" class="outline-btn magnetic">Deploy Message</button>
                 </form>
             </div>
         </div>
@@ -513,7 +540,7 @@
         <p style="color:var(--text-muted); font-family: 'Space Grotesk';">&copy; 2026 INUKA TECH. WHERE TECHNOLOGY POWERS CREATIVITY.</p>
     </footer>
 
-    <button id="scroll-up-btn" class="scroll-up-btn"><i class="fas fa-chevron-up"></i></button>
+    <button id="scroll-up-btn" class="scroll-up-btn magnetic"><i class="fas fa-chevron-up"></i></button>
 
     <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
@@ -522,8 +549,77 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            
-            // 1. Apple-Style Proximity Glow on Glass Cards
+
+            // GADGET 4: Scroll Progress Laser
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.scrollY;
+                const docHeight = document.body.scrollHeight - window.innerHeight;
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                document.getElementById('scroll-progress').style.width = scrollPercent + '%';
+            });
+
+            // GADGET 3: Live Clock (Sri Lanka Time)
+            function updateClock() {
+                const now = new Date();
+                const options = { timeZone: 'Asia/Colombo', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+                const timeString = new Intl.DateTimeFormat('en-GB', options).format(now);
+                const clockElement = document.getElementById('lk-time');
+                if(clockElement) clockElement.textContent = timeString;
+            }
+            setInterval(updateClock, 1000);
+            updateClock();
+
+            // GADGET 1: Fluid Glass Custom Cursor (GSAP)
+            if (window.matchMedia("(pointer: fine)").matches) {
+                const cursorDot = document.querySelector('.cursor-dot');
+                const cursorOutline = document.querySelector('.cursor-outline');
+                let mouseX = window.innerWidth / 2;
+                let mouseY = window.innerHeight / 2;
+                let outlineX = mouseX;
+                let outlineY = mouseY;
+
+                window.addEventListener('mousemove', (e) => {
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+                    gsap.set(cursorDot, { x: mouseX, y: mouseY });
+                });
+
+                // Smooth follow for the outline
+                gsap.ticker.add(() => {
+                    outlineX += (mouseX - outlineX) * 0.15;
+                    outlineY += (mouseY - outlineY) * 0.15;
+                    gsap.set(cursorOutline, { x: outlineX, y: outlineY });
+                });
+
+                // Snap to links/buttons
+                document.querySelectorAll('a, button, input, textarea, .magnetic').forEach(el => {
+                    el.addEventListener('mouseenter', () => {
+                        gsap.to(cursorOutline, { scale: 1.5, backgroundColor: "rgba(201,16,16,0.1)", borderColor: "rgba(201,16,16,0)", duration: 0.3 });
+                        gsap.to(cursorDot, { scale: 0, duration: 0.3 });
+                    });
+                    el.addEventListener('mouseleave', () => {
+                        gsap.to(cursorOutline, { scale: 1, backgroundColor: "transparent", borderColor: "rgba(201,16,16,0.5)", duration: 0.3 });
+                        gsap.to(cursorDot, { scale: 1, duration: 0.3 });
+                    });
+                });
+            }
+
+            // GADGET 2: Magnetic UI Buttons
+            if (window.matchMedia("(pointer: fine)").matches) {
+                document.querySelectorAll('.magnetic').forEach(btn => {
+                    btn.addEventListener('mousemove', (e) => {
+                        const rect = btn.getBoundingClientRect();
+                        const x = e.clientX - rect.left - rect.width / 2;
+                        const y = e.clientY - rect.top - rect.height / 2;
+                        gsap.to(btn, {duration: 0.3, x: x * 0.4, y: y * 0.4, ease: "power2.out"});
+                    });
+                    btn.addEventListener('mouseleave', () => {
+                        gsap.to(btn, {duration: 0.7, x: 0, y: 0, ease: "elastic.out(1, 0.3)"});
+                    });
+                });
+            }
+
+            // Proximity Glow on Glass Cards
             document.querySelectorAll('.glass-card').forEach(card => {
                 card.addEventListener('mousemove', e => {
                     const rect = card.getBoundingClientRect();
@@ -534,7 +630,7 @@
                 });
             });
 
-            // 2. Raw Terminal Preloader
+            // Raw Terminal Preloader
             new Typed("#boot-text", {
                 strings: [
                     "[SYSTEM] Mounting file systems... OK.<br>[SYSTEM] Initializing memory modules... OK.<br>[SYSTEM] Loading Neural UI...<br>> Bypassing security protocols...<br>> Access granted.<br>[ARCHITECT] AI Systems Online.^200"
@@ -548,7 +644,7 @@
                 }
             });
 
-            // 3. Typing Effects
+            // Typing Effects
             new Typed("#typing-hero", {
                 strings: ["SOFTWARE DEVELOPER.", "GRAPHIC DESIGNER.", "WEB DEVELOPER.", "FREELANCER."],
                 typeSpeed: 60, backSpeed: 40, loop: true
@@ -558,7 +654,7 @@
                 typeSpeed: 60, backSpeed: 40, loop: true
             });
 
-            // 4. Smooth Scroll Buttons, Nav Neon Effect & Mobile Menu
+            // Smooth Scroll Buttons, Nav Neon Effect & Mobile Menu
             const nav = document.getElementById("main-nav");
             const upBtn = document.getElementById("scroll-up-btn");
             const mobileToggle = document.querySelector('.mobile-toggle');
@@ -590,10 +686,10 @@
                 });
             });
 
-            // 5. Swiper
+            // Swiper
             new Swiper(".mySwiper", { loop: true, autoplay: { delay: 3000 } });
 
-            // 6. Interactive Terminal Logic
+            // Interactive Terminal Logic
             const cmdInput = document.getElementById("cmd-input");
             const cmdHistory = document.getElementById("cmd-history");
             const liveTerminal = document.getElementById("live-terminal");
@@ -635,7 +731,7 @@
                 });
             }
 
-            // 7. System Override Easter Egg (Type 'beast')
+            // System Override Easter Egg (Type 'beast')
             let keyBuffer = "";
             window.addEventListener("keydown", (e) => {
                 keyBuffer += e.key.toLowerCase();
@@ -654,7 +750,7 @@
                 }
             });
 
-            // 8. Molecular Canvas Background
+            // Molecular Canvas Background
             const canvas = document.getElementById("bg-canvas");
             const ctx = canvas.getContext("2d");
             canvas.width = window.innerWidth; 
