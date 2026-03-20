@@ -28,7 +28,7 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        body { font-family: 'Inter', sans-serif; color: var(--text-main); overflow-x: hidden; background-color: var(--bg); transition: filter 0.2s ease; }
+        body { font-family: 'Inter', sans-serif; color: var(--text-main); overflow-x: hidden; background-color: var(--bg); transition: filter 0.2s ease; width: 100%; }
         
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
@@ -37,13 +37,13 @@
         ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
         /* Canvas Layering */
-        #bg-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
+        #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: 0; pointer-events: none; }
         nav, section, footer, .marquee-container, .scroll-up-btn { position: relative; z-index: 10; }
 
-        /* SYSTEM OVERRIDE EASTER EGG CLASSES */
+        /* SYSTEM OVERRIDE EASTER EGG */
         body.override-active { filter: hue-rotate(90deg) invert(10%) saturate(200%); }
         .glitch-screen { position: fixed; inset: 0; background: rgba(0,255,0,0.1); z-index: 9999999; display: none; justify-content: center; align-items: center; pointer-events: none; mix-blend-mode: overlay; }
-        .glitch-screen h1 { font-family: var(--font-code); color: #0f0; font-size: clamp(3rem, 10vw, 5rem); text-shadow: 0 0 20px #0f0; animation: glitch-anim 0.2s infinite; }
+        .glitch-screen h1 { font-family: var(--font-code); color: #0f0; font-size: clamp(3rem, 10vw, 5rem); text-shadow: 0 0 20px #0f0; animation: glitch-anim 0.2s infinite; text-align: center;}
         @keyframes glitch-anim { 0% { transform: translate(0) } 20% { transform: translate(-5px, 5px) } 40% { transform: translate(-5px, -5px) } 60% { transform: translate(5px, 5px) } 80% { transform: translate(5px, -5px) } 100% { transform: translate(0) } }
 
         /* Preloader */
@@ -85,7 +85,7 @@
 
         /* About Section */
         .about-content { display: grid; grid-template-columns: 400px 1fr; gap: 50px; padding: 40px; background: var(--glass); backdrop-filter: blur(15px); border: 1px solid var(--border); border-radius: 20px; align-items: center; box-shadow: inset 0 -4px 15px rgba(201, 16, 16, 0.1); }
-        .about-images { width: 100%; max-width: 400px; aspect-ratio: 1/1; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .about-images { width: 100%; max-width: 400px; aspect-ratio: 1/1; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin: 0 auto; }
         .about-images img { width: 100%; height: 100%; object-fit: cover; }
         .about-text h3 { font-family: 'Space Grotesk'; font-size: clamp(1.4rem, 4vw, 1.8rem); margin-bottom: 15px; text-transform: uppercase; }
         .about-text p { font-size: 0.95rem; line-height: 1.8; color: #ccc; margin-bottom: 25px; letter-spacing: 0.5px; }
@@ -94,10 +94,10 @@
         .glass-badge i { color: var(--accent); }
         
         /* Grid System & Service Lists */
-        .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; perspective: 1000px; }
-        .glass-card { background: var(--glass); backdrop-filter: blur(15px); border: 1px solid var(--border); border-top: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 35px; transition: border-color 0.4s; box-shadow: 0 10px 30px rgba(0,0,0,0.3); display: flex; flex-direction: column; transform-style: preserve-3d; }
-        .glass-card:hover { border-color: rgba(255,255,255,0.2); box-shadow: inset 0 -4px 20px rgba(201,16,16,0.2), 0 15px 40px rgba(0,0,0,0.5); }
-        .glass-card > * { transform: translateZ(30px); }
+        .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .glass-card { background: var(--glass); backdrop-filter: blur(15px); border: 1px solid var(--border); border-top: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 35px; transition: all 0.4s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.3); display: flex; flex-direction: column;}
+        /* Sleek hover effect (No 3D tilt) */
+        .glass-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.2); box-shadow: inset 0 -4px 20px rgba(201,16,16,0.2), 0 15px 30px rgba(0,0,0,0.5); }
         
         .card-icon { font-size: 2.2rem; color: var(--accent); margin-bottom: 15px; }
         .glass-card h3 { font-family: 'Space Grotesk'; font-size: 1.3rem; margin-bottom: 10px; }
@@ -108,13 +108,18 @@
         .bento-large { grid-column: span 2; }
         .role-badge { display: inline-block; padding: 5px 12px; background: rgba(201,16,16,0.15); color: var(--accent); border-radius: 6px; font-size: 0.8rem; font-weight: 600; margin-bottom: 15px; border: 1px solid rgba(201,16,16,0.3); }
 
-        /* REAL Interactive Mac Terminal */
+        /* REAL Mac GUI Terminal */
         .ai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: stretch; }
-        .mac-window { background: #0a0a0c; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.6); display: flex; flex-direction: column; height: 100%; min-height: 350px;}
-        .mac-header { background: #1a1a1a; padding: 12px 20px; display: flex; align-items: center; border-bottom: 1px solid #333; }
+        .mac-window { background: #0a0a0c; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.6); display: flex; flex-direction: column; height: 100%; min-height: 380px;}
+        .mac-header { background: #1e1e1e; padding: 12px 20px; display: flex; align-items: center; border-bottom: 1px solid #000; position: relative; }
+        .mac-dots { display: flex; gap: 8px; }
+        .mac-dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+        .mac-dot.red { background: #ff5f56; } .mac-dot.yellow { background: #ffbd2e; } .mac-dot.green { background: #27c93f; }
+        .mac-title { position: absolute; left: 50%; transform: translateX(-50%); color: #888; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.5px;}
+        
         .mac-body { padding: 20px; font-family: var(--font-code); color: #00ff00; font-size: clamp(0.85rem, 2vw, 1rem); line-height: 1.6; flex-grow: 1; overflow-y: auto; max-height: 400px; word-wrap: break-word;}
         .mac-body::-webkit-scrollbar { width: 5px; }
-        .mac-body::-webkit-scrollbar-thumb { background: #333; }
+        .mac-body::-webkit-scrollbar-thumb { background: #333; border-radius: 5px;}
         .terminal-input-line { display: flex; align-items: center; margin-top: 5px; flex-wrap: wrap; }
         .terminal-input-line input { background: transparent; border: none; color: #00ff00; font-family: var(--font-code); font-size: 1rem; outline: none; flex-grow: 1; margin-left: 10px; text-shadow: 0 0 5px rgba(0,255,0,0.5); min-width: 150px;}
         .terminal-input-line input::placeholder { color: rgba(0,255,0,0.3); }
@@ -128,11 +133,11 @@
         /* Contact & Footer */
         .contact-container { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; padding: 50px; align-items: center; }
         .info-item { font-size: 1.1rem; margin-bottom: 20px; display: flex; align-items: center; gap: 15px; word-break: break-all; }
-        .info-item i { color: var(--accent); font-size: 1.3rem; min-width: 25px; }
+        .info-item i { color: var(--accent); font-size: 1.3rem; min-width: 25px; text-align: center;}
         .contact-form { display: flex; flex-direction: column; gap: 20px; }
         .contact-form input, .contact-form textarea { width: 100%; padding: 15px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 12px; color: #fff; font-family: 'Inter'; outline: none; transition: 0.3s; }
         .contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent); box-shadow: 0 0 10px rgba(201,16,16,0.2); }
-        .outline-btn { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 15px 30px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        .outline-btn { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 15px 30px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: 'Inter'; font-size: 1rem;}
         .outline-btn:hover { background: var(--accent); color: #fff; box-shadow: 0 0 20px rgba(201,16,16,0.4); }
 
         footer { text-align: center; padding: 50px 20px; border-top: 1px solid var(--border); background: rgba(0,0,0,0.5); backdrop-filter: blur(10px); }
@@ -146,37 +151,37 @@
 
         /* --- MOBILE RESPONSIVE FIXES --- */
         @media (max-width: 900px) {
-            /* Mobile Navbar */
+            /* Navbar */
             .mobile-toggle { display: block; }
             .nav-links {
                 position: absolute; top: 100%; left: 0; width: 100%;
                 background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(20px);
                 flex-direction: column; padding: 20px; border-radius: 0 0 20px 20px;
                 border: 1px solid var(--border); border-top: none;
-                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); /* Hidden initially */
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
                 transition: clip-path 0.4s ease;
             }
             .nav-links.active { clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); }
             
-            /* Section Adjustments */
+            /* Section Paddings */
             .expertise-section, .about-section { padding: 60px 15px; }
             
-            /* About Section Fixes */
-            .about-content { grid-template-columns: 1fr; padding: 25px; text-align: center; }
-            .about-images { width: 100%; max-width: 300px; margin: 0 auto; }
+            /* About Section */
+            .about-content { grid-template-columns: 1fr; padding: 25px; text-align: center; gap: 30px; }
+            .about-images { width: 100%; max-width: 320px; }
             .about-badges { justify-content: center; }
             
-            /* Grid Fixes */
-            .bento-grid { grid-template-columns: 1fr; gap: 15px; }
+            /* Grids */
+            .bento-grid { grid-template-columns: 1fr; gap: 20px; }
             .bento-large { grid-column: span 1; }
             .glass-card { padding: 25px; }
             
-            /* AI Terminal Fixes */
+            /* AI Terminal */
             .ai-grid { grid-template-columns: 1fr; gap: 20px; }
-            .mac-window { min-height: 300px; }
+            .mac-window { min-height: 320px; }
             
-            /* Contact Fixes */
-            .contact-container { grid-template-columns: 1fr; padding: 25px; }
+            /* Contact Section */
+            .contact-container { grid-template-columns: 1fr; padding: 25px; gap: 30px;}
             .info-item { font-size: 1rem; }
         }
     </style>
@@ -247,7 +252,7 @@
 
     <section id="about" class="about-section">
         <div class="max-width">
-            <div class="about-content tilt-card">
+            <div class="about-content">
                 <div class="about-images">
                     <div class="swiper mySwiper">
                         <div class="swiper-wrapper">
@@ -275,7 +280,7 @@
         <div class="max-width">
             <h2 class="section-title">WHAT I DO</h2>
             <div class="bento-grid">
-                <div class="glass-card tilt-card">
+                <div class="glass-card">
                     <i class="fas fa-laptop-code card-icon"></i>
                     <h3>Web Development</h3>
                     <p>Building fast, beautiful, and highly responsive websites.</p>
@@ -285,7 +290,7 @@
                         <li><i class="fas fa-check"></i> SEO Optimization</li>
                     </ul>
                 </div>
-                <div class="glass-card tilt-card">
+                <div class="glass-card">
                     <i class="fas fa-pen-nib card-icon"></i>
                     <h3>Graphic Design</h3>
                     <p>Premium brand visual identities that command attention.</p>
@@ -295,7 +300,7 @@
                         <li><i class="fas fa-check"></i> UI Mockups</li>
                     </ul>
                 </div>
-                <div class="glass-card tilt-card">
+                <div class="glass-card">
                     <i class="fas fa-hashtag card-icon"></i>
                     <h3>Social Media</h3>
                     <p>Strategic content creation and account management.</p>
@@ -305,7 +310,7 @@
                         <li><i class="fas fa-check"></i> Follower Growth</li>
                     </ul>
                 </div>
-                <div class="glass-card tilt-card">
+                <div class="glass-card">
                     <i class="fas fa-robot card-icon"></i>
                     <h3>AI Automation</h3>
                     <p>Developing smart Python scripts and AI tools.</p>
@@ -315,7 +320,7 @@
                         <li><i class="fas fa-check"></i> Workflow Automation</li>
                     </ul>
                 </div>
-                <div class="glass-card tilt-card">
+                <div class="glass-card">
                     <i class="fas fa-desktop card-icon"></i>
                     <h3>IT Consulting</h3>
                     <p>Expert advice on system architecture and setup.</p>
@@ -325,7 +330,7 @@
                         <li><i class="fas fa-check"></i> Tech Support</li>
                     </ul>
                 </div>
-                <div class="glass-card tilt-card">
+                <div class="glass-card">
                     <i class="fas fa-camera card-icon"></i>
                     <h3>Photography</h3>
                     <p>Commercial shoots and high-quality photography.</p>
@@ -335,7 +340,7 @@
                         <li><i class="fas fa-check"></i> Photo Retouching</li>
                     </ul>
                 </div>
-                <div class="glass-card tilt-card">
+                <div class="glass-card">
                     <i class="fas fa-pen-fancy card-icon"></i>
                     <h3>Content Writing</h3>
                     <p>Crafting compelling, SEO-friendly copy for campaigns.</p>
@@ -345,7 +350,7 @@
                         <li><i class="fas fa-check"></i> Product Descriptions</li>
                     </ul>
                 </div>
-                <div class="glass-card tilt-card">
+                <div class="glass-card">
                     <i class="fas fa-object-group card-icon"></i>
                     <h3>UI/UX Architecture</h3>
                     <p>Designing intuitive and beautiful user interfaces.</p>
@@ -355,7 +360,7 @@
                         <li><i class="fas fa-check"></i> Prototypes</li>
                     </ul>
                 </div>
-                <div class="glass-card tilt-card">
+                <div class="glass-card">
                     <i class="fas fa-shield-alt card-icon"></i>
                     <h3>Cybersecurity</h3>
                     <p>Ethical hacking concepts to secure digital environments.</p>
@@ -374,56 +379,56 @@
             <h2 class="section-title">SELECTED ROLES</h2>
             <div class="bento-grid">
                 
-                <div class="glass-card bento-large tilt-card">
+                <div class="glass-card bento-large">
                     <i class="fas fa-crown card-icon"></i>
                     <h3>Inuka Tech</h3>
                     <p class="role-badge">Founder & CEO</p>
                     <p>Over 5 years of leading a personal technology brand, delivering high-end web development, graphic design, and complete digital solutions to clients globally.</p>
                 </div>
 
-                <div class="glass-card tilt-card">
+                <div class="glass-card">
                     <i class="fas fa-code-branch card-icon"></i>
                     <h3>iCODE Software Solutions</h3>
                     <p class="role-badge">Graphic Designer & Developer</p>
                     <p>Engineering robust software solutions and crafting premium graphic assets for a Japan-based international tech firm.</p>
                 </div>
 
-                <div class="glass-card tilt-card">
+                <div class="glass-card">
                     <i class="fas fa-chart-line card-icon"></i>
                     <h3>Cantab</h3>
                     <p class="role-badge">Social Media Director</p>
                     <p>Leading social media initiatives, optimizing outreach, and managing brand communications.</p>
                 </div>
 
-                <div class="glass-card tilt-card">
+                <div class="glass-card">
                     <i class="fas fa-chalkboard-teacher card-icon"></i>
                     <h3>Iresh Dasanayaka</h3>
                     <p class="role-badge">ICT Tutor & Instructor</p>
                     <p>Serving as an instructor, coordinator, and lead graphic designer for educational programs.</p>
                 </div>
 
-                <div class="glass-card tilt-card">
+                <div class="glass-card">
                     <i class="fas fa-globe card-icon"></i>
                     <h3>Cmart Site</h3>
                     <p class="role-badge">Web Developer</p>
                     <p>Architecting and deploying customized web infrastructure and digital storefronts.</p>
                 </div>
 
-                <div class="glass-card tilt-card">
+                <div class="glass-card">
                     <i class="fas fa-car card-icon"></i>
                     <h3>Yunikon International</h3>
                     <p class="role-badge">Social Media Manager</p>
                     <p>Driving digital growth and brand presence for a premier vehicle dealership.</p>
                 </div>
 
-                <div class="glass-card tilt-card">
+                <div class="glass-card">
                     <i class="fas fa-tshirt card-icon"></i>
                     <h3>Velexlk</h3>
                     <p class="role-badge">Social Media Director</p>
                     <p>Directing visual marketing campaigns and overarching strategy for the clothing brand.</p>
                 </div>
 
-                <div class="glass-card tilt-card">
+                <div class="glass-card">
                     <i class="fas fa-camera-retro card-icon"></i>
                     <h3>Freelance Photography</h3>
                     <p class="role-badge">Commercial Photographer</p>
@@ -438,10 +443,12 @@
         <div class="max-width">
             <h2 class="section-title">AI ENGINEERING</h2>
             <div class="ai-grid">
-                <div class="mac-window tilt-card" style="cursor: text;" onclick="document.getElementById('cmd-input').focus();">
+                <div class="mac-window" style="cursor: text;" onclick="document.getElementById('cmd-input').focus();">
                     <div class="mac-header">
-                        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-                        <span style="margin-left:auto; margin-right:auto; color:#888; font-family:'Inter', sans-serif; font-size: 0.85rem;">Architect.py - LIVE</span>
+                        <div class="mac-dots">
+                            <span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span>
+                        </div>
+                        <span class="mac-title">Architect.py</span>
                     </div>
                     <div class="mac-body" id="live-terminal">
                         <p style="color: #f5b041;">[SYSTEM] Architect Core Initialized.</p>
@@ -455,7 +462,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="glass-card ai-description tilt-card">
+                <div class="glass-card ai-description">
                     <i class="fas fa-microchip card-icon"></i>
                     <h3>Project: Architect</h3>
                     <p>Architect is a custom-built, personalized AI automation assistant programmed entirely in Python.</p>
@@ -473,7 +480,7 @@
 
     <section id="contact" class="expertise-section">
         <div class="max-width">
-            <div class="contact-container glass-card tilt-card">
+            <div class="contact-container glass-card">
                 <div class="contact-info">
                     <h2 class="section-title" style="text-align: left; margin-bottom:20px; text-shadow:none;">Get In Touch</h2>
                     <p style="color:var(--text-muted); margin-bottom:30px;">Have a project in mind or need some help? Send me a message below.</p>
@@ -507,7 +514,6 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -536,18 +542,7 @@
                 typeSpeed: 60, backSpeed: 40, loop: true
             });
 
-            // 3. 3D Tilt Initialization (Disabled on mobile for better scrolling)
-            if (window.innerWidth > 900) {
-                VanillaTilt.init(document.querySelectorAll(".tilt-card"), {
-                    max: 5,
-                    speed: 400,
-                    glare: true,
-                    "max-glare": 0.15,
-                    scale: 1.02
-                });
-            }
-
-            // 4. Smooth Scroll Buttons, Nav Neon Effect & Mobile Menu
+            // 3. Smooth Scroll Buttons, Nav Neon Effect & Mobile Menu
             const nav = document.getElementById("main-nav");
             const upBtn = document.getElementById("scroll-up-btn");
             const mobileToggle = document.querySelector('.mobile-toggle');
@@ -588,10 +583,10 @@
                 });
             });
 
-            // 5. Swiper
+            // 4. Swiper
             new Swiper(".mySwiper", { loop: true, autoplay: { delay: 3000 } });
 
-            // 6. Interactive Terminal Logic
+            // 5. Interactive Terminal Logic
             const cmdInput = document.getElementById("cmd-input");
             const cmdHistory = document.getElementById("cmd-history");
             const liveTerminal = document.getElementById("live-terminal");
@@ -636,7 +631,7 @@
                 });
             }
 
-            // 7. System Override Easter Egg
+            // 6. System Override Easter Egg
             let keyBuffer = "";
             window.addEventListener("keydown", (e) => {
                 keyBuffer += e.key.toLowerCase();
@@ -655,14 +650,14 @@
                 }
             });
 
-            // 8. Molecular Canvas Background
+            // 7. Molecular Canvas Background
             const canvas = document.getElementById("bg-canvas");
             const ctx = canvas.getContext("2d");
-            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+            canvas.width = window.innerWidth; 
+            canvas.height = window.innerHeight;
             let particlesArray = [];
             
             let mouse = { x: null, y: null, radius: 120 };
-            // Disable mouse dodge on small screens to save battery/performance
             if(window.innerWidth > 900) {
                 window.addEventListener("mousemove", (event) => { mouse.x = event.x; mouse.y = event.y; });
                 window.addEventListener("mouseout", () => { mouse.x = undefined; mouse.y = undefined; });
@@ -697,7 +692,6 @@
 
             function initCanvas() {
                 particlesArray = [];
-                // Fewer particles on mobile for better performance
                 let density = window.innerWidth < 900 ? 15000 : 10000;
                 let numberOfParticles = (canvas.height * canvas.width) / density;
                 for (let i = 0; i < numberOfParticles; i++) {
