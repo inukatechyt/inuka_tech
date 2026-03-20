@@ -16,27 +16,27 @@
             --accent: #c91010; 
             --glass: rgba(255, 255, 255, 0.03);
             --border: rgba(255, 255, 255, 0.08);
-            --glass-highlight: rgba(255, 255, 255, 0.15);
             --text-main: #ffffff;
             --text-muted: #a0a0a5;
-            --font-code: 'Fira Code', monospace;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; background-color: var(--bg); }
-        body { font-family: 'Inter', sans-serif; color: var(--text-main); overflow-x: hidden; background: var(--bg); }
-
-        /* Canvas Background */
-        #bg-canvas { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+        html { scroll-behavior: smooth; }
+        
+        /* Fixed Background Layering */
+        body { font-family: 'Inter', sans-serif; color: var(--text-main); overflow-x: hidden; background-color: var(--bg); }
+        #bg-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
+        
+        /* Ensure all content sits ABOVE the canvas */
+        nav, section, footer, .marquee-container, .scroll-up-btn { position: relative; z-index: 10; }
 
         /* Preloader */
         .terminal-preloader { position: fixed; inset: 0; background: #000; z-index: 999999; display: flex; justify-content: center; align-items: center; }
-        .terminal-window { width: 90%; max-width: 600px; background: #0a0a0c; border: 1px solid #333; border-radius: 10px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
+        .terminal-window { width: 90%; max-width: 500px; background: #0a0a0c; border: 1px solid #333; border-radius: 10px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); overflow: hidden;}
         .terminal-header { background: #111; padding: 10px 20px; display: flex; align-items: center; border-bottom: 1px solid #333; }
         .dot { width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; }
         .dot.red { background: #ff5f56; } .dot.yellow { background: #ffbd2e; } .dot.green { background: #27c93f; }
-        .terminal-title { margin-left: auto; margin-right: auto; font-family: 'Inter', sans-serif; font-size: 0.85rem; color: #888; }
-        .terminal-body { padding: 30px; font-family: var(--font-code); color: #00ff00; font-size: 1.1rem; line-height: 1.8; }
+        .terminal-body { padding: 30px; font-family: 'Fira Code', monospace; color: #00ff00; font-size: 1.1rem; line-height: 1.8; }
         .prompt { color: #5dade2; }
 
         /* Navbar */
@@ -53,12 +53,12 @@
         .pre-headline { color: var(--accent); letter-spacing: 4px; margin-bottom: 10px; font-size: 1.2rem; text-transform: uppercase; }
         .main-headline { font-family: 'Space Grotesk'; font-size: clamp(3rem, 8vw, 6rem); font-weight: 900; background: linear-gradient(180deg, #fff, #444); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .dynamic-role { font-size: 1.8rem; color: var(--text-muted); margin: 20px 0; }
-        .scroll-down-btn { background: none; border: 1px solid var(--border); color: #fff; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; margin-top: 30px; transition: 0.3s; backdrop-filter: blur(5px); display: inline-flex; justify-content: center; align-items: center; font-size: 1.2rem; }
+        .scroll-down-btn { background: var(--glass); border: 1px solid var(--border); color: #fff; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; margin-top: 30px; transition: 0.3s; backdrop-filter: blur(5px); }
         .scroll-down-btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(5px); }
 
         /* Infinite Marquee */
         .marquee-container { border-block: 1px solid var(--border); padding: 15px 0; overflow: hidden; display: flex; background: rgba(255,255,255,0.01); }
-        .marquee-content { display: flex; animation: scroll-m 20s linear infinite; gap: 60px; white-space: nowrap; font-family: 'Space Grotesk'; font-weight: 700; color: var(--text-muted); }
+        .marquee-content { display: flex; animation: scroll-m 25s linear infinite; gap: 60px; white-space: nowrap; font-family: 'Space Grotesk'; font-weight: 700; color: var(--text-muted); }
         .marquee-content span { display: flex; align-items: center; gap: 10px; }
         .marquee-content i { color: var(--accent); }
         @keyframes scroll-m { from { transform: translateX(0); } to { transform: translateX(-50%); } }
@@ -68,7 +68,7 @@
         .max-width { max-width: 1200px; margin: 0 auto; }
         .section-title { font-family: 'Space Grotesk'; font-size: 3rem; font-weight: 700; margin-bottom: 3rem; text-align: center; letter-spacing: -1px; }
 
-        /* About Section (EXACT Side-by-Side Fix) */
+        /* About Section (Side-by-Side) */
         .about-content { 
             display: grid; grid-template-columns: 400px 1fr; gap: 50px; padding: 40px; 
             background: var(--glass); backdrop-filter: blur(15px); border: 1px solid var(--border); 
@@ -79,20 +79,20 @@
         .about-text h3 { font-family: 'Space Grotesk'; font-size: 1.8rem; margin-bottom: 15px; text-transform: uppercase; }
         .about-text p { text-transform: uppercase; font-size: 0.85rem; line-height: 1.6; color: #ccc; margin-bottom: 25px; letter-spacing: 0.5px; }
         .about-footer-row { display: flex; align-items: center; gap: 20px; }
-        .subscribe-btn { background: var(--accent); color: #fff; padding: 12px 25px; text-decoration: none; border-radius: 4px; font-weight: 700; font-size: 0.9rem; }
+        .subscribe-btn { background: var(--accent); color: #fff; padding: 12px 25px; text-decoration: none; border-radius: 4px; font-weight: 700; font-size: 0.9rem; transition: 0.3s;}
+        .subscribe-btn:hover { background: #a00b0b; }
         .about-socials { display: flex; gap: 10px; }
         .about-socials a { color: #fff; width: 40px; height: 40px; border: 1px solid var(--accent); display: flex; align-items: center; justify-content: center; border-radius: 6px; text-decoration: none; transition: 0.3s; background: rgba(0,0,0,0.3); }
         .about-socials a:hover { background: var(--accent); }
 
         /* Grid System */
         .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .glass-card { background: var(--glass); backdrop-filter: blur(15px); border: 1px solid var(--border); border-top: 1px solid var(--glass-highlight); border-radius: 20px; padding: 40px; transition: 0.4s; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .glass-card { background: var(--glass); backdrop-filter: blur(15px); border: 1px solid var(--border); border-top: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 40px; transition: 0.4s; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
         .glass-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.2); box-shadow: inset 0 -4px 20px rgba(201,16,16,0.2); }
         .card-icon { font-size: 2.5rem; color: var(--accent); margin-bottom: 20px; }
         .glass-card h3 { font-family: 'Space Grotesk'; font-size: 1.4rem; margin-bottom: 10px; }
         .glass-card p { color: var(--text-muted); line-height: 1.6; font-size: 0.95rem; }
         
-        /* Specific Grid Adjustments */
         .nine-grid .glass-card { padding: 30px; }
         .bento-large { grid-column: span 2; }
         .role-badge { display: inline-block; padding: 5px 12px; background: rgba(201,16,16,0.15); color: var(--accent); border-radius: 6px; font-size: 0.85rem; font-weight: 600; margin-bottom: 15px; border: 1px solid rgba(201,16,16,0.3); }
@@ -111,8 +111,9 @@
         .outline-btn:hover { background: var(--accent); color: #fff; }
 
         /* Scroll Up Button */
-        .scroll-up-btn { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: var(--accent); color: #fff; border: none; opacity: 0; cursor: pointer; transition: 0.3s; z-index: 1000; box-shadow: 0 10px 20px rgba(0,0,0,0.5); font-size: 1.2rem;}
-        .scroll-up-btn.visible { opacity: 1; }
+        .scroll-up-btn { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: var(--accent); color: #fff; border: none; opacity: 0; pointer-events: none; cursor: pointer; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.5); font-size: 1.2rem;}
+        .scroll-up-btn.visible { opacity: 1; pointer-events: auto; }
+        .scroll-up-btn:hover { background: #a00b0b; transform: translateY(-5px); }
 
         /* Mobile Adjustments */
         @media (max-width: 900px) {
@@ -128,6 +129,8 @@
 </head>
 
 <body>
+    <canvas id="bg-canvas"></canvas>
+
     <div id="preloader" class="terminal-preloader">
         <div class="terminal-window">
             <div class="terminal-header">
@@ -140,8 +143,6 @@
             </div>
         </div>
     </div>
-
-    <canvas id="bg-canvas"></canvas>
 
     <nav class="glass-nav">
         <div class="nav-container">
@@ -178,9 +179,9 @@
                 <div class="about-images">
                     <div class="swiper mySwiper">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide"><img src="Inuka1.jpeg" alt="Inuka 1"></div>
-                            <div class="swiper-slide"><img src="Inuka2.jpeg" alt="Inuka 2"></div>
-                            <div class="swiper-slide"><img src="Inuka3.jpeg" alt="Inuka 3"></div>
+                            <div class="swiper-slide"><img src="Inuka1.jpeg" alt="Inuka 1" onerror="this.src='https://via.placeholder.com/400x380?text=Photo+1'"></div>
+                            <div class="swiper-slide"><img src="Inuka2.jpeg" alt="Inuka 2" onerror="this.src='https://via.placeholder.com/400x380?text=Photo+2'"></div>
+                            <div class="swiper-slide"><img src="Inuka3.jpeg" alt="Inuka 3" onerror="this.src='https://via.placeholder.com/400x380?text=Photo+3'"></div>
                         </div>
                     </div>
                 </div>
@@ -356,7 +357,7 @@
 
             function initCanvas() {
                 particlesArray = [];
-                let numberOfParticles = (canvas.height * canvas.width) / 12000;
+                let numberOfParticles = (canvas.height * canvas.width) / 10000;
                 for (let i = 0; i < numberOfParticles; i++) {
                     let size = (Math.random() * 2) + 1;
                     let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
@@ -372,14 +373,14 @@
                 ctx.clearRect(0, 0, innerWidth, innerHeight);
                 for (let i = 0; i < particlesArray.length; i++) particlesArray[i].update();
                 
-                // Connect Particles (The Molecular Style)
+                // Connect Particles
                 for (let a = 0; a < particlesArray.length; a++) {
                     for (let b = a; b < particlesArray.length; b++) {
                         let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + 
                                        ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
-                        if (distance < (canvas.width / 7) * (canvas.height / 7)) {
-                            let opacityValue = 1 - (distance / 20000);
-                            ctx.strokeStyle = `rgba(255, 255, 255, ${opacityValue * 0.15})`;
+                        if (distance < 15000) {
+                            let opacityValue = 1 - (distance / 15000);
+                            ctx.strokeStyle = `rgba(255, 255, 255, ${opacityValue * 0.25})`;
                             ctx.lineWidth = 1;
                             ctx.beginPath();
                             ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
