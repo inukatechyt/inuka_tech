@@ -32,14 +32,14 @@
         
         /* GADGET 1: Custom Cursor */
         @media (pointer: fine) {
-            body, a, button, input, textarea { cursor: none !important; }
+            body, a, button, input, textarea, .faq-question { cursor: none !important; }
             .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999999; pointer-events: none; }
             .cursor-dot { width: 6px; height: 6px; background: var(--accent); box-shadow: 0 0 10px var(--accent); }
             .cursor-outline { width: 36px; height: 36px; border: 1px solid rgba(var(--accent-rgb), 0.5); }
         }
         @media (pointer: coarse) { .cursor-dot, .cursor-outline { display: none; } }
 
-        /* GADGET 4: Scroll Progress Laser */
+        /* GADGET 2: Scroll Progress Laser */
         .scroll-progress { position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); width: 0%; z-index: 999999; box-shadow: 0 0 10px var(--accent), 0 0 5px #fff; }
 
         /* Custom Scrollbar */
@@ -50,7 +50,7 @@
 
         /* Canvas Layering */
         #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: 0; pointer-events: none; }
-        nav, section, footer, .marquee-container, .scroll-up-btn, .chat-toggle-btn, .chat-window { position: relative; z-index: 10; }
+        nav, section, footer, .marquee-container, .scroll-up-btn, .faq-toggle-btn, .faq-window { position: relative; z-index: 10; }
 
         /* SYSTEM OVERRIDE EASTER EGG */
         body.override-active { filter: hue-rotate(90deg) invert(10%) saturate(200%); }
@@ -97,7 +97,7 @@
         .max-width { max-width: 1200px; margin: 0 auto; }
         .section-title { font-family: 'Space Grotesk'; font-size: clamp(2rem, 6vw, 3rem); font-weight: 700; margin-bottom: 3rem; text-align: center; letter-spacing: -1px; text-shadow: 0 4px 10px rgba(0,0,0,0.5); }
 
-        /* About Section */
+        /* About Section - FIXED LAYOUT */
         .about-content { display: grid; grid-template-columns: 400px 1fr; gap: 50px; padding: 40px; background: var(--glass); backdrop-filter: blur(15px); border: 1px solid var(--border); border-radius: 20px; align-items: center; box-shadow: inset 0 -4px 15px rgba(201, 16, 16, 0.1); transition: 0.3s; }
         .about-images { width: 100%; max-width: 400px; aspect-ratio: 1/1; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin: 0 auto; }
         .about-images img { width: 100%; height: 100%; object-fit: cover; }
@@ -162,33 +162,36 @@
         .footer-socials a { width: 45px; height: 45px; border-radius: 50%; background: var(--glass); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.2rem; transition: 0.3s; text-decoration: none;}
         .footer-socials a:hover { background: var(--accent); border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 5px 15px rgba(201, 16, 16, 0.4); }
 
-        /* FLOATING UI BUTTONS (Scroll + Chat) */
+        /* FLOATING UI BUTTONS */
         .scroll-up-btn { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: var(--accent); color: #fff; border: none; opacity: 0; pointer-events: none; cursor: pointer; transition: opacity 0.4s, transform 0.4s; z-index: 1000; box-shadow: 0 10px 20px rgba(0,0,0,0.5); font-size: 1.2rem; display: flex; justify-content: center; align-items: center;}
         .scroll-up-btn.visible { opacity: 1; pointer-events: auto; }
         .scroll-up-btn:hover { filter: brightness(0.8); transform: translateY(-5px); }
         
-        .chat-toggle-btn { position: fixed; bottom: 95px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: var(--glass); border: 1px solid var(--accent); color: var(--accent); cursor: pointer; transition: 0.3s; z-index: 1000; box-shadow: 0 0 15px rgba(201, 16, 16, 0.2); font-size: 1.3rem; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(5px);}
-        .chat-toggle-btn:hover { background: var(--accent); color: #fff; box-shadow: 0 0 20px rgba(201, 16, 16, 0.5); }
+        .faq-toggle-btn { position: fixed; bottom: 95px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: var(--glass); border: 1px solid var(--accent); color: var(--accent); cursor: pointer; transition: 0.3s; z-index: 1000; box-shadow: 0 0 15px rgba(201, 16, 16, 0.2); font-size: 1.3rem; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(5px);}
+        .faq-toggle-btn:hover { background: var(--accent); color: #fff; box-shadow: 0 0 20px rgba(201, 16, 16, 0.5); }
 
-        /* THE AI CHAT WINDOW */
-        .chat-window { position: fixed; bottom: 160px; right: 30px; width: 320px; height: 400px; background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 15px 40px rgba(0,0,0,0.8); z-index: 1001; display: flex; flex-direction: column; transform: scale(0); opacity: 0; transform-origin: bottom right; transition: transform 0.3s ease, opacity 0.3s ease; pointer-events: none; }
-        .chat-window.active { transform: scale(1); opacity: 1; pointer-events: auto; }
+        /* NEW GADGET: FLOATING FAQ WINDOW */
+        .faq-window { position: fixed; bottom: 160px; right: 30px; width: 350px; background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 15px 40px rgba(0,0,0,0.8); z-index: 1001; display: flex; flex-direction: column; transform: scale(0); opacity: 0; transform-origin: bottom right; transition: transform 0.3s ease, opacity 0.3s ease; pointer-events: none; }
+        .faq-window.active { transform: scale(1); opacity: 1; pointer-events: auto; }
         
-        .chat-header { background: #1e1e1e; padding: 12px 15px; display: flex; align-items: center; border-bottom: 1px solid #000; border-radius: 12px 12px 0 0;}
-        .chat-title { margin-left: 15px; color: #fff; font-family: 'Space Grotesk'; font-size: 0.9rem; font-weight: 600;}
+        .faq-header { background: #1e1e1e; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #000; border-radius: 12px 12px 0 0;}
+        .faq-title { color: #fff; font-family: 'Space Grotesk'; font-size: 1rem; font-weight: 700; display: flex; align-items: center; gap: 10px;}
+        .faq-title i { color: var(--accent); }
+        .faq-close { color: #888; cursor: pointer; transition: 0.3s; font-size: 1.2rem; }
+        .faq-close:hover { color: var(--accent); }
         
-        .chat-body { flex-grow: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
-        .chat-body::-webkit-scrollbar { width: 4px; }
-        .chat-body::-webkit-scrollbar-thumb { background: #333; }
+        .faq-body { padding: 15px; overflow-y: auto; max-height: 400px; display: flex; flex-direction: column; gap: 10px; }
+        .faq-body::-webkit-scrollbar { width: 4px; }
+        .faq-body::-webkit-scrollbar-thumb { background: #333; border-radius: 5px;}
         
-        .chat-msg { padding: 10px 14px; border-radius: 10px; font-size: 0.85rem; line-height: 1.5; max-width: 85%; font-family: 'Inter'; }
-        .bot-msg { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: #ccc; align-self: flex-start; border-bottom-left-radius: 2px;}
-        .user-msg { background: rgba(201, 16, 16, 0.2); border: 1px solid var(--accent); color: #fff; align-self: flex-end; border-bottom-right-radius: 2px;}
+        .faq-item { border: 1px solid var(--border); border-radius: 8px; background: rgba(255,255,255,0.02); overflow: hidden; transition: 0.3s; }
+        .faq-question { padding: 12px 15px; color: #fff; font-size: 0.9rem; font-weight: 600; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+        .faq-question i { transition: transform 0.3s; font-size: 0.8rem; color: var(--accent); }
+        .faq-answer { padding: 0 15px; max-height: 0; color: #ccc; font-size: 0.85rem; line-height: 1.6; transition: max-height 0.3s ease, padding 0.3s ease; overflow: hidden; }
         
-        .chat-input-area { display: flex; border-top: 1px solid var(--border); padding: 10px; background: rgba(0,0,0,0.3); border-radius: 0 0 12px 12px;}
-        .chat-input-area input { flex-grow: 1; background: transparent; border: none; color: #fff; font-family: 'Inter'; font-size: 0.9rem; outline: none; padding: 5px 10px; }
-        .chat-input-area button { background: transparent; border: none; color: var(--accent); font-size: 1.2rem; cursor: pointer; padding: 5px; transition: 0.3s; }
-        .chat-input-area button:hover { color: #fff; }
+        .faq-item.active { border-color: rgba(201, 16, 16, 0.4); background: rgba(201, 16, 16, 0.05); }
+        .faq-item.active .faq-answer { padding: 0 15px 15px 15px; max-height: 200px; }
+        .faq-item.active .faq-question i { transform: rotate(180deg); }
 
         /* --- MOBILE RESPONSIVE FIXES --- */
         @media (max-width: 900px) {
@@ -204,6 +207,8 @@
             .nav-links.active { clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); }
 
             .expertise-section, .about-section { padding: 60px 15px; }
+            
+            /* Fixed About Section for Mobile */
             .about-content { grid-template-columns: 1fr; padding: 25px; text-align: center; gap: 30px; }
             .about-images { width: 100%; max-width: 320px; }
             .about-badges { justify-content: center; }
@@ -219,8 +224,8 @@
             
             /* Mobile Floating Buttons */
             .scroll-up-btn { bottom: 20px; right: 20px; width: 45px; height: 45px;}
-            .chat-toggle-btn { bottom: 75px; right: 20px; width: 45px; height: 45px;}
-            .chat-window { bottom: 130px; right: 20px; width: calc(100% - 40px); max-width: 350px;}
+            .faq-toggle-btn { bottom: 75px; right: 20px; width: 45px; height: 45px;}
+            .faq-window { bottom: 130px; right: 20px; width: calc(100% - 40px); max-width: 350px;}
         }
     </style>
 </head>
@@ -296,7 +301,7 @@
 
     <section id="about" class="about-section">
         <div class="max-width">
-            <div class="about-content glass-card">
+            <div class="about-content">
                 <div class="about-images">
                     <div class="swiper mySwiper">
                         <div class="swiper-wrapper">
@@ -552,25 +557,37 @@
         <p style="color:var(--text-muted); font-family: 'Space Grotesk';">&copy; 2026 INUKA TECH. WHERE TECHNOLOGY POWERS CREATIVITY.</p>
     </footer>
 
-    <div class="chat-window" id="chat-window">
-        <div class="chat-header">
-            <div class="mac-dots">
-                <span class="mac-dot red" id="close-chat" style="cursor: pointer;" title="Close"></span>
-                <span class="mac-dot yellow"></span>
-                <span class="mac-dot green"></span>
+    <div class="faq-window" id="faq-window">
+        <div class="faq-header">
+            <div class="faq-title"><i class="fas fa-question-circle"></i> F.A.Q</div>
+            <i class="fas fa-times faq-close" id="close-faq" title="Close"></i>
+        </div>
+        <div class="faq-body">
+            
+            <div class="faq-item">
+                <div class="faq-question">What services do you offer? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">I specialize in full-stack web development, premium graphic design, Python AI automation, and social media management. Check the Services section for full details.</div>
             </div>
-            <span class="chat-title">Architect_Support</span>
-        </div>
-        <div class="chat-body" id="chat-body">
-            <div class="chat-msg bot-msg">Hello. I am Architect, the AI assistant for Inuka Tech. How can I help you today?</div>
-        </div>
-        <div class="chat-input-area">
-            <input type="text" id="chat-msg-input" placeholder="Message Architect..." autocomplete="off">
-            <button id="chat-send-btn"><i class="fas fa-paper-plane"></i></button>
+            
+            <div class="faq-item">
+                <div class="faq-question">Where are you based? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">I am based in Kurunegala, Sri Lanka, but I provide digital solutions to clients globally.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How do you price projects? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">Every project is unique. Pricing depends on scope, timeline, and complexity. Send me a message through the contact form for a custom quote!</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">What technologies do you use? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">My main stack includes Python, React, HTML/CSS/JS, SQL, Kali Linux, Adobe Photoshop, Premiere Pro, and After Effects.</div>
+            </div>
+
         </div>
     </div>
 
-    <button id="chat-toggle-btn" class="chat-toggle-btn"><i class="fas fa-comment-dots"></i></button>
+    <button id="faq-toggle-btn" class="faq-toggle-btn"><i class="fas fa-question"></i></button>
     <button id="scroll-up-btn" class="scroll-up-btn"><i class="fas fa-chevron-up"></i></button>
 
     <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
@@ -581,52 +598,29 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
 
-            // NEW GADGET: Custom Architect Chatbot Logic
-            const chatToggleBtn = document.getElementById("chat-toggle-btn");
-            const chatWindow = document.getElementById("chat-window");
-            const closeChatBtn = document.getElementById("close-chat");
-            const chatInput = document.getElementById("chat-msg-input");
-            const chatSendBtn = document.getElementById("chat-send-btn");
-            const chatBody = document.getElementById("chat-body");
+            // NEW GADGET: FAQ Accordion Logic
+            const faqToggleBtn = document.getElementById("faq-toggle-btn");
+            const faqWindow = document.getElementById("faq-window");
+            const closeFaqBtn = document.getElementById("close-faq");
+            const faqItems = document.querySelectorAll(".faq-item");
 
-            chatToggleBtn.addEventListener("click", () => chatWindow.classList.add("active"));
-            closeChatBtn.addEventListener("click", () => chatWindow.classList.remove("active"));
-
-            function addChatMessage(text, isUser) {
-                const msgDiv = document.createElement("div");
-                msgDiv.className = `chat-msg ${isUser ? 'user-msg' : 'bot-msg'}`;
-                msgDiv.textContent = text;
-                chatBody.appendChild(msgDiv);
-                chatBody.scrollTop = chatBody.scrollHeight;
-            }
-
-            function handleChatSend() {
-                const val = chatInput.value.trim();
-                if(!val) return;
+            if(faqToggleBtn) {
+                faqToggleBtn.addEventListener("click", () => faqWindow.classList.add("active"));
+                closeFaqBtn.addEventListener("click", () => faqWindow.classList.remove("active"));
                 
-                addChatMessage(val, true);
-                chatInput.value = "";
-
-                // Simulated AI Response Delay
-                setTimeout(() => {
-                    const lowerVal = val.toLowerCase();
-                    if(lowerVal.includes("hello") || lowerVal.includes("hi")) {
-                        addChatMessage("Greetings. Are you looking to start a new project with Inuka?", false);
-                    } else if(lowerVal.includes("price") || lowerVal.includes("cost") || lowerVal.includes("quote")) {
-                        addChatMessage("For pricing and project quotes, please use the Contact form on this site. Inuka reviews all inquiries within 24 hours.", false);
-                    } else if(lowerVal.includes("service") || lowerVal.includes("do")) {
-                        addChatMessage("Inuka specializes in Web Development, Graphic Design, and AI Automation. You can view the full list in the 'Services' section.", false);
-                    } else {
-                        addChatMessage("I have logged your message. If you require a direct response, please deploy a message via the Contact section below.", false);
-                    }
-                }, 800);
+                faqItems.forEach(item => {
+                    const question = item.querySelector(".faq-question");
+                    question.addEventListener("click", () => {
+                        const isActive = item.classList.contains("active");
+                        // Close all
+                        faqItems.forEach(i => i.classList.remove("active"));
+                        // Open if not previously active
+                        if(!isActive) item.classList.add("active");
+                    });
+                });
             }
 
-            chatSendBtn.addEventListener("click", handleChatSend);
-            chatInput.addEventListener("keypress", (e) => { if(e.key === "Enter") handleChatSend(); });
-
-
-            // GADGET 4: Scroll Progress Laser
+            // GADGET 2: Scroll Progress Laser
             window.addEventListener('scroll', () => {
                 const scrollTop = window.scrollY;
                 const docHeight = document.body.scrollHeight - window.innerHeight;
@@ -657,7 +651,7 @@
                 });
 
                 // Snap to links/buttons
-                document.querySelectorAll('a, button, input, textarea, .mac-dot').forEach(el => {
+                document.querySelectorAll('a, button, input, textarea, .mac-dot, .faq-question').forEach(el => {
                     el.addEventListener('mouseenter', () => {
                         gsap.to(cursorOutline, { scale: 1.5, backgroundColor: "rgba(201,16,16,0.1)", borderColor: "rgba(201,16,16,0)", duration: 0.3 });
                         gsap.to(cursorDot, { scale: 0, duration: 0.3 });
