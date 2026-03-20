@@ -5,7 +5,591 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inuka Tech | Premium Digital Solutions</title>
     
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Inuka Tech, Software Developer, Graphic Designer, IT Consulting, Sri Lanka">
+    <meta name="description" content="Inuka Tech - Where technology powers creativity.">
+    
+    <title>Inuka Tech | Where technology powers creativity</title>
+    <link rel="icon" type="image/jpeg" href="logo (2).jpg">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&family=Space+Grotesk:wght@400;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CORE BEAST STYLING --- */
+        :root {
+            --bg: #050507; 
+            --accent: #c91010; 
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
+            --glass-highlight: rgba(255, 255, 255, 0.15);
+            --text-main: #ffffff;
+            --text-muted: #a0a0a5;
+            --font-code: 'Fira Code', monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; color: var(--text-main); overflow-x: hidden; background-color: var(--bg); }
+        
+        /* Canvas Layering */
+        #bg-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
+        nav, section, footer, .marquee-container, .scroll-up-btn { position: relative; z-index: 10; }
+
+        /* Preloader */
+        .terminal-preloader { position: fixed; inset: 0; background: #000; z-index: 999999; display: flex; justify-content: center; align-items: center; }
+        .terminal-window { width: 90%; max-width: 500px; background: #0a0a0c; border: 1px solid #333; border-radius: 10px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); overflow: hidden;}
+        .terminal-header { background: #111; padding: 10px 20px; display: flex; align-items: center; border-bottom: 1px solid #333; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; }
+        .dot.red { background: #ff5f56; } .dot.yellow { background: #ffbd2e; } .dot.green { background: #27c93f; }
+        .terminal-body { padding: 30px; font-family: 'Fira Code', monospace; color: #00ff00; font-size: 1.1rem; line-height: 1.8; }
+        .prompt { color: #5dade2; }
+
+        /* Navbar */
+        .glass-nav { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 1200px; background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 20px; z-index: 1000; padding: 15px 30px; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .brand { font-family: 'Space Grotesk'; font-size: 1.5rem; font-weight: 700; }
+        .brand span { color: var(--accent); }
+        .nav-links { display: flex; list-style: none; gap: 25px; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: 0.3s; }
+        .nav-links a:hover { color: #fff; }
+
+        /* Hero with New Text Shadow */
+        .hero-section { height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; }
+        .pre-headline { color: var(--accent); letter-spacing: 4px; margin-bottom: 10px; font-size: 1.2rem; text-transform: uppercase; text-shadow: 0 0 10px rgba(201,16,16,0.5); }
+        .main-headline { font-family: 'Space Grotesk'; font-size: clamp(3rem, 8vw, 6rem); font-weight: 900; background: linear-gradient(180deg, #fff, #888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0px 10px 20px rgba(201, 16, 16, 0.2)); }
+        .dynamic-role { font-size: 1.8rem; color: #fff; margin: 20px 0; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+        .scroll-down-btn { background: var(--glass); border: 1px solid var(--border); color: #fff; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; margin-top: 30px; transition: 0.3s; backdrop-filter: blur(5px); }
+        .scroll-down-btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(5px); box-shadow: 0 0 15px rgba(201,16,16,0.4); }
+
+        /* Glossy Marquee with Real Icons */
+        .marquee-container { border-block: 1px solid var(--border); padding: 15px 0; overflow: hidden; display: flex; background: rgba(255,255,255,0.02); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+        .marquee-content { display: flex; animation: scroll-m 25s linear infinite; gap: 60px; white-space: nowrap; font-family: 'Space Grotesk'; font-weight: 700; color: var(--text-muted); }
+        .marquee-content span { display: flex; align-items: center; gap: 10px; font-size: 1.1rem;}
+        .marquee-content i { color: var(--accent); font-size: 1.3rem;}
+        .marquee-content img { width: 22px; height: 22px; } /* For Real SVG Icons */
+        @keyframes scroll-m { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+        /* General Sections */
+        .expertise-section, .about-section { padding: 100px 20px; }
+        .max-width { max-width: 1200px; margin: 0 auto; }
+        .section-title { font-family: 'Space Grotesk'; font-size: 3rem; font-weight: 700; margin-bottom: 3rem; text-align: center; letter-spacing: -1px; text-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+
+        /* About Section */
+        .about-content { display: grid; grid-template-columns: 400px 1fr; gap: 50px; padding: 40px; background: var(--glass); backdrop-filter: blur(15px); border: 1px solid var(--border); border-radius: 20px; align-items: center; box-shadow: inset 0 -4px 15px rgba(201, 16, 16, 0.1); }
+        .about-images { width: 400px; height: 380px; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .about-images img { width: 100%; height: 100%; object-fit: cover; }
+        .about-text h3 { font-family: 'Space Grotesk'; font-size: 1.8rem; margin-bottom: 15px; text-transform: uppercase; }
+        .about-text p { text-transform: uppercase; font-size: 0.85rem; line-height: 1.6; color: #ccc; margin-bottom: 25px; letter-spacing: 0.5px; }
+        
+        /* New Glossy Badges & Buttons */
+        .about-badges { display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 20px;}
+        .glass-badge { background: rgba(201, 16, 16, 0.1); border: 1px solid rgba(201, 16, 16, 0.3); color: #fff; padding: 8px 16px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 8px; backdrop-filter: blur(5px); box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .glass-badge i { color: var(--accent); }
+        .subscribe-btn { display: inline-block; background: linear-gradient(135deg, rgba(201,16,16,0.8), rgba(150,0,0,0.9)); color: #fff; padding: 12px 30px; border-radius: 8px; font-weight: 700; font-size: 1rem; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 10px 20px rgba(201,16,16,0.3); text-transform: uppercase; letter-spacing: 1px; cursor: default; }
+
+        /* Grid System & Service Lists */
+        .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .glass-card { background: var(--glass); backdrop-filter: blur(15px); border: 1px solid var(--border); border-top: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 35px; transition: 0.4s; box-shadow: 0 10px 30px rgba(0,0,0,0.3); display: flex; flex-direction: column;}
+        .glass-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.2); box-shadow: inset 0 -4px 20px rgba(201,16,16,0.2); }
+        .card-icon { font-size: 2.2rem; color: var(--accent); margin-bottom: 15px; }
+        .glass-card h3 { font-family: 'Space Grotesk'; font-size: 1.3rem; margin-bottom: 10px; }
+        .glass-card p { color: var(--text-muted); line-height: 1.5; font-size: 0.9rem; }
+        
+        /* The New Service Checklists */
+        .service-list { list-style: none; margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px; flex-grow: 1;}
+        .service-list li { font-size: 0.85rem; color: #bbb; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+        .service-list li i { color: var(--accent); font-size: 0.75rem; }
+
+        /* Roles Layout */
+        .bento-large { grid-column: span 2; }
+        .role-badge { display: inline-block; padding: 5px 12px; background: rgba(201,16,16,0.15); color: var(--accent); border-radius: 6px; font-size: 0.8rem; font-weight: 600; margin-bottom: 15px; border: 1px solid rgba(201,16,16,0.3); }
+
+        /* AI Engineering Layout */
+        .ai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center; }
+        .terminal-container { padding: 0 !important; overflow: hidden; height: 100%; border: 1px solid #333; }
+        .ai-description { padding: 20px; }
+        .ai-description h3 { font-family: 'Space Grotesk'; font-size: 1.8rem; margin-bottom: 15px; color: #fff; }
+        .ai-description p { color: #ccc; line-height: 1.7; font-size: 1rem; margin-bottom: 15px;}
+        .ai-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;}
+        .ai-tags span { background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 5px 12px; border-radius: 5px; font-size: 0.8rem; font-family: var(--font-code); color: var(--accent);}
+
+        /* Contact Section */
+        .contact-container { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; padding: 50px; align-items: center; }
+        .info-item { font-size: 1.1rem; margin-bottom: 20px; display: flex; align-items: center; gap: 15px; }
+        .info-item i { color: var(--accent); font-size: 1.3rem; }
+        .contact-form { display: flex; flex-direction: column; gap: 20px; }
+        .contact-form input, .contact-form textarea { width: 100%; padding: 15px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 12px; color: #fff; font-family: 'Inter'; outline: none; transition: 0.3s; }
+        .contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent); }
+        .outline-btn { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 15px 30px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        .outline-btn:hover { background: var(--accent); color: #fff; box-shadow: 0 0 20px rgba(201,16,16,0.4); }
+
+        /* Full Social Footer */
+        footer { text-align: center; padding: 50px 20px; border-top: 1px solid var(--border); background: rgba(0,0,0,0.5); backdrop-filter: blur(10px); }
+        .footer-socials { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;}
+        .footer-socials a { width: 45px; height: 45px; border-radius: 50%; background: var(--glass); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.2rem; transition: 0.3s; text-decoration: none;}
+        .footer-socials a:hover { background: var(--accent); border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 5px 15px rgba(201,16,16,0.4); }
+
+        /* Scroll Up Button */
+        .scroll-up-btn { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: var(--accent); color: #fff; border: none; opacity: 0; pointer-events: none; cursor: pointer; transition: 0.3s; z-index: 1000; box-shadow: 0 10px 20px rgba(0,0,0,0.5); font-size: 1.2rem;}
+        .scroll-up-btn.visible { opacity: 1; pointer-events: auto; }
+        .scroll-up-btn:hover { background: #a00b0b; transform: translateY(-5px); }
+
+        /* Mobile Adjustments */
+        @media (max-width: 900px) {
+            .about-content { grid-template-columns: 1fr; padding: 30px; text-align: center; }
+            .about-images { width: 100%; height: auto; }
+            .about-badges { justify-content: center; }
+            .bento-grid { grid-template-columns: 1fr; }
+            .bento-large { grid-column: span 1; }
+            .ai-grid { grid-template-columns: 1fr; }
+            .contact-container { grid-template-columns: 1fr; padding: 30px; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="bg-canvas"></canvas>
+
+    <div id="preloader" class="terminal-preloader">
+        <div class="terminal-window" style="border:1px solid #333; box-shadow: 0 0 50px rgba(201,16,16,0.2);">
+            <div class="terminal-header">
+                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                <span class="terminal-title" style="margin-left:auto; margin-right:auto; color:#888;">boot_sequence.sh</span>
+            </div>
+            <div class="terminal-body">
+                <p><span class="prompt">root@inuka-tech:~#</span> ./start_beast</p>
+                <p><span id="boot-text"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <nav class="glass-nav">
+        <div class="nav-container">
+            <div class="brand">Inuka<span>.</span>Tech</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#projects">Work</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <h2 class="pre-headline">WELCOME TO MY PORTFOLIO</h2>
+            <h1 class="main-headline">INUKA SANJULA</h1>
+            <div class="dynamic-role">I AM A <span id="typing-hero"></span></div>
+            <button id="scroll-down-btn" class="scroll-down-btn"><i class="fas fa-chevron-down"></i></button>
+        </div>
+    </section>
+
+    <div class="marquee-container">
+        <div class="marquee-content">
+            <span><i class="fab fa-python"></i> PYTHON</span>
+            <span><i class="fab fa-react"></i> REACT</span>
+            <span><i class="fas fa-database"></i> SQL</span>
+            <span><i class="fab fa-linux"></i> KALI LINUX</span>
+            <span><img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg" alt="PS"> PHOTOSHOP</span>
+            <span><img src="https://upload.wikimedia.org/wikipedia/commons/4/40/Adobe_Premiere_Pro_CC_icon.svg" alt="PR"> PREMIERE PRO</span>
+            <span><img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Adobe_After_Effects_CC_icon.svg" alt="AE"> AFTER EFFECTS</span>
+            <span><i class="fas fa-bezier-curve"></i> CORELDRAW</span>
+            <span><i class="fas fa-pen-nib"></i> AFFINITY</span>
+            <span><i class="fas fa-code"></i> INTELLIJ</span>
+            
+            <span><i class="fab fa-python"></i> PYTHON</span>
+            <span><i class="fab fa-react"></i> REACT</span>
+            <span><i class="fas fa-database"></i> SQL</span>
+            <span><i class="fab fa-linux"></i> KALI LINUX</span>
+            <span><img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg" alt="PS"> PHOTOSHOP</span>
+            <span><img src="https://upload.wikimedia.org/wikipedia/commons/4/40/Adobe_Premiere_Pro_CC_icon.svg" alt="PR"> PREMIERE PRO</span>
+            <span><img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Adobe_After_Effects_CC_icon.svg" alt="AE"> AFTER EFFECTS</span>
+            <span><i class="fas fa-bezier-curve"></i> CORELDRAW</span>
+            <span><i class="fas fa-pen-nib"></i> AFFINITY</span>
+            <span><i class="fas fa-code"></i> INTELLIJ</span>
+        </div>
+    </div>
+
+    <section id="about" class="about-section">
+        <div class="max-width">
+            <div class="about-content">
+                <div class="about-images">
+                    <div class="swiper mySwiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="Inuka1.jpeg" alt="Inuka 1" onerror="this.src='https://via.placeholder.com/400x380?text=Photo+1'"></div>
+                            <div class="swiper-slide"><img src="Inuka2.jpeg" alt="Inuka 2" onerror="this.src='https://via.placeholder.com/400x380?text=Photo+2'"></div>
+                            <div class="swiper-slide"><img src="Inuka3.jpeg" alt="Inuka 3" onerror="this.src='https://via.placeholder.com/400x380?text=Photo+3'"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <h3>I'M INUKA AND I'M A <span id="typing-about" style="color:var(--accent)"></span></h3>
+                    <p>SURROUNDED BY INNOVATION, YET EMBRACING THE TIMELESS ESSENCE OF CREATIVITY. IDEAS FLOW LIKE INK ON PAGES, FORMING DESIGNS, CODE, AND VISIONS THAT SHAPE THE DIGITAL WORLD. EVERY PROJECT IS A STEP TOWARD MASTERY, EVERY CHALLENGE A LESSON IN RESILIENCE.</p>
+                    
+                    <div class="about-badges">
+                        <span class="glass-badge"><i class="fas fa-star"></i> 5+ Years Experience</span>
+                        <span class="glass-badge"><i class="fas fa-map-marker-alt"></i> Kurunegala, LK</span>
+                        <span class="glass-badge"><i class="fas fa-crown"></i> Founder, Inuka Tech</span>
+                    </div>
+
+                    <div class="subscribe-btn">ARCHITECTING THE FUTURE</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="expertise-section">
+        <div class="max-width">
+            <h2 class="section-title">WHAT I DO</h2>
+            <div class="bento-grid">
+                <div class="glass-card">
+                    <i class="fas fa-laptop-code card-icon"></i>
+                    <h3>Web Development</h3>
+                    <p>Building fast, beautiful, and highly responsive websites.</p>
+                    <ul class="service-list">
+                        <li><i class="fas fa-check"></i> E-Commerce Stores</li>
+                        <li><i class="fas fa-check"></i> Custom Portfolios</li>
+                        <li><i class="fas fa-check"></i> SEO Optimization</li>
+                    </ul>
+                </div>
+                <div class="glass-card">
+                    <i class="fas fa-pen-nib card-icon"></i>
+                    <h3>Graphic Design</h3>
+                    <p>Premium brand visual identities that command attention.</p>
+                    <ul class="service-list">
+                        <li><i class="fas fa-check"></i> Logo & Branding</li>
+                        <li><i class="fas fa-check"></i> Marketing Flyers</li>
+                        <li><i class="fas fa-check"></i> UI Mockups</li>
+                    </ul>
+                </div>
+                <div class="glass-card">
+                    <i class="fas fa-hashtag card-icon"></i>
+                    <h3>Social Media</h3>
+                    <p>Strategic content creation and account management.</p>
+                    <ul class="service-list">
+                        <li><i class="fas fa-check"></i> Page Management</li>
+                        <li><i class="fas fa-check"></i> Ad Campaigns</li>
+                        <li><i class="fas fa-check"></i> Follower Growth</li>
+                    </ul>
+                </div>
+                <div class="glass-card">
+                    <i class="fas fa-robot card-icon"></i>
+                    <h3>AI Automation</h3>
+                    <p>Developing smart Python scripts and AI tools.</p>
+                    <ul class="service-list">
+                        <li><i class="fas fa-check"></i> Custom Python Bots</li>
+                        <li><i class="fas fa-check"></i> Data Scraping</li>
+                        <li><i class="fas fa-check"></i> Workflow Automation</li>
+                    </ul>
+                </div>
+                <div class="glass-card">
+                    <i class="fas fa-desktop card-icon"></i>
+                    <h3>IT Consulting</h3>
+                    <p>Expert advice on system architecture and setup.</p>
+                    <ul class="service-list">
+                        <li><i class="fas fa-check"></i> Hardware Setup</li>
+                        <li><i class="fas fa-check"></i> Network Security</li>
+                        <li><i class="fas fa-check"></i> Tech Support</li>
+                    </ul>
+                </div>
+                <div class="glass-card">
+                    <i class="fas fa-camera card-icon"></i>
+                    <h3>Photography</h3>
+                    <p>Commercial shoots and high-quality photography.</p>
+                    <ul class="service-list">
+                        <li><i class="fas fa-check"></i> Commercial Shoots</li>
+                        <li><i class="fas fa-check"></i> Event Coverage</li>
+                        <li><i class="fas fa-check"></i> Photo Retouching</li>
+                    </ul>
+                </div>
+                <div class="glass-card">
+                    <i class="fas fa-pen-fancy card-icon"></i>
+                    <h3>Content Writing</h3>
+                    <p>Crafting compelling, SEO-friendly copy for campaigns.</p>
+                    <ul class="service-list">
+                        <li><i class="fas fa-check"></i> Website Copy</li>
+                        <li><i class="fas fa-check"></i> Tech Articles</li>
+                        <li><i class="fas fa-check"></i> Product Descriptions</li>
+                    </ul>
+                </div>
+                <div class="glass-card">
+                    <i class="fas fa-object-group card-icon"></i>
+                    <h3>UI/UX Architecture</h3>
+                    <p>Designing intuitive and beautiful user interfaces.</p>
+                    <ul class="service-list">
+                        <li><i class="fas fa-check"></i> App Wireframing</li>
+                        <li><i class="fas fa-check"></i> User Research</li>
+                        <li><i class="fas fa-check"></i> Prototypes</li>
+                    </ul>
+                </div>
+                <div class="glass-card">
+                    <i class="fas fa-shield-alt card-icon"></i>
+                    <h3>Cybersecurity</h3>
+                    <p>Ethical hacking concepts to secure digital environments.</p>
+                    <ul class="service-list">
+                        <li><i class="fas fa-check"></i> Penetration Testing</li>
+                        <li><i class="fas fa-check"></i> Vulnerability Scans</li>
+                        <li><i class="fas fa-check"></i> Security Audits</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="expertise-section">
+        <div class="max-width">
+            <h2 class="section-title">SELECTED ROLES</h2>
+            <div class="bento-grid">
+                <div class="glass-card bento-large">
+                    <i class="fas fa-code-branch card-icon"></i>
+                    <h3>iCODE Software Solutions</h3>
+                    <p class="role-badge">Graphic Designer & Developer</p>
+                    <p>Engineering robust software solutions and crafting premium graphic assets for a Japan-based international tech firm.</p>
+                </div>
+                <div class="glass-card">
+                    <i class="fas fa-chart-line card-icon"></i>
+                    <h3>Cantab</h3>
+                    <p class="role-badge">Social Media Director</p>
+                    <p>Leading social media initiatives, optimizing outreach, and managing brand communications.</p>
+                </div>
+                <div class="glass-card">
+                    <i class="fas fa-chalkboard-teacher card-icon"></i>
+                    <h3>Iresh Dasanayaka</h3>
+                    <p class="role-badge">ICT Tutor & Instructor</p>
+                    <p>Serving as an instructor, coordinator, and lead graphic designer for educational programs.</p>
+                </div>
+                <div class="glass-card">
+                    <i class="fas fa-globe card-icon"></i>
+                    <h3>Cmart Site</h3>
+                    <p class="role-badge">Web Developer</p>
+                    <p>Architecting and deploying customized web infrastructure and digital storefronts.</p>
+                </div>
+                <div class="glass-card">
+                    <i class="fas fa-car card-icon"></i>
+                    <h3>Yunikon International</h3>
+                    <p class="role-badge">Social Media Manager</p>
+                    <p>Driving digital growth and brand presence for a premier vehicle dealership.</p>
+                </div>
+                <div class="glass-card">
+                    <i class="fas fa-tshirt card-icon"></i>
+                    <h3>Velexlk</h3>
+                    <p class="role-badge">Social Media Director</p>
+                    <p>Directing visual marketing campaigns and overarching strategy for the clothing brand.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="expertise-section">
+        <div class="max-width">
+            <h2 class="section-title">AI ENGINEERING</h2>
+            <div class="ai-grid">
+                <div class="glass-card terminal-container">
+                    <div class="terminal-header">
+                        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                        <span class="terminal-title" style="margin:auto; color:#888;">Architect.py</span>
+                    </div>
+                    <div class="terminal-body">
+                        <p><span class="prompt">inuka@dev-machine:~$</span> python3 Architect.py</p>
+                        <p style="color: #f5b041;">[SYSTEM] Importing Neural Core... Done.</p>
+                        <p>[ARCHITECT] <span id="architect-typing"></span></p>
+                    </div>
+                </div>
+                <div class="glass-card ai-description">
+                    <i class="fas fa-microchip card-icon"></i>
+                    <h3>Project: Architect</h3>
+                    <p>Architect is a custom-built, personalized AI automation assistant programmed entirely in Python.</p>
+                    <p>Designed to bypass standard protocols, it seamlessly controls my local environment, automates complex workflows, and optimizes system memory in real-time.</p>
+                    <div class="ai-tags">
+                        <span>#Python3</span>
+                        <span>#MachineLearning</span>
+                        <span>#Automation</span>
+                        <span>#OS_Control</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="expertise-section">
+        <div class="max-width">
+            <div class="contact-container glass-card">
+                <div class="contact-info">
+                    <h2 class="section-title" style="text-align: left; margin-bottom:20px; text-shadow:none;">Get In Touch</h2>
+                    <p style="color:var(--text-muted); margin-bottom:30px;">Have a project in mind or need some help? Send me a message below.</p>
+                    <div class="info-item"><i class="fas fa-envelope"></i> inukatech10@gmail.com</div>
+                    <div class="info-item"><i class="fas fa-phone"></i> +94 71 795 4374</div>
+                    <div class="info-item"><i class="fas fa-map-marker-alt"></i> Kurunegala, Sri Lanka</div>
+                </div>
+                <form action="https://formsubmit.co/inukatech10@gmail.com" method="post" class="contact-form">
+                    <input type="text" name="Name" required placeholder="Your Name">
+                    <input type="email" name="Email" required placeholder="Email Address">
+                    <input type="text" name="Subject" required placeholder="Subject">
+                    <textarea name="Message" rows="4" required placeholder="Project Details"></textarea>
+                    <button type="submit" class="outline-btn">Deploy Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-socials">
+            <a href="https://www.facebook.com/share/14udQvUyhk/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.youtube.com/@InukaTech" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="https://www.instagram.com/inukasanjula10" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" target="_blank" title="Twitter/X"><i class="fab fa-x-twitter"></i></a>
+            <a href="#" target="_blank" title="Threads"><i class="fab fa-threads"></i></a>
+        </div>
+        <p style="color:var(--text-muted); font-family: 'Space Grotesk';">&copy; 2026 INUKA TECH. WHERE TECHNOLOGY POWERS CREATIVITY.</p>
+    </footer>
+
+    <button id="scroll-up-btn" class="scroll-up-btn"><i class="fas fa-chevron-up"></i></button>
+
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // 1. Terminal Preloader
+            new Typed("#boot-text", {
+                strings: ["[SYSTEM] Booting Inuka_OS...^200<br>[ARCHITECT] AI Systems Online.^200"],
+                typeSpeed: 20, showCursor: false,
+                onComplete: () => {
+                    setTimeout(() => {
+                        document.getElementById("preloader").style.opacity = "0";
+                        setTimeout(() => document.getElementById("preloader").style.display="none", 500);
+                    }, 200);
+                }
+            });
+
+            // 2. Typing Effects
+            new Typed("#typing-hero", {
+                strings: ["SOFTWARE DEVELOPER.", "GRAPHIC DESIGNER.", "WEB DEVELOPER.", "FREELANCER."],
+                typeSpeed: 60, backSpeed: 40, loop: true
+            });
+            new Typed("#typing-about", {
+                strings: ["DEVELOPER", "DESIGNER", "FREELANCER"],
+                typeSpeed: 60, backSpeed: 40, loop: true
+            });
+            new Typed("#architect-typing", {
+                strings: ["Awaiting command...", "Optimizing system memory...", "Bypassing standard protocols...", "System fully optimized for Inuka."],
+                typeSpeed: 40, backSpeed: 20, loop: true, cursorChar: '█'
+            });
+
+            // 3. Scroll Buttons
+            const upBtn = document.getElementById("scroll-up-btn");
+            window.addEventListener("scroll", () => {
+                if(window.scrollY > 500) upBtn.classList.add("visible");
+                else upBtn.classList.remove("visible");
+            });
+            upBtn.addEventListener("click", () => window.scrollTo({top: 0, behavior: 'smooth'}));
+            document.getElementById("scroll-down-btn").addEventListener("click", () => {
+                window.scrollTo({top: document.getElementById('about').offsetTop - 80, behavior: 'smooth'});
+            });
+
+            // 4. Swiper
+            new Swiper(".mySwiper", { loop: true, autoplay: { delay: 3000 } });
+
+            // 5. Molecular Canvas Background (With Mouse Dodge and Connecting Lines)
+            const canvas = document.getElementById("bg-canvas");
+            const ctx = canvas.getContext("2d");
+            canvas.width = window.innerWidth; 
+            canvas.height = window.innerHeight;
+            let particlesArray = [];
+            
+            // Mouse Tracker for dodge animation
+            let mouse = { x: null, y: null, radius: 120 };
+            window.addEventListener("mousemove", (event) => { 
+                mouse.x = event.x; 
+                mouse.y = event.y; 
+            });
+            window.addEventListener("mouseout", () => {
+                mouse.x = undefined;
+                mouse.y = undefined;
+            });
+
+            class Particle {
+                constructor(x, y, directionX, directionY, size) {
+                    this.x = x; this.y = y; this.directionX = directionX; this.directionY = directionY; this.size = size;
+                }
+                draw() {
+                    ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                    ctx.fillStyle = '#c91010'; ctx.fill();
+                }
+                update() {
+                    if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
+                    if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
+                    
+                    // Dodge Animation Logic
+                    let dx = mouse.x - this.x; 
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < mouse.radius + this.size) {
+                        if (mouse.x < this.x && this.x < canvas.width - this.size * 10) this.x += 3;
+                        if (mouse.x > this.x && this.x > this.size * 10) this.x -= 3;
+                        if (mouse.y < this.y && this.y < canvas.height - this.size * 10) this.y += 3;
+                        if (mouse.y > this.y && this.y > this.size * 10) this.y -= 3;
+                    }
+
+                    this.x += this.directionX; 
+                    this.y += this.directionY;
+                    this.draw();
+                }
+            }
+
+            function initCanvas() {
+                particlesArray = [];
+                let numberOfParticles = (canvas.height * canvas.width) / 10000;
+                for (let i = 0; i < numberOfParticles; i++) {
+                    let size = (Math.random() * 2) + 1;
+                    let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                    let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                    let directionX = (Math.random() * 0.8) - 0.4; 
+                    let directionY = (Math.random() * 0.8) - 0.4;
+                    particlesArray.push(new Particle(x, y, directionX, directionY, size));
+                }
+            }
+
+            function animateCanvas() {
+                requestAnimationFrame(animateCanvas);
+                ctx.clearRect(0, 0, innerWidth, innerHeight);
+                for (let i = 0; i < particlesArray.length; i++) particlesArray[i].update();
+                
+                // Connect Particles (The molecular lines)
+                for (let a = 0; a < particlesArray.length; a++) {
+                    for (let b = a; b < particlesArray.length; b++) {
+                        let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + 
+                                       ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                        if (distance < 15000) {
+                            let opacityValue = 1 - (distance / 15000);
+                            ctx.strokeStyle = `rgba(255, 255, 255, ${opacityValue * 0.25})`;
+                            ctx.lineWidth = 1;
+                            ctx.beginPath();
+                            ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                            ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            window.addEventListener('resize', () => { canvas.width = innerWidth; canvas.height = innerHeight; initCanvas(); });
+            initCanvas(); animateCanvas();
+        });
+    </script>
+</body>
+</html>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&family=Space+Grotesk:wght@400;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     
