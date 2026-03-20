@@ -14,15 +14,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&family=Space+Grotesk:wght@400;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     
     <style>
-        /* --- CORE BEAST STYLING & DYNAMIC VARIABLES --- */
+        /* --- CORE BEAST STYLING --- */
         :root {
-            /* The Energy Engine Default (Crimson Red) */
-            --accent: #c91010; 
-            --accent-rgb: 201, 16, 16;
-            
             --bg: #050507; 
+            --accent: #c91010; 
             --glass: rgba(255, 255, 255, 0.03);
             --border: rgba(255, 255, 255, 0.08);
+            --glass-highlight: rgba(255, 255, 255, 0.15);
             --text-main: #ffffff;
             --text-muted: #a0a0a5;
             --font-code: 'Fira Code', monospace;
@@ -40,7 +38,7 @@
 
         /* Canvas Layering */
         #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: 0; pointer-events: none; }
-        nav, section, footer, .marquee-container, .scroll-up-btn, .theme-switcher { position: relative; z-index: 10; }
+        nav, section, footer, .marquee-container, .scroll-up-btn { position: relative; z-index: 10; }
 
         /* SYSTEM OVERRIDE EASTER EGG */
         body.override-active { filter: hue-rotate(90deg) invert(10%) saturate(200%); }
@@ -53,14 +51,9 @@
         .raw-preloader-text { font-family: var(--font-code); color: #00ff00; font-size: clamp(1rem, 3vw, 1.2rem); line-height: 1.8; text-shadow: 0 0 5px rgba(0,255,0,0.5); }
         .prompt { color: #5dade2; }
 
-        /* Custom Accent "Energy" Engine Switcher */
-        .theme-switcher { position: fixed; bottom: 30px; left: 30px; background: var(--glass); backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 30px; padding: 15px 12px; display: flex; flex-direction: column; gap: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 1000; }
-        .theme-dot { width: 22px; height: 22px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; transition: 0.3s; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
-        .theme-dot:hover, .theme-dot.active { transform: scale(1.2); border-color: #fff; }
-
         /* Navbar */
         .glass-nav { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 1200px; background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 20px; z-index: 1000; padding: 15px 30px; transition: all 0.4s ease; }
-        .glass-nav.scrolled { box-shadow: 0 0 20px rgba(var(--accent-rgb), 0.4); border-color: rgba(var(--accent-rgb), 0.6); background: rgba(5, 5, 7, 0.95); }
+        .glass-nav.scrolled { box-shadow: 0 0 20px rgba(201, 16, 16, 0.4); border-color: rgba(201, 16, 16, 0.6); background: rgba(5, 5, 7, 0.95); }
         .nav-container { display: flex; justify-content: space-between; align-items: center; }
         .brand { font-family: 'Space Grotesk'; font-size: 1.5rem; font-weight: 700; }
         .brand span { color: var(--accent); transition: 0.3s; }
@@ -71,11 +64,11 @@
 
         /* Hero */
         .hero-section { height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 20px; }
-        .pre-headline { color: var(--accent); letter-spacing: 4px; margin-bottom: 10px; font-size: clamp(0.9rem, 3vw, 1.2rem); text-transform: uppercase; text-shadow: 0 0 10px rgba(var(--accent-rgb), 0.5); transition: 0.3s; }
-        .main-headline { font-family: 'Space Grotesk'; font-size: clamp(3rem, 10vw, 6rem); font-weight: 900; background: linear-gradient(180deg, #fff, #888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0px 10px 20px rgba(var(--accent-rgb), 0.2)); line-height: 1.1; transition: filter 0.3s; }
+        .pre-headline { color: var(--accent); letter-spacing: 4px; margin-bottom: 10px; font-size: clamp(0.9rem, 3vw, 1.2rem); text-transform: uppercase; text-shadow: 0 0 10px rgba(201, 16, 16, 0.5); transition: 0.3s; }
+        .main-headline { font-family: 'Space Grotesk'; font-size: clamp(3rem, 10vw, 6rem); font-weight: 900; background: linear-gradient(180deg, #fff, #888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0px 10px 20px rgba(201, 16, 16, 0.2)); line-height: 1.1; transition: filter 0.3s; }
         .dynamic-role { font-size: clamp(1.2rem, 4vw, 1.8rem); color: #fff; margin: 20px 0; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
         .scroll-down-btn { background: var(--glass); border: 1px solid var(--border); color: #fff; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; margin-top: 30px; transition: 0.3s; backdrop-filter: blur(5px); display: inline-flex; justify-content: center; align-items: center; font-size: 1.2rem;}
-        .scroll-down-btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(5px); box-shadow: 0 0 15px rgba(var(--accent-rgb), 0.4); }
+        .scroll-down-btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(5px); box-shadow: 0 0 15px rgba(201, 16, 16, 0.4); }
 
         /* Marquee */
         .marquee-container { border-block: 1px solid var(--border); padding: 15px 0; overflow: hidden; display: flex; background: rgba(255,255,255,0.02); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
@@ -90,17 +83,17 @@
         .max-width { max-width: 1200px; margin: 0 auto; }
         .section-title { font-family: 'Space Grotesk'; font-size: clamp(2rem, 6vw, 3rem); font-weight: 700; margin-bottom: 3rem; text-align: center; letter-spacing: -1px; text-shadow: 0 4px 10px rgba(0,0,0,0.5); }
 
-        /* About Section */
-        .about-content { display: grid; grid-template-columns: 400px 1fr; gap: 50px; padding: 40px; background: var(--glass); backdrop-filter: blur(15px); border: 1px solid var(--border); border-radius: 20px; align-items: center; box-shadow: inset 0 -4px 15px rgba(var(--accent-rgb), 0.1); transition: 0.3s; }
+        /* About Section (Fixed Side-by-Side Layout) */
+        .about-content { display: grid; grid-template-columns: 400px 1fr; gap: 50px; padding: 40px; background: var(--glass); backdrop-filter: blur(15px); border: 1px solid var(--border); border-radius: 20px; align-items: center; box-shadow: inset 0 -4px 15px rgba(201, 16, 16, 0.1); transition: 0.3s; }
         .about-images { width: 100%; max-width: 400px; aspect-ratio: 1/1; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin: 0 auto; }
         .about-images img { width: 100%; height: 100%; object-fit: cover; }
         .about-text h3 { font-family: 'Space Grotesk'; font-size: clamp(1.4rem, 4vw, 1.8rem); margin-bottom: 15px; text-transform: uppercase; }
         .about-text p { font-size: 0.95rem; line-height: 1.8; color: #ccc; margin-bottom: 25px; letter-spacing: 0.5px; }
         .about-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;}
-        .glass-badge { background: rgba(var(--accent-rgb), 0.1); border: 1px solid rgba(var(--accent-rgb), 0.3); color: #fff; padding: 8px 14px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; display: flex; align-items: center; gap: 8px; backdrop-filter: blur(5px); box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: 0.3s; }
+        .glass-badge { background: rgba(201, 16, 16, 0.1); border: 1px solid rgba(201, 16, 16, 0.3); color: #fff; padding: 8px 14px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; display: flex; align-items: center; gap: 8px; backdrop-filter: blur(5px); box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: 0.3s; }
         .glass-badge i { color: var(--accent); }
         
-        /* APPLE-STYLE PROXIMITY GLOW SYSTEM (Feature 1) */
+        /* APPLE-STYLE PROXIMITY GLOW SYSTEM */
         .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
         .glass-card { 
             position: relative; overflow: hidden;
@@ -109,13 +102,13 @@
         /* The Glow Orb */
         .glass-card::before {
             content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(var(--accent-rgb), 0.12), transparent 40%);
+            background: radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(201, 16, 16, 0.12), transparent 40%);
             opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 0;
         }
         .glass-card:hover::before { opacity: 1; }
         /* Keep text above the glow */
         .glass-card > * { position: relative; z-index: 1; }
-        .glass-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.2); box-shadow: inset 0 -4px 20px rgba(var(--accent-rgb), 0.15), 0 15px 30px rgba(0,0,0,0.5); }
+        .glass-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.2); box-shadow: inset 0 -4px 20px rgba(201, 16, 16, 0.15), 0 15px 30px rgba(0,0,0,0.5); }
         
         .card-icon { font-size: 2.2rem; color: var(--accent); margin-bottom: 15px; transition: 0.3s; }
         .glass-card h3 { font-family: 'Space Grotesk'; font-size: 1.3rem; margin-bottom: 10px; }
@@ -124,7 +117,7 @@
         .service-list li { font-size: 0.85rem; color: #bbb; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
         .service-list li i { color: var(--accent); font-size: 0.75rem; transition: 0.3s; }
         .bento-large { grid-column: span 2; }
-        .role-badge { display: inline-block; padding: 5px 12px; background: rgba(var(--accent-rgb), 0.15); color: var(--accent); border-radius: 6px; font-size: 0.8rem; font-weight: 600; margin-bottom: 15px; border: 1px solid rgba(var(--accent-rgb), 0.3); transition: 0.3s; }
+        .role-badge { display: inline-block; padding: 5px 12px; background: rgba(201, 16, 16, 0.15); color: var(--accent); border-radius: 6px; font-size: 0.8rem; font-weight: 600; margin-bottom: 15px; border: 1px solid rgba(201, 16, 16, 0.3); transition: 0.3s; }
 
         /* REAL Mac GUI Terminal */
         .ai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: stretch; }
@@ -154,14 +147,14 @@
         .info-item i { color: var(--accent); font-size: 1.3rem; min-width: 25px; text-align: center; transition: 0.3s; }
         .contact-form { display: flex; flex-direction: column; gap: 20px; position: relative; z-index: 1;}
         .contact-form input, .contact-form textarea { width: 100%; padding: 15px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 12px; color: #fff; font-family: 'Inter'; outline: none; transition: 0.3s; }
-        .contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent); box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.2); }
+        .contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent); box-shadow: 0 0 10px rgba(201, 16, 16, 0.2); }
         .outline-btn { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 15px 30px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: 'Inter'; font-size: 1rem;}
-        .outline-btn:hover { background: var(--accent); color: #fff; box-shadow: 0 0 20px rgba(var(--accent-rgb), 0.4); filter: brightness(1.2); }
+        .outline-btn:hover { background: var(--accent); color: #fff; box-shadow: 0 0 20px rgba(201, 16, 16, 0.4); filter: brightness(1.2); }
 
         footer { text-align: center; padding: 50px 20px; border-top: 1px solid var(--border); background: rgba(0,0,0,0.5); backdrop-filter: blur(10px); }
         .footer-socials { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;}
         .footer-socials a { width: 45px; height: 45px; border-radius: 50%; background: var(--glass); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.2rem; transition: 0.3s; text-decoration: none;}
-        .footer-socials a:hover { background: var(--accent); border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 5px 15px rgba(var(--accent-rgb), 0.4); }
+        .footer-socials a:hover { background: var(--accent); border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 5px 15px rgba(201, 16, 16, 0.4); }
 
         .scroll-up-btn { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: var(--accent); color: #fff; border: none; opacity: 0; pointer-events: none; cursor: pointer; transition: all 0.4s ease; z-index: 1000; box-shadow: 0 10px 20px rgba(0,0,0,0.5); font-size: 1.2rem; display: flex; justify-content: center; align-items: center;}
         .scroll-up-btn.visible { opacity: 1; pointer-events: auto; }
@@ -180,9 +173,6 @@
                 transition: clip-path 0.4s ease;
             }
             .nav-links.active { clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); }
-            
-            /* Theme Switcher Mobile */
-            .theme-switcher { left: 50%; bottom: 20px; transform: translateX(-50%); flex-direction: row; padding: 10px 15px; }
 
             .expertise-section, .about-section { padding: 60px 15px; }
             .about-content { grid-template-columns: 1fr; padding: 25px; text-align: center; gap: 30px; }
@@ -205,13 +195,6 @@
 <body>
     <div class="glitch-screen" id="glitch-screen">
         <h1>SYSTEM OVERRIDE</h1>
-    </div>
-
-    <div class="theme-switcher">
-        <div class="theme-dot active" style="background: #c91010; box-shadow: 0 0 10px #c91010;" data-hex="#c91010" data-rgb="201, 16, 16" title="Crimson Beast"></div>
-        <div class="theme-dot" style="background: #00a8ff;" data-hex="#00a8ff" data-rgb="0, 168, 255" title="Cyber Blue"></div>
-        <div class="theme-dot" style="background: #27c93f;" data-hex="#27c93f" data-rgb="39, 201, 63" title="Matrix Green"></div>
-        <div class="theme-dot" style="background: #b339ff;" data-hex="#b339ff" data-rgb="179, 57, 255" title="Amethyst Design"></div>
     </div>
 
     <canvas id="bg-canvas"></canvas>
@@ -274,7 +257,7 @@
 
     <section id="about" class="about-section">
         <div class="max-width">
-            <div class="about-content glass-card">
+            <div class="about-content">
                 <div class="about-images">
                     <div class="swiper mySwiper">
                         <div class="swiper-wrapper">
@@ -465,7 +448,7 @@
         <div class="max-width">
             <h2 class="section-title">AI ENGINEERING</h2>
             <div class="ai-grid">
-                <div class="glass-card mac-window" style="cursor: text; padding: 0;" onclick="document.getElementById('cmd-input').focus();">
+                <div class="mac-window" style="cursor: text;" onclick="document.getElementById('cmd-input').focus();">
                     <div class="mac-header">
                         <div class="mac-dots">
                             <span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span>
@@ -540,32 +523,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             
-            // 1. Dynamic Accent Color (Energy Engine)
-            let currentAccentColor = '#c91010'; // Default
-            const themeDots = document.querySelectorAll('.theme-dot');
-            const root = document.documentElement;
-
-            themeDots.forEach(dot => {
-                dot.addEventListener('click', () => {
-                    themeDots.forEach(d => {
-                        d.classList.remove('active');
-                        d.style.boxShadow = "none";
-                    });
-                    
-                    dot.classList.add('active');
-                    const hex = dot.getAttribute('data-hex');
-                    const rgb = dot.getAttribute('data-rgb');
-                    
-                    dot.style.boxShadow = `0 0 15px ${hex}`;
-                    
-                    // Update CSS Variables globally
-                    root.style.setProperty('--accent', hex);
-                    root.style.setProperty('--accent-rgb', rgb);
-                    currentAccentColor = hex; // Update canvas particles
-                });
-            });
-
-            // 2. Apple-Style Proximity Glow on Glass Cards
+            // 1. Apple-Style Proximity Glow on Glass Cards
             document.querySelectorAll('.glass-card').forEach(card => {
                 card.addEventListener('mousemove', e => {
                     const rect = card.getBoundingClientRect();
@@ -576,7 +534,7 @@
                 });
             });
 
-            // 3. Raw Terminal Preloader
+            // 2. Raw Terminal Preloader
             new Typed("#boot-text", {
                 strings: [
                     "[SYSTEM] Mounting file systems... OK.<br>[SYSTEM] Initializing memory modules... OK.<br>[SYSTEM] Loading Neural UI...<br>> Bypassing security protocols...<br>> Access granted.<br>[ARCHITECT] AI Systems Online.^200"
@@ -590,7 +548,7 @@
                 }
             });
 
-            // 4. Typing Effects
+            // 3. Typing Effects
             new Typed("#typing-hero", {
                 strings: ["SOFTWARE DEVELOPER.", "GRAPHIC DESIGNER.", "WEB DEVELOPER.", "FREELANCER."],
                 typeSpeed: 60, backSpeed: 40, loop: true
@@ -600,7 +558,7 @@
                 typeSpeed: 60, backSpeed: 40, loop: true
             });
 
-            // 5. Smooth Scroll Buttons & Nav Neon Effect
+            // 4. Smooth Scroll Buttons, Nav Neon Effect & Mobile Menu
             const nav = document.getElementById("main-nav");
             const upBtn = document.getElementById("scroll-up-btn");
             const mobileToggle = document.querySelector('.mobile-toggle');
@@ -632,10 +590,10 @@
                 });
             });
 
-            // 6. Swiper
+            // 5. Swiper
             new Swiper(".mySwiper", { loop: true, autoplay: { delay: 3000 } });
 
-            // 7. Interactive Terminal Logic
+            // 6. Interactive Terminal Logic
             const cmdInput = document.getElementById("cmd-input");
             const cmdHistory = document.getElementById("cmd-history");
             const liveTerminal = document.getElementById("live-terminal");
@@ -677,7 +635,7 @@
                 });
             }
 
-            // 8. System Override Easter Egg (Type 'beast')
+            // 7. System Override Easter Egg (Type 'beast')
             let keyBuffer = "";
             window.addEventListener("keydown", (e) => {
                 keyBuffer += e.key.toLowerCase();
@@ -696,7 +654,7 @@
                 }
             });
 
-            // 9. Molecular Canvas Background (With Dynamic Colors)
+            // 8. Molecular Canvas Background
             const canvas = document.getElementById("bg-canvas");
             const ctx = canvas.getContext("2d");
             canvas.width = window.innerWidth; 
@@ -715,7 +673,7 @@
                 }
                 draw() {
                     ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-                    ctx.fillStyle = currentAccentColor; // Uses active theme color
+                    ctx.fillStyle = '#c91010'; 
                     ctx.fill();
                 }
                 update() {
