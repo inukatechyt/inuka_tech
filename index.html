@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&family=Space+Grotesk:wght@400;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     
     <style>
-        /* --- CORE BEAST STYLING --- */
+        /* --- CORE VISUAL RESTORATION --- */
         :root {
             --bg: #050507; 
             --accent: #c91010; 
@@ -39,7 +39,7 @@
         }
         @media (pointer: coarse) { .cursor-dot, .cursor-outline { display: none; } }
 
-        /* GADGET 2: Scroll Progress Laser */
+        /* Scroll Progress Laser */
         .scroll-progress { position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); width: 0%; z-index: 999999; box-shadow: 0 0 10px var(--accent), 0 0 5px #fff; }
 
         /* Custom Scrollbar */
@@ -52,25 +52,16 @@
         #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: 0; pointer-events: none; }
         nav, section, footer, .marquee-container, .scroll-up-btn, .faq-toggle-btn, .faq-window { position: relative; z-index: 10; }
 
-        /* SYSTEM OVERRIDE EASTER EGG */
-        body.override-active { filter: hue-rotate(90deg) invert(10%) saturate(200%); }
-        .glitch-screen { position: fixed; inset: 0; background: rgba(0,255,0,0.1); z-index: 9999999; display: none; justify-content: center; align-items: center; pointer-events: none; mix-blend-mode: overlay; }
-        .glitch-screen h1 { font-family: var(--font-code); color: #0f0; font-size: clamp(3rem, 10vw, 5rem); text-shadow: 0 0 20px #0f0; animation: glitch-anim 0.2s infinite; text-align: center;}
-        @keyframes glitch-anim { 0% { transform: translate(0) } 20% { transform: translate(-5px, 5px) } 40% { transform: translate(-5px, -5px) } 60% { transform: translate(5px, 5px) } 80% { transform: translate(5px, -5px) } 100% { transform: translate(0) } }
-
         /* Preloader */
         .raw-preloader { position: fixed; inset: 0; background: #000; z-index: 999999; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding-left: 10vw; transition: opacity 0.5s ease; }
         .raw-preloader-text { font-family: var(--font-code); color: #00ff00; font-size: clamp(1rem, 3vw, 1.2rem); line-height: 1.8; text-shadow: 0 0 5px rgba(0,255,0,0.5); }
-        .prompt { color: #5dade2; }
 
         /* Navbar */
         .glass-nav { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 1200px; background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 20px; z-index: 1000; padding: 15px 30px; transition: all 0.4s ease; display: flex; flex-direction: column; gap: 10px;}
         .glass-nav.scrolled { box-shadow: 0 0 20px rgba(201, 16, 16, 0.4); border-color: rgba(201, 16, 16, 0.6); background: rgba(5, 5, 7, 0.95); }
         .nav-container { display: flex; justify-content: space-between; align-items: center; width: 100%;}
-        
         .brand { font-family: 'Space Grotesk'; font-size: 1.5rem; font-weight: 700; }
         .brand span { color: var(--accent); transition: 0.3s; }
-
         .nav-links { display: flex; list-style: none; gap: 25px; align-items: center; margin: 0; padding: 0; }
         .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: 0.3s; }
         .nav-links a:hover { color: #fff; }
@@ -78,136 +69,80 @@
 
         /* Hero */
         .hero-section { height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 20px; }
-        .pre-headline { color: var(--accent); letter-spacing: 4px; margin-bottom: 10px; font-size: clamp(0.9rem, 3vw, 1.2rem); text-transform: uppercase; text-shadow: 0 0 10px rgba(201, 16, 16, 0.5); transition: 0.3s; }
-        .main-headline { font-family: 'Space Grotesk'; font-size: clamp(3rem, 10vw, 6rem); font-weight: 900; background: linear-gradient(180deg, #fff, #888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0px 10px 20px rgba(201, 16, 16, 0.2)); line-height: 1.1; transition: filter 0.3s; }
+        .pre-headline { color: var(--accent); letter-spacing: 4px; margin-bottom: 10px; font-size: clamp(0.9rem, 3vw, 1.2rem); text-transform: uppercase; text-shadow: 0 0 10px rgba(201, 16, 16, 0.5); }
+        .main-headline { font-family: 'Space Grotesk'; font-size: clamp(3rem, 10vw, 6rem); font-weight: 900; background: linear-gradient(180deg, #fff, #888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0px 10px 20px rgba(201, 16, 16, 0.2)); line-height: 1.1; }
         .dynamic-role { font-size: clamp(1.2rem, 4vw, 1.8rem); color: #fff; margin: 20px 0; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
-        .scroll-down-btn { background: var(--glass); border: 1px solid var(--border); color: #fff; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; margin-top: 30px; transition: border-color 0.3s, color 0.3s, box-shadow 0.3s; backdrop-filter: blur(5px); display: inline-flex; justify-content: center; align-items: center; font-size: 1.2rem;}
+        .scroll-down-btn { background: var(--glass); border: 1px solid var(--border); color: #fff; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; margin-top: 30px; transition: 0.3s; backdrop-filter: blur(5px); display: inline-flex; justify-content: center; align-items: center; font-size: 1.2rem;}
         .scroll-down-btn:hover { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 15px rgba(201, 16, 16, 0.4); }
 
         /* Marquee */
         .marquee-container { border-block: 1px solid var(--border); padding: 15px 0; overflow: hidden; display: flex; background: rgba(255,255,255,0.02); backdrop-filter: blur(10px); box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
         .marquee-content { display: flex; animation: scroll-m 25s linear infinite; gap: 40px; white-space: nowrap; font-family: 'Space Grotesk'; font-weight: 700; color: var(--text-muted); }
         .marquee-content span { display: flex; align-items: center; gap: 10px; font-size: 1.1rem;}
-        .marquee-content i { color: var(--accent); font-size: 1.3rem; transition: 0.3s; }
-        .marquee-content img { width: 22px; height: 22px; } 
+        .marquee-content i { color: var(--accent); font-size: 1.3rem; }
         @keyframes scroll-m { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-        /* General Sections */
+        /* Section Title */
         .expertise-section, .about-section { padding: 100px 20px; }
         .max-width { max-width: 1200px; margin: 0 auto; }
         .section-title { font-family: 'Space Grotesk'; font-size: clamp(2rem, 6vw, 3rem); font-weight: 700; margin-bottom: 3rem; text-align: center; letter-spacing: -1px; text-shadow: 0 4px 10px rgba(0,0,0,0.5); }
 
-        /* About Section (RESTORED SPLIT LAYOUT) */
-        .about-content { display: grid; grid-template-columns: 400px 1fr; gap: 50px; padding: 40px; background: var(--glass); backdrop-filter: blur(15px); border: 1px solid var(--border); border-radius: 20px; align-items: center; box-shadow: inset 0 -4px 15px rgba(201, 16, 16, 0.1); transition: 0.3s; }
-        .about-images { width: 100%; max-width: 400px; aspect-ratio: 1/1; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin: 0 auto; }
+        /* About Section - Correct Side-by-Side */
+        .about-content { display: grid; grid-template-columns: 400px 1fr; gap: 50px; padding: 40px; background: var(--glass); backdrop-filter: blur(15px); border: 1px solid var(--border); border-radius: 20px; align-items: center; box-shadow: inset 0 -4px 15px rgba(201, 16, 16, 0.1); }
+        .about-images { width: 100%; max-width: 400px; aspect-ratio: 1/1; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .about-images img { width: 100%; height: 100%; object-fit: cover; }
-        .about-text h3 { font-family: 'Space Grotesk'; font-size: clamp(1.4rem, 4vw, 1.8rem); margin-bottom: 15px; text-transform: uppercase; }
-        .about-text p { font-size: 0.95rem; line-height: 1.8; color: #ccc; margin-bottom: 25px; letter-spacing: 0.5px; }
         .about-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;}
-        .glass-badge { background: rgba(201, 16, 16, 0.1); border: 1px solid rgba(201, 16, 16, 0.3); color: #fff; padding: 8px 14px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; display: flex; align-items: center; gap: 8px; backdrop-filter: blur(5px); box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: 0.3s; }
-        .glass-badge i { color: var(--accent); }
-        
-        /* Proximity Glow Grid */
+        .glass-badge { background: rgba(201, 16, 16, 0.1); border: 1px solid rgba(201, 16, 16, 0.3); color: #fff; padding: 8px 14px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; display: flex; align-items: center; gap: 8px; backdrop-filter: blur(5px); }
+
+        /* Cards */
         .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-        .glass-card { position: relative; overflow: hidden; background: var(--glass); backdrop-filter: blur(15px); border: 1px solid var(--border); border-top: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 35px; transition: border-color 0.4s, transform 0.4s, box-shadow 0.4s; box-shadow: 0 10px 30px rgba(0,0,0,0.3); display: flex; flex-direction: column; }
-        .glass-card::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(201, 16, 16, 0.12), transparent 40%); opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 0; }
+        .glass-card { position: relative; overflow: hidden; background: var(--glass); backdrop-filter: blur(15px); border: 1px solid var(--border); border-top: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 35px; transition: all 0.4s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.3); display: flex; flex-direction: column; }
+        .glass-card::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(201, 16, 16, 0.12), transparent 40%); opacity: 0; transition: opacity 0.3s; pointer-events: none; }
         .glass-card:hover::before { opacity: 1; }
-        .glass-card > * { position: relative; z-index: 1; }
         .glass-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.2); box-shadow: inset 0 -4px 20px rgba(201, 16, 16, 0.15), 0 15px 30px rgba(0,0,0,0.5); }
-        
-        .card-icon { font-size: 2.2rem; color: var(--accent); margin-bottom: 15px; transition: 0.3s; }
-        .glass-card h3 { font-family: 'Space Grotesk'; font-size: 1.3rem; margin-bottom: 10px; }
-        .glass-card p { color: var(--text-muted); line-height: 1.5; font-size: 0.9rem; }
+        .card-icon { font-size: 2.2rem; color: var(--accent); margin-bottom: 15px; }
         .service-list { list-style: none; margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px; flex-grow: 1; padding-left: 0; }
         .service-list li { font-size: 0.85rem; color: #bbb; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
-        .service-list li i { color: var(--accent); font-size: 0.75rem; transition: 0.3s; }
+        .service-list li i { color: var(--accent); font-size: 0.75rem; }
         .bento-large { grid-column: span 2; }
-        .role-badge { display: inline-block; padding: 5px 12px; background: rgba(201, 16, 16, 0.15); color: var(--accent); border-radius: 6px; font-size: 0.8rem; font-weight: 600; margin-bottom: 15px; border: 1px solid rgba(201, 16, 16, 0.3); transition: 0.3s; }
+        .role-badge { display: inline-block; padding: 5px 12px; background: rgba(201, 16, 16, 0.15); color: var(--accent); border-radius: 6px; font-size: 0.8rem; font-weight: 600; margin-bottom: 15px; border: 1px solid rgba(201, 16, 16, 0.3); }
 
-        /* REAL Mac GUI Terminal */
+        /* Mac UI Terminal */
         .ai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: stretch; }
         .mac-window { position: relative; background: #0a0a0c; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.6); display: flex; flex-direction: column; height: 100%; min-height: 380px;}
-        .mac-header { background: #1e1e1e; padding: 12px 20px; display: flex; align-items: center; border-bottom: 1px solid #000; position: relative; z-index: 1;}
+        .mac-header { background: #1e1e1e; padding: 12px 20px; display: flex; align-items: center; border-bottom: 1px solid #000; position: relative; }
         .mac-dots { display: flex; gap: 8px; }
-        .mac-dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; cursor: pointer; }
+        .mac-dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
         .mac-dot.red { background: #ff5f56; } .mac-dot.yellow { background: #ffbd2e; } .mac-dot.green { background: #27c93f; }
-        .mac-title { position: absolute; left: 50%; transform: translateX(-50%); color: #888; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.5px;}
-        
-        .mac-body { padding: 20px; font-family: var(--font-code); color: #00ff00; font-size: clamp(0.85rem, 2vw, 1rem); line-height: 1.6; flex-grow: 1; overflow-y: auto; max-height: 400px; word-wrap: break-word; position: relative; z-index: 1;}
-        .mac-body::-webkit-scrollbar { width: 5px; }
-        .mac-body::-webkit-scrollbar-thumb { background: #333; border-radius: 5px;}
+        .mac-title { position: absolute; left: 50%; transform: translateX(-50%); color: #888; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 600; }
+        .mac-body { padding: 20px; font-family: var(--font-code); color: #00ff00; font-size: clamp(0.85rem, 2vw, 1rem); line-height: 1.6; flex-grow: 1; overflow-y: auto; max-height: 400px; word-wrap: break-word;}
         .terminal-input-line { display: flex; align-items: center; margin-top: 5px; flex-wrap: wrap; }
-        .terminal-input-line input { background: transparent; border: none; color: #00ff00; font-family: var(--font-code); font-size: 1rem; outline: none; flex-grow: 1; margin-left: 10px; text-shadow: 0 0 5px rgba(0,255,0,0.5); min-width: 150px;}
-        .terminal-input-line input::placeholder { color: rgba(0,255,0,0.3); }
+        .terminal-input-line input { background: transparent; border: none; color: #00ff00; font-family: var(--font-code); font-size: 1rem; outline: none; flex-grow: 1; margin-left: 10px; text-shadow: 0 0 5px rgba(0,255,0,0.5); }
 
-        .ai-description { padding: 30px; height: 100%; display: flex; flex-direction: column; justify-content: center;}
-        .ai-description h3 { font-family: 'Space Grotesk'; font-size: clamp(1.4rem, 4vw, 1.8rem); margin-bottom: 15px; color: #fff; }
-        .ai-description p { color: #ccc; line-height: 1.7; font-size: 0.95rem; margin-bottom: 15px;}
-        .ai-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-top: auto;}
-        .ai-tags span { background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 5px 12px; border-radius: 5px; font-size: 0.8rem; font-family: var(--font-code); color: var(--accent); transition: 0.3s; }
-
-        /* Contact Section */
-        .contact-container { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; padding: 50px; align-items: center; }
-        .info-item { font-size: 1.1rem; margin-bottom: 20px; display: flex; align-items: center; gap: 15px; word-break: break-all; }
-        .info-item i { color: var(--accent); font-size: 1.3rem; min-width: 25px; text-align: center; transition: 0.3s; }
-        .contact-form { display: flex; flex-direction: column; gap: 20px; position: relative; z-index: 1;}
-        .contact-form input, .contact-form textarea { width: 100%; padding: 15px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 12px; color: #fff; font-family: 'Inter'; outline: none; transition: 0.3s; }
-        .contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent); box-shadow: 0 0 10px rgba(201, 16, 16, 0.2); }
-        .outline-btn { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 15px 30px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: border-color 0.3s, color 0.3s, box-shadow 0.3s; font-family: 'Inter'; font-size: 1rem; display: inline-block; text-align: center;}
-        .outline-btn:hover { background: var(--accent); color: #fff; box-shadow: 0 0 20px rgba(201, 16, 16, 0.4); filter: brightness(1.2); }
-
-        /* Footer */
-        footer { text-align: center; padding: 50px 20px; border-top: 1px solid var(--border); background: rgba(0,0,0,0.5); backdrop-filter: blur(10px); }
-        .footer-socials { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;}
-        .footer-socials a { width: 45px; height: 45px; border-radius: 50%; background: var(--glass); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.2rem; transition: 0.3s; text-decoration: none;}
-        .footer-socials a:hover { background: var(--accent); border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 5px 15px rgba(201, 16, 16, 0.4); }
-
-        /* FLOATING UI BUTTONS */
-        .scroll-up-btn { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: var(--accent); color: #fff; border: none; opacity: 0; pointer-events: none; cursor: pointer; transition: all 0.4s ease; z-index: 1000; box-shadow: 0 10px 20px rgba(0,0,0,0.5); font-size: 1.2rem; display: flex; justify-content: center; align-items: center;}
+        /* Floating Buttons */
+        .scroll-up-btn { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: var(--accent); color: #fff; border: none; opacity: 0; pointer-events: none; cursor: pointer; transition: all 0.4s ease; z-index: 1000; display: flex; justify-content: center; align-items: center; font-size: 1.2rem;}
         .scroll-up-btn.visible { opacity: 1; pointer-events: auto; }
         
-        .faq-toggle-btn { position: fixed; bottom: 95px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: var(--glass); border: 1px solid var(--accent); color: var(--accent); cursor: pointer; transition: all 0.4s ease; z-index: 1000; box-shadow: 0 0 15px rgba(201, 16, 16, 0.2); font-size: 1.3rem; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(5px); opacity: 0; pointer-events: none;}
+        /* CLEAN HERO LOGIC: FAQ Toggle button inherits visible state from scroll */
+        .faq-toggle-btn { position: fixed; bottom: 95px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: var(--glass); border: 1px solid var(--accent); color: var(--accent); cursor: pointer; transition: all 0.4s ease; z-index: 1000; backdrop-filter: blur(5px); opacity: 0; pointer-events: none; display: flex; justify-content: center; align-items: center; font-size: 1.3rem;}
         .faq-toggle-btn.visible { opacity: 1; pointer-events: auto; }
 
-        /* FAQ WINDOW */
+        /* FAQ Window */
         .faq-window { position: fixed; bottom: 160px; right: 30px; width: 350px; background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 15px 40px rgba(0,0,0,0.8); z-index: 1001; display: flex; flex-direction: column; transform: scale(0); opacity: 0; transform-origin: bottom right; transition: transform 0.3s ease, opacity 0.3s ease; pointer-events: none; }
         .faq-window.active { transform: scale(1); opacity: 1; pointer-events: auto; }
-        .faq-header { background: #1e1e1e; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #000; border-radius: 12px 12px 0 0;}
-        .faq-title { color: #fff; font-family: 'Space Grotesk'; font-size: 1rem; font-weight: 700; display: flex; align-items: center; gap: 10px;}
-        .faq-close { color: #888; cursor: pointer; transition: 0.3s; font-size: 1.2rem; }
-        .faq-body { padding: 15px; overflow-y: auto; max-height: 400px; display: flex; flex-direction: column; gap: 10px; }
-        .faq-item { border: 1px solid var(--border); border-radius: 8px; background: rgba(255,255,255,0.02); overflow: hidden; transition: 0.3s; }
-        .faq-question { padding: 12px 15px; color: #fff; font-size: 0.9rem; font-weight: 600; display: flex; justify-content: space-between; align-items: center; user-select: none; transition: 0.3s;}
-        .faq-question i { transition: transform 0.3s; font-size: 0.8rem; color: var(--accent); }
-        .faq-answer { padding: 0 15px; max-height: 0; color: #ccc; font-size: 0.85rem; line-height: 1.6; transition: max-height 0.3s ease, padding 0.3s ease; overflow: hidden; }
-        .faq-item.active .faq-answer { padding: 0 15px 15px 15px; max-height: 200px; }
-        .faq-item.active .faq-question i { transform: rotate(180deg); }
+        .faq-header { background: #1e1e1e; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-radius: 12px 12px 0 0; border-bottom: 1px solid #000;}
+        .faq-item { border: 1px solid var(--border); margin: 10px; border-radius: 8px; background: rgba(255,255,255,0.02); overflow: hidden; }
+        .faq-question { padding: 12px 15px; color: #fff; font-size: 0.9rem; font-weight: 600; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+        .faq-answer { padding: 0 15px; max-height: 0; color: #ccc; font-size: 0.85rem; line-height: 1.6; transition: 0.3s; overflow: hidden; }
+        .faq-item.active .faq-answer { padding-bottom: 15px; max-height: 200px; }
 
-        /* --- MOBILE RESPONSIVE FIXES --- */
         @media (max-width: 900px) {
             .mobile-toggle { display: block; }
-            .nav-links {
-                position: absolute; top: 100%; left: 0; width: 100%;
-                background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(20px);
-                flex-direction: column; padding: 20px; border-radius: 0 0 20px 20px;
-                border: 1px solid var(--border); border-top: none;
-                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-                transition: clip-path 0.4s ease;
-            }
-            .nav-links.active { clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); }
-            .expertise-section, .about-section { padding: 60px 15px; }
-            .about-content { grid-template-columns: 1fr; padding: 25px; text-align: center; gap: 30px; }
-            .about-images { width: 100%; max-width: 320px; }
-            .about-badges { justify-content: center; }
-            .bento-grid { grid-template-columns: 1fr; gap: 20px; }
+            .nav-links { position: absolute; top: 100%; left: 0; width: 100%; background: rgba(10, 10, 15, 0.95); flex-direction: column; padding: 20px; display: none; }
+            .nav-links.active { display: flex; }
+            .about-content, .ai-grid, .contact-container { grid-template-columns: 1fr; text-align: center;}
+            .bento-grid { grid-template-columns: 1fr; }
             .bento-large { grid-column: span 1; }
-            .glass-card { padding: 25px; }
-            .ai-grid { grid-template-columns: 1fr; gap: 20px; }
-            .mac-window { min-height: 320px; }
-            .contact-container { grid-template-columns: 1fr; padding: 25px; gap: 30px;}
-            .scroll-up-btn { bottom: 20px; right: 20px; width: 45px; height: 45px;}
-            .faq-toggle-btn { bottom: 75px; right: 20px; width: 45px; height: 45px;}
-            .faq-window { bottom: 130px; right: 20px; width: calc(100% - 40px); max-width: 350px;}
         }
     </style>
 </head>
@@ -217,17 +152,12 @@
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
 
-    <div class="glitch-screen" id="glitch-screen">
-        <h1>SYSTEM OVERRIDE</h1>
-    </div>
+    <div class="glitch-screen" id="glitch-screen"><h1>SYSTEM OVERRIDE</h1></div>
 
     <canvas id="bg-canvas"></canvas>
 
     <div id="preloader" class="raw-preloader">
-        <div class="raw-preloader-text">
-            <p><span class="prompt">root@inuka-tech:~#</span> ./boot_sequence</p>
-            <p><span id="boot-text"></span></p>
-        </div>
+        <div class="raw-preloader-text"><p><span class="prompt">root@inuka-tech:~#</span> ./boot_sequence</p><p id="boot-text"></p></div>
     </div>
 
     <nav class="glass-nav" id="main-nav">
@@ -259,23 +189,12 @@
             <span><i class="fab fa-react"></i> REACT</span>
             <span><i class="fas fa-database"></i> SQL</span>
             <span><i class="fab fa-linux"></i> KALI LINUX</span>
-            <span><img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg" alt="PS"> PHOTOSHOP</span>
-            <span><img src="https://upload.wikimedia.org/wikipedia/commons/4/40/Adobe_Premiere_Pro_CC_icon.svg" alt="PR"> PREMIERE PRO</span>
-            <span><img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Adobe_After_Effects_CC_icon.svg" alt="AE"> AFTER EFFECTS</span>
-            <span><i class="fas fa-bezier-curve"></i> CORELDRAW</span>
-            <span><i class="fas fa-pen-nib"></i> AFFINITY</span>
-            <span><i class="fas fa-code"></i> INTELLIJ</span>
-            
+            <span><img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg" width="20"> PHOTOSHOP</span>
+            <span><img src="https://upload.wikimedia.org/wikipedia/commons/4/40/Adobe_Premiere_Pro_CC_icon.svg" width="20"> PREMIERE PRO</span>
             <span><i class="fab fa-python"></i> PYTHON</span>
             <span><i class="fab fa-react"></i> REACT</span>
             <span><i class="fas fa-database"></i> SQL</span>
             <span><i class="fab fa-linux"></i> KALI LINUX</span>
-            <span><img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg" alt="PS"> PHOTOSHOP</span>
-            <span><img src="https://upload.wikimedia.org/wikipedia/commons/4/40/Adobe_Premiere_Pro_CC_icon.svg" alt="PR"> PREMIERE PRO</span>
-            <span><img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Adobe_After_Effects_CC_icon.svg" alt="AE"> AFTER EFFECTS</span>
-            <span><i class="fas fa-bezier-curve"></i> CORELDRAW</span>
-            <span><i class="fas fa-pen-nib"></i> AFFINITY</span>
-            <span><i class="fas fa-code"></i> INTELLIJ</span>
         </div>
     </div>
 
@@ -285,9 +204,9 @@
                 <div class="about-images">
                     <div class="swiper mySwiper">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide"><img src="Inuka1.jpeg" alt="Inuka 1" onerror="this.src='https://via.placeholder.com/400x400?text=Photo+1'"></div>
-                            <div class="swiper-slide"><img src="Inuka2.jpeg" alt="Inuka 2" onerror="this.src='https://via.placeholder.com/400x400?text=Photo+2'"></div>
-                            <div class="swiper-slide"><img src="Inuka3.jpeg" alt="Inuka 3" onerror="this.src='https://via.placeholder.com/400x400?text=Photo+3'"></div>
+                            <div class="swiper-slide"><img src="Inuka1.jpeg" alt="Inuka 1"></div>
+                            <div class="swiper-slide"><img src="Inuka2.jpeg" alt="Inuka 2"></div>
+                            <div class="swiper-slide"><img src="Inuka3.jpeg" alt="Inuka 3"></div>
                         </div>
                     </div>
                 </div>
@@ -314,48 +233,13 @@
                     <p class="role-badge">Founder & CEO</p>
                     <p>Over 5 years of leading a personal technology brand, delivering high-end web development and design solutions.</p>
                 </div>
-                <div class="glass-card">
-                    <i class="fas fa-code-branch card-icon"></i>
-                    <h3>iCODE Software Solutions</h3>
-                    <p class="role-badge">Designer & Developer</p>
-                    <p>Engineering software for a Japan-based firm.</p>
-                </div>
-                <div class="glass-card">
-                    <i class="fas fa-chart-line card-icon"></i>
-                    <h3>Cantab</h3>
-                    <p class="role-badge">Social Media Director</p>
-                    <p>Leading communications and optimization.</p>
-                </div>
-                <div class="glass-card">
-                    <i class="fas fa-chalkboard-teacher card-icon"></i>
-                    <h3>Iresh Dasanayaka</h3>
-                    <p class="role-badge">ICT Tutor</p>
-                    <p>Graphic designer and coordinator for educational programs.</p>
-                </div>
-                <div class="glass-card">
-                    <i class="fas fa-globe card-icon"></i>
-                    <h3>Cmart Site</h3>
-                    <p class="role-badge">Web Developer</p>
-                    <p>Architecting customized web infrastructure.</p>
-                </div>
-                <div class="glass-card">
-                    <i class="fas fa-car card-icon"></i>
-                    <h3>Yunikon International</h3>
-                    <p class="role-badge">Social Media Manager</p>
-                    <p>Driving growth for a vehicle dealership.</p>
-                </div>
-                <div class="glass-card">
-                    <i class="fas fa-tshirt card-icon"></i>
-                    <h3>Velexlk</h3>
-                    <p class="role-badge">Social Media Director</p>
-                    <p>Strategy for a clothing brand.</p>
-                </div>
-                <div class="glass-card">
-                    <i class="fas fa-camera-retro card-icon"></i>
-                    <h3>Freelance Photography</h3>
-                    <p class="role-badge">Commercial Photographer</p>
-                    <p>Executing high-quality commercial shoots.</p>
-                </div>
+                <div class="glass-card"><i class="fas fa-code-branch card-icon"></i><h3>iCODE Software</h3><p class="role-badge">Designer & Dev</p><p>Engineering software for Japan-based firm.</p></div>
+                <div class="glass-card"><i class="fas fa-chart-line card-icon"></i><h3>Cantab</h3><p class="role-badge">Social Media Director</p><p>Leading brand communications.</p></div>
+                <div class="glass-card"><i class="fas fa-chalkboard-teacher card-icon"></i><h3>ICT Tutor</h3><p class="role-badge">Coordinator</p><p>Coordinator for Iresh sir's programs.</p></div>
+                <div class="glass-card"><i class="fas fa-globe card-icon"></i><h3>Cmart Site</h3><p class="role-badge">Web Developer</p><p>Architecting web infrastructure.</p></div>
+                <div class="glass-card"><i class="fas fa-car card-icon"></i><h3>Yunikon</h3><p class="role-badge">Media Manager</p><p>Driving growth for vehicle dealership.</p></div>
+                <div class="glass-card"><i class="fas fa-tshirt card-icon"></i><h3>Velexlk</h3><p class="role-badge">Social Media Director</p><p>Strategy for clothing brand.</p></div>
+                <div class="glass-card"><i class="fas fa-camera-retro card-icon"></i><h3>Freelance</h3><p class="role-badge">Photographer</p><p>Executing commercial shoots.</p></div>
             </div>
         </div>
     </section>
@@ -364,27 +248,18 @@
         <div class="max-width">
             <h2 class="section-title">AI ENGINEERING</h2>
             <div class="ai-grid">
-                <div class="mac-window" style="cursor: text;" onclick="document.getElementById('cmd-input').focus();">
-                    <div class="mac-header">
-                        <div class="mac-dots">
-                            <span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span>
-                        </div>
-                        <span class="mac-title">Architect.py - LIVE</span>
-                    </div>
+                <div class="mac-window" onclick="document.getElementById('cmd-input').focus();">
+                    <div class="mac-header"><div class="mac-dots"><span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span></div><span class="mac-title">Architect.py</span></div>
                     <div class="mac-body" id="live-terminal">
                         <p style="color: #f5b041;">[SYSTEM] Architect Core Initialized.</p>
-                        <p style="color: #aaa; font-size: 0.9rem; margin-bottom: 10px;">Type 'help' to view available commands.</p>
                         <div id="cmd-history"></div>
-                        <div class="terminal-input-line">
-                            <span class="prompt">guest@inuka-tech:~$</span>
-                            <input type="text" id="cmd-input" placeholder="enter command..." autocomplete="off" spellcheck="false">
-                        </div>
+                        <div class="terminal-input-line"><span class="prompt">guest@inuka-tech:~$</span><input type="text" id="cmd-input" autocomplete="off" spellcheck="false"></div>
                     </div>
                 </div>
                 <div class="glass-card ai-description">
                     <i class="fas fa-microchip card-icon"></i>
                     <h3>Project: Architect</h3>
-                    <p>Custom-built AI automation assistant in Python for system optimization.</p>
+                    <p>Designed to bypass standard protocols, Architect automates complex workflows and optimizes system memory in real-time.</p>
                     <div class="ai-tags"><span>#Python3</span><span>#Automation</span><span>#Interactive_UI</span></div>
                 </div>
             </div>
@@ -395,16 +270,12 @@
         <div class="max-width">
             <div class="contact-container glass-card">
                 <div class="contact-info">
-                    <h2 class="section-title" style="text-align: left; margin-bottom:20px;">Get In Touch</h2>
-                    <p style="color:var(--text-muted); margin-bottom:30px;">Have a project? Deploy a message below.</p>
+                    <h2 class="section-title" style="text-align: left;">Get In Touch</h2>
                     <div class="info-item"><i class="fas fa-envelope"></i> inukatech10@gmail.com</div>
                     <div class="info-item"><i class="fas fa-phone"></i> +94 71 795 4374</div>
                 </div>
                 <form action="https://formsubmit.co/inukatech10@gmail.com" method="post" class="contact-form">
-                    <input type="text" name="Name" required placeholder="Your Name">
-                    <input type="email" name="Email" required placeholder="Email Address">
-                    <textarea name="Message" rows="4" required placeholder="Project Details"></textarea>
-                    <button type="submit" class="outline-btn">Deploy Message</button>
+                    <input type="text" name="Name" required placeholder="Your Name"><input type="email" name="Email" required placeholder="Email Address"><textarea name="Message" rows="4" required placeholder="Project Details"></textarea><button type="submit" class="outline-btn">Deploy Message</button>
                 </form>
             </div>
         </div>
@@ -417,17 +288,14 @@
             <a href="https://www.instagram.com/inukasanjula10" target="_blank"><i class="fab fa-instagram"></i></a>
             <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
         </div>
-        <p style="color:var(--text-muted); font-family: 'Space Grotesk';">&copy; 2026 INUKA TECH.</p>
+        <p style="color:var(--text-muted);">&copy; 2026 INUKA TECH.</p>
     </footer>
 
     <div class="faq-window" id="faq-window">
-        <div class="faq-header">
-            <div class="faq-title"><i class="fas fa-question-circle"></i> F.A.Q</div>
-            <i class="fas fa-times faq-close" id="close-faq" title="Close"></i>
-        </div>
+        <div class="faq-header"><div class="faq-title">F.A.Q</div><i class="fas fa-times faq-close" id="close-faq"></i></div>
         <div class="faq-body">
-            <div class="faq-item"><div class="faq-question">Services? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Full-stack web development, design, and AI automation.</div></div>
-            <div class="faq-item"><div class="faq-question">Location? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Kurunegala, Sri Lanka. Serving globally.</div></div>
+            <div class="faq-item"><div class="faq-question">Services? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Web dev, design, AI automation.</div></div>
+            <div class="faq-item"><div class="faq-question">Location? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Sri Lanka. Global service.</div></div>
         </div>
     </div>
 
@@ -441,7 +309,7 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // --- SECURITY LOCK ---
+            // --- SECURITY LOCK (ANTI-THEFT) ---
             document.addEventListener('contextmenu', event => event.preventDefault());
             document.onkeydown = function(e) {
                 if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'J'.charCodeAt(0))) || (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0))) {
@@ -455,20 +323,18 @@
             const closeFaqBtn = document.getElementById("close-faq");
             const faqItems = document.querySelectorAll(".faq-item");
 
-            if(faqToggleBtn) {
-                faqToggleBtn.addEventListener("click", () => faqWindow.classList.add("active"));
-                closeFaqBtn.addEventListener("click", () => faqWindow.classList.remove("active"));
-                faqItems.forEach(item => {
-                    const q = item.querySelector(".faq-question");
-                    q.addEventListener("click", () => {
-                        const isActive = item.classList.contains("active");
-                        faqItems.forEach(i => i.classList.remove("active"));
-                        if(!isActive) item.classList.add("active");
-                    });
+            faqToggleBtn.addEventListener("click", () => faqWindow.classList.add("active"));
+            closeFaqBtn.addEventListener("click", () => faqWindow.classList.remove("active"));
+            faqItems.forEach(item => {
+                const q = item.querySelector(".faq-question");
+                q.addEventListener("click", () => {
+                    const isActive = item.classList.contains("active");
+                    faqItems.forEach(i => i.classList.remove("active"));
+                    if(!isActive) item.classList.add("active");
                 });
-            }
+            });
 
-            // Scroll Progress & Button Visibility
+            // CLEAN HERO LOGIC (Scroll Visibility)
             window.addEventListener('scroll', () => {
                 const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
                 document.getElementById('scroll-progress').style.width = scrollPercent + '%';
@@ -487,12 +353,10 @@
             if (window.matchMedia("(pointer: fine)").matches) {
                 const dot = document.querySelector('.cursor-dot');
                 const out = document.querySelector('.cursor-outline');
-                let mx = window.innerWidth/2, my = window.innerHeight/2, ox = mx, oy = my;
+                let mx = window.innerWidth/2, my = window.innerHeight/2;
                 window.addEventListener('mousemove', (e) => { mx = e.clientX; my = e.clientY; gsap.set(dot, {x:mx, y:my}); });
-                gsap.ticker.add(() => { ox += (mx - ox)*0.15; oy += (my - oy)*0.15; gsap.set(out, {x:ox, y:oy}); });
-                document.querySelectorAll('a, button, input, textarea, .mac-dot, .faq-question').forEach(el => {
-                    el.addEventListener('mouseenter', () => { gsap.to(out, { scale: 1.5, duration: 0.3 }); gsap.to(dot, { scale: 0, duration: 0.3 }); });
-                    el.addEventListener('mouseleave', () => { gsap.to(out, { scale: 1, duration: 0.3 }); gsap.to(dot, { scale: 1, duration: 0.3 }); });
+                gsap.ticker.add(() => { 
+                    gsap.set(out, {x: gsap.getProperty(out, "x") + (mx - gsap.getProperty(out, "x")) * 0.15, y: gsap.getProperty(out, "y") + (my - gsap.getProperty(out, "y")) * 0.15}); 
                 });
             }
 
@@ -505,23 +369,17 @@
                 });
             });
 
-            // Boot Preloader
-            new Typed("#boot-text", {
-                strings: ["[SYSTEM] Mounting file systems... OK.<br>[SYSTEM] Loading Neural UI...<br>> Bypassing security protocols...<br>> Access granted.<br>[ARCHITECT] AI Systems Online."],
-                typeSpeed: 10, cursorChar: '█',
-                onComplete: () => { setTimeout(() => { document.getElementById("preloader").style.opacity = "0"; setTimeout(() => document.getElementById("preloader").style.display="none", 500); }, 400); }
-            });
-
-            // Typing hero
+            // Typing
+            new Typed("#boot-text", { strings: ["[SYSTEM] Mounting file systems... OK.<br>[SYSTEM] Loading Neural UI...<br>> Access granted.<br>[ARCHITECT] AI Systems Online."], typeSpeed: 10, onComplete: () => { setTimeout(() => { document.getElementById("preloader").style.opacity = "0"; setTimeout(() => document.getElementById("preloader").style.display="none", 500); }, 400); } });
             new Typed("#typing-hero", { strings: ["SOFTWARE DEVELOPER.", "GRAPHIC DESIGNER.", "FREELANCER."], typeSpeed: 60, backSpeed: 40, loop: true });
             new Typed("#typing-about", { strings: ["DEVELOPER", "DESIGNER", "FREELANCER"], typeSpeed: 60, backSpeed: 40, loop: true });
 
-            document.getElementById("scroll-up-btn").addEventListener("click", () => window.scrollTo({top: 0, behavior: 'smooth'}));
-            document.getElementById("scroll-down-btn").addEventListener("click", () => window.scrollTo({top: document.getElementById('about').offsetTop - 80, behavior: 'smooth'}));
+            document.getElementById("scroll-up-btn").onclick = () => window.scrollTo({top: 0, behavior: 'smooth'});
+            document.getElementById("scroll-down-btn").onclick = () => window.scrollTo({top: document.getElementById('about').offsetTop - 80, behavior: 'smooth'});
             new Swiper(".mySwiper", { loop: true, autoplay: { delay: 3000 } });
 
             // Terminal
-            const ci = document.getElementById("cmd-input"), ch = document.getElementById("cmd-history"), lt = document.getElementById("live-terminal");
+            const ci = document.getElementById("cmd-input"), ch = document.getElementById("cmd-history");
             ci.addEventListener("keypress", (e) => {
                 if(e.key === "Enter") {
                     const v = ci.value.trim().toLowerCase(); if(!v) return;
@@ -530,15 +388,15 @@
                     setTimeout(() => {
                         const r = document.createElement("p");
                         if(v === "help") r.innerHTML = "- services<br>- contact<br>- clear";
-                        else if(v === "services") r.innerHTML = "Web, Design, AI.";
+                        else if(v === "services") r.innerHTML = "Web dev, Design, AI.";
                         else if(v === "clear") ch.innerHTML = "";
                         else r.innerHTML = "Unknown command.";
-                        ch.appendChild(r); lt.scrollTop = lt.scrollHeight;
+                        ch.appendChild(r);
                     }, 400);
                 }
             });
 
-            // Background Canvas
+            // Canvas Background Particles
             const cnv = document.getElementById("bg-canvas"), ctx = cnv.getContext("2d");
             cnv.width = window.innerWidth; cnv.height = window.innerHeight;
             let parts = []; let m = { x: null, y: null, r: 120 };
@@ -549,7 +407,7 @@
                 up() {
                     if(this.x>cnv.width||this.x<0)this.dx=-this.dx; if(this.y>cnv.height||this.y<0)this.dy=-this.dy;
                     let dist = Math.sqrt((m.x-this.x)**2+(m.y-this.y)**2);
-                    if(m.x&&m.y&&dist<m.r+this.s) { this.x+=m.x<this.x?3:-3; this.y+=m.y<this.y?3:-3; }
+                    if(m.x&&m.y&&dist<m.r+this.s) { this.x+=m.x<this.x?2:-2; this.y+=m.y<this.y?2:-2; }
                     this.x+=this.dx; this.y+=this.dy; this.draw();
                 }
             }
