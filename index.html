@@ -92,6 +92,17 @@
         .marquee-content img { width: 22px; height: 22px; } 
         @keyframes scroll-m { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
+        /* MARQUEE GLITCH ANIMATION */
+        .marquee-content span { position: relative;  transition: 0.2s;}
+        .marquee-content span:hover {color: #fff; text-shadow: 2px 0 #00ff00, -2px 0 #ff00ff; animation: glitch-hover 0.3s infinite; }
+        @keyframes glitch-hover {
+        0% { transform: translate(0); }
+        20% { transform: translate(-2px, 2px); }
+        40% { transform: translate(-2px, -2px); }
+        60% { transform: translate(2px, 2px); }
+        80% { transform: translate(2px, -2px); }
+        100% { transform: translate(0); } }
+
         /* General Sections */
         .expertise-section, .about-section { padding: 100px 20px; }
         .max-width { max-width: 1200px; margin: 0 auto; }
